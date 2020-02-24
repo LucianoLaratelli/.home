@@ -68,3 +68,5 @@
       "w -" #'evil-window-split)
 
 (require `evil-surround)
+
+(add-hook 'pdf-view-mode-hook (lambda () (auto-revert-mode 1)))
