@@ -77,3 +77,6 @@
  "C-k" #'evil-window-up
  "C-l" #'evil-window-right
  )
+
+(use-package! bison-mode
+  :defer t)

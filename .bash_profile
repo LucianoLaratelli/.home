@@ -10,6 +10,7 @@ PATH=/usr/local/bin/:$PATH
 PATH=/home/luciano/.local/lib/python2.7/site-packages:$PATH
 PATH=$HOME/.local/bin:$PATH #fixes pip issues on debian
 PATH=$HOME/.emacs.d/bin:$PATH #fixes pip issues on debian
+PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
 
 fortune -a | cowsay
 HISTSIZE= HISTFILESIZE=
@@ -69,3 +70,4 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 
 
 export GPG_TTY=$(tty)
+export PATH="/usr/local/sbin:$PATH"
