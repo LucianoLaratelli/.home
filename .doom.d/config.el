@@ -72,6 +72,11 @@
 
 (add-hook 'pdf-view-mode-hook (lambda () (auto-revert-mode 1)))
 
+(map! "C-h" #'evil-window-left
+      "C-j" #'evil-window-down
+      "C-k" #'evil-window-up
+      "C-l" #'evil-window-right
+ )
 (map! :after vterm
       :map vterm-mode-map
       "C-h" #'evil-window-left
