@@ -26,7 +26,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+;;(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-outrun-electric)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -71,11 +72,12 @@
 
 (add-hook 'pdf-view-mode-hook (lambda () (auto-revert-mode 1)))
 
-(map!
- "C-h" #'evil-window-left
- "C-j" #'evil-window-down
- "C-k" #'evil-window-up
- "C-l" #'evil-window-right
+(map! :after vterm
+      :map vterm-mode-map
+      "C-h" #'evil-window-left
+      "C-j" #'evil-window-down
+      "C-k" #'evil-window-up
+      "C-l" #'evil-window-right
  )
 
 (use-package! bison-mode
