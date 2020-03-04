@@ -4,24 +4,24 @@
 system=$(uname -s)
 #mac specific commands
 if [ "$system" = "Darwin" ]; then
-# `o` with no arguments opens the current directory, otherwise opens the given
-# location
-function o() {
-	if [ $# -eq 0 ]; then
-		open .;
-	else
-		open "$@";
-	fi;
-}
+	# `o` with no arguments opens the current directory, otherwise opens the given
+	# location
+	function o() {
+		if [ $# -eq 0 ]; then
+			open .;
+		else
+			open "$@";
+		fi;
+	}
 fi
 if [ "$system" = "Linux" ]; then
-function o() {
-	if [ $# -eq 0 ]; then
-		xdg-open .;
-	else
-		xdg-open "$@";
-	fi;
-}
+	function o() {
+		if [ $# -eq 0 ]; then
+			xdg-open .;
+		else
+			xdg-open "$@";
+		fi;
+	}
 fi
 
 function mkd() {
@@ -56,6 +56,32 @@ function tre() {
 }
 
 function grep() {
-  echo "Use rg"
-  rg "$@" . --no-ignore
+	echo "Use rg"
+}
+
+function rg(){
+	#because I use $HOME as a git directory (and therefore have a .gitignore in $HOME),
+	#rg's default respect of whatever gitignore it finds can get annoying
+	#this will find the closest gitignore to the current directory, then
+	#add flags to rg based on which gitignore is found
+	GITIGNORE=".gitignore"
+	START="${pwd}"
+	if [ "${PWD}" == "${HOME}" ]; then
+		rg "$@" --no-ignore
+	else
+		if [ -f "${GITIGNORE}" -a "${PWD}" != "${HOME}" ]; then
+			rg "$@" 
+		else
+			while [ ! -f "${GITIGNORE}" ];
+			do
+				cd ..
+			done
+			if [ "${PWD}" == "${HOME}" ]; then 
+				echo "${HOME} found"
+				cd "${START}"
+				rg "$@" --no-ignore
+			fi
+		fi 
+	fi
+		
 }
