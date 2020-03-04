@@ -64,22 +64,27 @@ function rg(){
 	#rg's default respect of whatever gitignore it finds can get annoying
 	#this will find the closest gitignore to the current directory, then
 	#add flags to rg based on which gitignore is found
+	#CAVEATS:
+	#    rg must exist at /usr/bin/rg
+	#    
+
 	GITIGNORE=".gitignore"
-	START="${pwd}"
-	if [ "${PWD}" == "${HOME}" ]; then
-		rg "$@" --no-ignore
+	START="$(pwd)"
+	if [ "${PWD}" == "${HOME}" ]; then #bail early if we're home
+		/usr/bin/rg "$@" --no-ignore
 	else
-		if [ -f "${GITIGNORE}" -a "${PWD}" != "${HOME}" ]; then
-			rg "$@" 
+		if [ -f "${GITIGNORE}" ]; then
+			/usr/bin/rg "$@" 
 		else
 			while [ ! -f "${GITIGNORE}" ];
 			do
 				cd ..
 			done
 			if [ "${PWD}" == "${HOME}" ]; then 
-				echo "${HOME} found"
-				cd "${START}"
-				rg "$@" --no-ignore
+				cd "${START}" || echo "rg function failed to find ${START}" 
+				/usr/bin/rg "$@" --no-ignore
+			else
+				/usr/bin/rg "$@"
 			fi
 		fi 
 	fi
