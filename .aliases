@@ -78,8 +78,14 @@ if [ "$system" = "Darwin" ]; then
   # Stuff I never really use but cannot delete either because of http://xkcd.com/530/
   alias stfu="osascript -e 'set volume output muted true'"
   alias pumpitup="osascript -e 'set volume output volume 100'"
-elif [ "$system" = "Linux" ]; then
-  alias update='sudo apt update; sudo apt upgrade; sudo apt dist-upgrade; sudo apt autoremove'
+else
+  system=$(cat /etc/*release | rg -U "ID=" | rg "arch")
+  if [ $? -eq 0 ]; then
+    alias update="sudo pacman -Syyu"
+  else
+    alias update='sudo apt update; sudo apt upgrade; sudo apt dist-upgrade; sudo apt autoremove'
+    
+  fi
 fi
 
 
