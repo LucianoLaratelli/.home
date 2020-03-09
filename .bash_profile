@@ -1,16 +1,13 @@
 # Add `~/bin` to the `$PATH`
-PGI=/opt/pgi; export PGI
+export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/bin:$PATH";
-export PATH=$PGI/osx86-64/18.4/bin:$PATH
-PFDIR=/opt/plusfort
-PATH=$PFDIR:$PATH
-export PFDIR PATH
 export PATH="$HOME/.cargo/bin:$PATH"
 PATH=/usr/local/bin/:$PATH
 PATH=/home/luciano/.local/lib/python2.7/site-packages:$PATH
 PATH=$HOME/.local/bin:$PATH #fixes pip issues on debian
 PATH=$HOME/.emacs.d/bin:$PATH #fixes pip issues on debian
-PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+PATH=/usr/local/opt/findutils/libexec/gnubin:$PATH
+PATH=/usr/local/Cellar/bison/3.5.2/bin:$PATH
 
 fortune -a | cowsay
 HISTSIZE= HISTFILESIZE=
@@ -70,4 +67,3 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 
 
 export GPG_TTY=$(tty)
-export PATH="/usr/local/sbin:$PATH"
