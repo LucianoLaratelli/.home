@@ -1,4 +1,3 @@
 cd ~
-git submodule init
-git submodule update
-yes | doom install
+git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
+yes | ~/.emacs.d/bin/doom install
