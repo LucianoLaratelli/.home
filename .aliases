@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Easier navigation: .., ..., ...., ....., ~ and -
-alias osmake="make clean; make TEST=1"
+alias osmake="make clean;bear make;make clean; make TEST=1"
 alias mcmk="make clean; make"
 alias ..="cd .."
 alias ...="cd ../.."
