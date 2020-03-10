@@ -91,3 +91,6 @@
 
 (setq company-idle-delay 0.2
       company-minimum-prefix-length 3)
+
+(after! which-key
+  (which-key-postframe-mode 1))
