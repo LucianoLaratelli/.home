@@ -94,3 +94,6 @@
 
 (after! which-key
   (which-key-postframe-mode 1))
+
+(map! :leader
+      "r" #'rtags-find-symbol-at-point)
