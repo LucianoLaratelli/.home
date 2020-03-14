@@ -8,65 +8,64 @@ if [ "$system" = "Darwin" ]; then
 	# location
 	function o() {
 		if [ $# -eq 0 ]; then
-			open .;
+			open .
 		else
-			open "$@";
-		fi;
+			open "$@"
+		fi
 	}
 fi
 if [ "$system" = "Linux" ]; then
 	function o() {
 		if [ $# -eq 0 ]; then
-			xdg-open .;
+			xdg-open .
 		else
-			xdg-open "$@";
-		fi;
+			xdg-open "$@"
+		fi
 	}
 fi
 
 function mkd() {
-	mkdir -p "$@" && cd "$_";
+	mkdir -p "$@" && cd "$_"
 }
 
 # Use Git’s colored diff when available
-hash git &>/dev/null;
+hash git &>/dev/null
 if [ $? -eq 0 ]; then
 	function diff() {
-		git diff --no-index --color-words "$@";
+		git diff --no-index --color-words "$@"
 	}
-fi;
+fi
 
 # `v` with no arguments opens the current directory in Vim, otherwise opens the
 # given location
 function v() {
 	if [ $# -eq 0 ]; then
-		vim .;
+		vim .
 	else
-		vim "$@";
-	fi;
+		vim "$@"
+	fi
 }
-
 
 # `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
 # the `.git` directory, listing directories first. The output gets piped into
 # `less` with options to preserve color and line numbers, unless the output is
 # small enough for one screen.
 function tre() {
-	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
+	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX
 }
 
 function grep() {
 	echo "Use rg"
 }
 
-function rg(){
+function rg() {
 	#because I use $HOME as a git directory (and therefore have a .gitignore in $HOME),
 	#rg's default respect of whatever gitignore it finds can get annoying
 	#this will find the closest gitignore to the current directory, then
 	#not take the gitignore into account if that nearest gitignore is the one in $HOME
-	# 
+	#
 	#CAVEATS:
-	#    rg must exist at /usr/bin/rg 
+	#    rg must exist at /usr/bin/rg
 	#    overwrites executable name (bad?)
 
 	EXEC="/usr/bin/rg"
@@ -76,18 +75,17 @@ function rg(){
 		"${EXEC}" "$@" --no-ignore
 	else
 		if [ -f "${GITIGNORE}" ]; then
-			"${EXEC}" "$@" 
+			"${EXEC}" "$@"
 		else
-			while [ ! -f "${GITIGNORE}" ];
-			do
+			while [ ! -f "${GITIGNORE}" ]; do
 				cd ..
 			done
-			if [ "${PWD}" == "${HOME}" ]; then 
-				cd "${START}" || echo "rg function failed to find ${START}" 
-				"${EXEC}" "$@" --no-ignore
+			cd "${START}" || echo "rg function failed to find ${START}"
+			if [ "${PWD}" == "${HOME}" ]; then
+				"${EXEC}" "$@" --no-ignore -i
 			else
-				"${EXEC}" "$@"
+				"${EXEC}" "$@" -i
 			fi
-		fi 
+		fi
 	fi
 }
