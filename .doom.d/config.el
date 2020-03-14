@@ -92,9 +92,6 @@
 (setq company-idle-delay 0.2
       company-minimum-prefix-length 3)
 
-(after! which-key
-  (which-key-posframe-mode 1))
-
 (map! :leader
       "r" #'rtags-find-symbol-at-point)
 
@@ -113,3 +110,15 @@
 (add-hook 'emacs-lisp-mode-hook
           (lambda ()
             (local-set-key (kbd "C-x E") 'eval-region-or-buffer)))
+
+(defun my-put-file-name-on-clipboard ()
+  "Put the current file name on the clipboard"
+  (interactive)
+  (let ((filename (if (equal major-mode 'dired-mode)
+                      default-directory
+                    (buffer-file-name))))
+    (when filename
+      (with-temp-buffer
+        (insert filename)
+        (clipboard-kill-region (point-min) (point-max)))
+      (message filename))))
