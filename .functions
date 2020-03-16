@@ -59,32 +59,39 @@ function grep() {
 }
 
 function rg() {
-	#because I use $HOME as a git directory (and therefore have a .gitignore in $HOME),
-	#rg's default respect of whatever gitignore it finds can get annoying
-	#this will find the closest gitignore to the current directory, then
-	#not take the gitignore into account if that nearest gitignore is the one in $HOME
+	# because I use $HOME as a git directory (and therefore have a .gitignore in $HOME),
+	# rg's default respect of whatever gitignore it finds can get annoying when the current
+	# directory is not a git directory
+	# this will find the closest gitignore to the current directory, then
+	# not take the gitignore into account if that nearest gitignore is the one in $HOME
 	#
-	#CAVEATS:
+	# CAVEATS:
 	#    rg must exist at /usr/bin/rg
 	#    overwrites executable name (bad?)
 
 	EXEC="/usr/bin/rg"
 	GITIGNORE=".gitignore"
+	RGFLAGS="-i"
 	START="$(pwd)"
-	if [ "${PWD}" == "${HOME}" ]; then #bail early if we're home
-		"${EXEC}" "$@" --no-ignore
+	if [ "${START}" == "${HOME}" ]; then #bail early if we're home
+		"${EXEC}" "$@" --no-ignore "${RGFLAGS}"
+	elif [[ "${START}" != "/home/${USER}"* ]]; then
+		# if we're above ${HOME}, this will prevent an infinite loop down below.
+		# TODO: add case for macos, where directory structure is `/Users/${USER}`
+		"${EXEC}" "$@" "${RGFLAGS}"
 	else
 		if [ -f "${GITIGNORE}" ]; then
-			"${EXEC}" "$@"
+			"${EXEC}" "$@" "${RGFLAGS}"
 		else
 			while [ ! -f "${GITIGNORE}" ]; do
 				cd ..
 			done
+			STOP="$(pwd)"
 			cd "${START}" || echo "rg function failed to find ${START}"
-			if [ "${PWD}" == "${HOME}" ]; then
-				"${EXEC}" "$@" --no-ignore -i
+			if [ "${STOP}" == "${HOME}" ]; then
+				"${EXEC}" "$@" --no-ignore "${RGFLAGS}"
 			else
-				"${EXEC}" "$@" -i
+				"${EXEC}" "$@" "${RGFLAGS}"
 			fi
 		fi
 	fi
