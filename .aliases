@@ -60,6 +60,7 @@ if [ "$system" = "Darwin" ]; then
 	alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 else
 	system=$(cat /etc/*release | rg -U "ID=" | rg "arch")
+  #TODO: add pushd ~; git pull;... ;popd to update
 	if [ $? -eq 0 ]; then
 		alias update='sudo pacman -Syyu; doom update; doom upgrade'
 	else
