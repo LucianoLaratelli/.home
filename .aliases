@@ -50,7 +50,7 @@ alias sudo='sudo '
 
 system=$(uname -s)
 if [ "$system" = "Darwin" ]; then
-	alias update='pushd ~; git pull; sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; popd'
+	alias update='pushd ~; git pull; sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup;doom update; doom upgrade; popd'
 	alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 	alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 	alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
