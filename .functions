@@ -96,3 +96,29 @@ function rg() {
 		fi
 	fi
 }
+
+function update() {
+	system=$(uname -s)
+	pushd ~
+	git pull
+	if [ "$system" = "Darwin" ]; then
+		sudo softwareupdate -i -a
+		brew update
+		brew upgrade
+		brew cleanup
+	else
+		if cat /etc/*release | rg -U "ID=" | rg "arch"; then
+			sudo pacman -Syyu
+		else
+			sudo apt update
+			sudo apt upgrade
+			sudo apt autoremove
+		fi
+	fi
+	rustup update
+	npm update
+	pip_upgrade_outdated -u -p
+	doom update
+	doom upgrade
+	popd
+}
