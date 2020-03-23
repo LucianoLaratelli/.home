@@ -86,14 +86,12 @@
       "C-l" #'evil-window-right
  )
 
-(use-package! bison-mode
-  :defer t)
-
 (setq company-idle-delay 0.2
       company-minimum-prefix-length 3)
 
 (map! :leader
-      "r" #'rtags-find-symbol-at-point)
+      "r" #'rtags-find-symbol-at-point
+      "f j" `open-junk-file)
 
 (defun eval-region-or-buffer ()
   (interactive)
@@ -122,3 +120,13 @@
         (insert filename)
         (clipboard-kill-region (point-min) (point-max)))
       (message filename))))
+
+(use-package! bison-mode
+  :defer t)
+
+(use-package! impatient-mode
+  :defer t)
+
+(use-package! open-junk-file
+  :custom
+  (open-junk-file-format "~/Dropbox/junk/%Y/%m/%d-%H%M%S."))
