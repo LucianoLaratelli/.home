@@ -50,7 +50,6 @@ alias sudo='sudo '
 
 system=$(uname -s)
 if [ "$system" = "Darwin" ]; then
-	alias update='pushd ~; git pull; sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup;doom update; doom upgrade; popd'
 	alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 	alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 	alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
@@ -58,12 +57,6 @@ if [ "$system" = "Darwin" ]; then
 	# Also, clear Apple’s System Logs to improve shell startup speed.
 	# Finally, clear download history from quarantine. https://mths.be/bum
 	alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
-else
-	if cat /etc/*release | rg -U "ID=" | rg "arch"; then
-		alias update='pushd ~;git pull ;sudo pacman -Syyu; doom update; doom upgrade; popd'
-	else
-		alias update='pushd ~; git pull; sudo apt update; sudo apt upgrade; sudo apt dist-upgrade; sudo apt autoremove; doom update; doom upgrade; popd'
-	fi
 fi
 
 # IP addresses
