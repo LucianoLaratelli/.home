@@ -1,0 +1,6 @@
+/* Hide Tab Bar */
+#TabsToolbar { visibility: collapse; }
+
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] > #sidebar-header {
+   visibility: collapse;  
+}
