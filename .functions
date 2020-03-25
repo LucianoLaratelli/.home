@@ -106,6 +106,7 @@ function update() {
 		brew update
 		brew upgrade
 		brew cleanup
+		sudo npm install -g npm
 	else
 		if cat /etc/*release | rg -U "ID=" | rg "arch"; then
 			sudo pacman -Syyu
@@ -114,6 +115,7 @@ function update() {
 			sudo apt upgrade
 			sudo apt autoremove
 		fi
+		npm install -g npm
 	fi
 	rustup update
 	npm update
