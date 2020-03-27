@@ -54,10 +54,6 @@ function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX
 }
 
-function grep() {
-	echo "Use rg"
-}
-
 function rg() {
 	# because I use $HOME as a git directory (and therefore have a .gitignore in $HOME),
 	# rg's default respect of whatever gitignore it finds can get annoying when the current
@@ -65,11 +61,9 @@ function rg() {
 	# this will find the closest gitignore to the current directory, then
 	# not take the gitignore into account if that nearest gitignore is the one in $HOME
 	#
-	# CAVEATS:
-	#    rg must exist at /usr/bin/rg
-	#    overwrites executable name (bad?)
+	# TODO: fix behavior when text is piped to rg 
 
-	EXEC="/usr/bin/rg"
+	EXEC="rg"
 	GITIGNORE=".gitignore"
 	RGFLAGS="-i"
 	START="$(pwd)"
@@ -99,7 +93,7 @@ function rg() {
 
 function update() {
 	system=$(uname -s)
-	pushd ~
+	pushd ~ || echo "pushd failed to push ~ onto directory stack" ; exit
 	git pull
 	if [ "$system" = "Darwin" ]; then
 		sudo softwareupdate -i -a
@@ -122,5 +116,5 @@ function update() {
 	pip_upgrade_outdated -u -p
 	doom update
 	doom upgrade
-	popd
+	popd || echo "popd failed to pop top of directory stack" ; exit
 }
