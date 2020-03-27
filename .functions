@@ -93,7 +93,7 @@ function rg() {
 
 function update() {
 	system=$(uname -s)
-	pushd ~ || echo "pushd failed to push ~ onto directory stack" ; exit
+	pushd ~ || (echo "pushd failed to push ~ onto directory stack" ; exit)
 	git pull
 	if [ "$system" = "Darwin" ]; then
 		sudo softwareupdate -i -a
@@ -116,5 +116,5 @@ function update() {
 	pip_upgrade_outdated -u -p
 	doom update
 	doom upgrade
-	popd || echo "popd failed to pop top of directory stack" ; exit
+	popd || (echo "popd failed to pop top of directory stack" ; exit)
 }
