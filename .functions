@@ -61,7 +61,7 @@ function rg() {
 	# this will find the closest gitignore to the current directory, then
 	# not take the gitignore into account if that nearest gitignore is the one in $HOME
 	#
-	# TODO: fix behavior when text is piped to rg 
+	# TODO: fix behavior when text is piped to rg
 
 	EXEC="rg"
 	GITIGNORE=".gitignore"
@@ -93,7 +93,10 @@ function rg() {
 
 function update() {
 	system=$(uname -s)
-	pushd ~ || (echo "pushd failed to push ~ onto directory stack" ; exit)
+	pushd ~ || (
+		echo "pushd failed to push ~ onto directory stack"
+		exit
+	)
 	git pull
 	if [ "$system" = "Darwin" ]; then
 		sudo softwareupdate -i -a
@@ -103,7 +106,8 @@ function update() {
 		sudo npm install -g npm
 	else
 		if cat /etc/*release | rg -U "ID=" | rg "arch"; then
-			sudo pacman -Syyu
+			yay -Syu --devel --timeupdate
+			yay -Yc
 		else
 			sudo apt update
 			sudo apt upgrade
@@ -116,5 +120,8 @@ function update() {
 	pip_upgrade_outdated -u -p
 	doom update
 	doom upgrade
-	popd || (echo "popd failed to pop top of directory stack" ; exit)
+	popd || (
+		echo "popd failed to pop top of directory stack"
+		exit
+	)
 }
