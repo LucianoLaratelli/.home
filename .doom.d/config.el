@@ -130,3 +130,6 @@
 (use-package! open-junk-file
   :custom
   (open-junk-file-format "~/Dropbox/junk/%Y/%m/%d-%H%M%S."))
+
+(use-package! make-mode
+  :defer t)
