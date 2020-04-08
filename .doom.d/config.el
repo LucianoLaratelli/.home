@@ -77,14 +77,14 @@
       "C-j" #'evil-window-down
       "C-k" #'evil-window-up
       "C-l" #'evil-window-right
- )
+      )
 (map! :after vterm
       :map vterm-mode-map
       "C-h" #'evil-window-left
       "C-j" #'evil-window-down
       "C-k" #'evil-window-up
       "C-l" #'evil-window-right
- )
+      )
 
 (setq company-idle-delay 0.2
       company-minimum-prefix-length 3)
@@ -133,3 +133,16 @@
 
 (use-package! make-mode
   :defer t)
+
+
+(defun my/fix-file-formatting-and-tabs (directory extension)
+  ;; inspired by https://stackoverflow.com/a/55302689
+  ;; and stolen from https://emacs.stackexchange.com/a/34222
+  (interactive (list (read-directory-name "Directory: ")
+                     (read-string "File extension: ")))
+  (dolist (file (directory-files-recursively directory (concat "^[a-z0-9A-Z]?+\\" extension "$")))
+    (find-file file)
+    (format-all-buffer)
+    (untabify)
+    (save-buffer)
+    (kill-buffer nil)))
