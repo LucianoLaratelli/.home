@@ -134,12 +134,10 @@
 (use-package! make-mode
   :defer t)
 
-<<<<<<< HEAD
 (setq org-src-fontify-natively t
     org-src-tab-acts-natively t
     org-confirm-babel-evaluate nil
     org-edit-src-content-indentation 0)
-=======
 
 (defun my/fix-file-formatting-and-tabs (directory extension)
   ;; inspired by https://stackoverflow.com/a/55302689
@@ -152,4 +150,3 @@
     (untabify(point-min)(point-max))
     (save-buffer)
     (kill-buffer nil)))
->>>>>>> 6f7e7caa3dce95fc2bffb4987f9e073b21bf1752
