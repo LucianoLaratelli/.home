@@ -2,7 +2,7 @@
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/bin:$PATH";
 export PATH="$HOME/.cargo/bin:$PATH"
-export GOPATH=$HOME/go
+export PATH="$HOME/go/bin:$PATH"
 PATH=/usr/local/bin/:$PATH
 PATH=/home/luciano/.local/lib/python2.7/site-packages:$PATH
 PATH=$HOME/.local/bin:$PATH #fixes pip issues on debian
