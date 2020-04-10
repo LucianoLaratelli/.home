@@ -133,3 +133,8 @@
 
 (use-package! make-mode
   :defer t)
+
+(setq org-src-fontify-natively t
+    org-src-tab-acts-natively t
+    org-confirm-babel-evaluate nil
+    org-edit-src-content-indentation 0)
