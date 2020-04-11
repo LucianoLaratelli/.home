@@ -99,7 +99,7 @@ function update() {
 	)
 	git pull
 	if [ "$system" = "Darwin" ]; then
-		sudo softwareupdate -i -a
+		#sudo softwareupdate -i -a
 		brew update
 		brew upgrade
 		brew cleanup
