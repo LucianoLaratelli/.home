@@ -11,6 +11,9 @@ case $- in
 *) return ;;
 esac
 
+OCLINT_HOME=/home/luciano/repos/oclint/build/oclint-release
+export PATH=$OCLINT_HOME/bin:$PATH
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -106,7 +109,9 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 if [ -f ~/.bash_aliases ]; then
 	. ~/.bash_aliases
 fi
-
+# Use bash-completion, if available
+[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] &&
+	. /usr/share/bash-completion/bash_completion
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
