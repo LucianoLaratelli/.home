@@ -3,6 +3,8 @@
 # for examples
 
 # If not running interactively, don't do anything
+# 
+./repos/z/z.sh
 case $- in
 *i*) ;;
 *) return ;;
