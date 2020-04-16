@@ -105,7 +105,7 @@
 	# Speed up commands involving untracked files such as `git status`.
 	# https://git-scm.com/docs/git-update-index#_untracked_cache
 	untrackedCache = true
-  editor = emacs
+  editor = vim
 
 [color]
 
@@ -187,8 +187,7 @@
 	name = Luciano Laratelli
 	email = luciano@laratelli.com
 	signingkey = EDF23D9CB0F3AF74
-#
-# Add the following to your .gitconfig file.
+
 [diff]
   tool = meld
 [difftool]
