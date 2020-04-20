@@ -109,7 +109,7 @@
           (lambda ()
             (local-set-key (kbd "C-x E") 'eval-region-or-buffer)))
 
-(defun my-put-file-name-on-clipboard ()
+(defun my/put-file-name-on-clipboard ()
   "Put the current file name on the clipboard"
   (interactive)
   (let ((filename (if (equal major-mode 'dired-mode)
@@ -158,7 +158,7 @@
     (save-buffer)
     (kill-buffer nil)))
 
-(defun toggle-window-split ()
+(defun my/toggle-window-split ()
   (interactive)
   (if (= (count-windows) 2)
       (let* ((this-win-buffer (window-buffer))
