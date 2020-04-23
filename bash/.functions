@@ -91,13 +91,25 @@ function tre() {
 #   fi
 # }
 
+function udd() {
+	pushd ~/.home || (
+		echo "pushd failed to push ~/.home onto directory stack"
+		exit
+	)
+	git pull
+	stow bash doom git tmux
+	popd || (
+		echo "popd failed to pop top of directory stack"
+		exit
+	)
+}
+
 function ud() {
 	system=$(uname -s)
 	pushd ~ || (
 		echo "pushd failed to push ~ onto directory stack"
 		exit
 	)
-	git pull
 	if [ "$system" = "Darwin" ]; then
 		brew update
 		brew upgrade

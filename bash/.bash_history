@@ -314,3 +314,9 @@ id
 ud
 doom doctor
 doom compile
+..
+git rm --cached repos/z/
+ls
+rm -rf repos/
+ls
+git status
