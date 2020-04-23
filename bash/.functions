@@ -101,6 +101,7 @@ function ud() {
 	pip_upgrade_outdated -u -p
 	doom update
 	doom upgrade
+	doom compile
 	popd || (
 		echo "popd failed to pop top of directory stack"
 		exit
