@@ -77,14 +77,14 @@
       "C-j" #'evil-window-down
       "C-k" #'evil-window-up
       "C-l" #'evil-window-right
- )
+      )
 (map! :after vterm
       :map vterm-mode-map
       "C-h" #'evil-window-left
       "C-j" #'evil-window-down
       "C-k" #'evil-window-up
       "C-l" #'evil-window-right
- )
+      )
 
 (setq company-idle-delay 0.2
       company-minimum-prefix-length 3)
@@ -142,9 +142,9 @@
 
 
 (setq org-src-fontify-natively t
-    org-src-tab-acts-natively t
-    org-confirm-babel-evaluate nil
-    org-edit-src-content-indentation 0)
+      org-src-tab-acts-natively t
+      org-confirm-babel-evaluate nil
+      org-edit-src-content-indentation 0)
 
 (defun my/fix-file-formatting-and-tabs (directory extension)
   ;; inspired by https://stackoverflow.com/a/55302689
