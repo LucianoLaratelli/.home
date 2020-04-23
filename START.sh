@@ -1,7 +1,8 @@
 pushd 
+# cd .home
+# stow 
 git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
 yes | ~/.emacs.d/bin/doom install
 cd repos
-git submodule init
-git submodule update
+git clone git@github.com:rupa/z.git
 popd
