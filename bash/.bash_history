@@ -320,3 +320,7 @@ ls
 rm -rf repos/
 ls
 git status
+ls
+mkdir vim
+mv .vimrc vim
+la

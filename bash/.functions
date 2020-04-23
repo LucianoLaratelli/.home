@@ -54,43 +54,6 @@ function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX
 }
 
-# function rg() {
-#   # because I use $HOME as a git directory (and therefore have a .gitignore in $HOME),
-#   # rg's default respect of whatever gitignore it finds can get annoying when the current
-#   # directory is not a git directory
-#   # this will find the closest gitignore to the current directory, then
-#   # not take the gitignore into account if that nearest gitignore is the one in $HOME
-#   #
-#   # TODO: fix behavior when text is piped to rg
-
-#   EXEC="rg"
-#   GITIGNORE=".gitignore"
-#   RGFLAGS="-i"
-#   START="$(pwd)"
-#   if [ "${START}" == "${HOME}" ]; then #bail early if we're home
-#       "${EXEC}" "$@" --no-ignore "${RGFLAGS}"
-#   elif [[ "${START}" != "/home/${USER}"* ]]; then
-#       # if we're above ${HOME}, this will prevent an infinite loop down below.
-#       # TODO: add case for macos, where directory structure is `/Users/${USER}`
-#       "${EXEC}" "$@" "${RGFLAGS}"
-#   else
-#       if [ -f "${GITIGNORE}" ]; then
-#           "${EXEC}" "$@" "${RGFLAGS}"
-#       else
-#           while [ ! -f "${GITIGNORE}" ]; do
-#               cd ..
-#           done
-#           STOP="$(pwd)"
-#           cd "${START}" || echo "rg function failed to find ${START}"
-#           if [ "${STOP}" == "${HOME}" ]; then
-#               "${EXEC}" "$@" --no-ignore "${RGFLAGS}"
-#           else
-#               "${EXEC}" "$@" "${RGFLAGS}"
-#           fi
-#       fi
-#   fi
-# }
-
 function udd() {
 	pushd ~/.home || (
 		echo "pushd failed to push ~/.home onto directory stack"
@@ -116,11 +79,16 @@ function ud() {
 		brew cleanup
 		sudo npm install -g npm
 	else
-		if cat /etc/*release | rg -U "ID=" | rg "arch"; then
+		if cat /etc/*release | rg "arch"; then
 			yay -Syu --devel --timeupdate
 			yay -Yc
-			npm install -g npm
-			npm update
+			if cat /etc/*release | rg "manjaro"; then
+				sudo npm install -g npm
+				sudo npm update
+			else
+				npm install -g npm
+				npm update
+			fi
 		else
 			sudo apt update
 			sudo apt upgrade
