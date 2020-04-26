@@ -86,8 +86,8 @@
       "C-l" #'evil-window-right
       )
 
-(setq company-idle-delay 0.2
-      company-minimum-prefix-length 3)
+(setq company-idle-delay 0.01
+      company-minimum-prefix-length 2)
 
 (map! :leader
       "r" #'rtags-find-symbol-at-point
@@ -139,6 +139,17 @@
   :hook
   (flycheck-mode . flycheck-clang-tidy-setup)
   )
+
+(load! "/home/luciano/Downloads/gud-dism.el")
+(after! tramp
+ (add-to-list `tramp-remote-path `tramp-own-remote-path)
+ )
+
+;; (use-package symon
+;;   :config (
+;;    symon-mode 1
+;;               )
+;;   )
 
 
 (setq org-src-fontify-natively t
