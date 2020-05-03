@@ -1,9 +1,25 @@
 #!/usr/bin/env bash
+mkdir ~/repos
+
+if cat /etc/*release | grep "arch"; then
+	cd ~/repos
+	git clone https://aur.archlinux.org/yay.git
+	cd yay
+	makepkg -si
+	cd
+	yay git
+	yay dropbox
+fi
+
+echo "********************************************************************************"
+echo "*****************************start dropbox please*******************************"
+echo "********************************************************************************"
+read -p "Press Enter to continue"
+
 cd ~/.home
 stow bash doom git tmux vim
 source ~/.bashrc
 
-mkdir ~/repos
 cd ~/repos
 
 git clone git@github.com:rupa/z.git
@@ -21,3 +37,6 @@ cd
 git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
 yes | ~/.emacs.d/bin/doom install
 doom compile
+
+cd ~/Dropbox/stow
+stow --target=${HOME} bash
