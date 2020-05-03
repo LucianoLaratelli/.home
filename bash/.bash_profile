@@ -11,7 +11,6 @@ PATH=/usr/local/opt/findutils/libexec/gnubin:$PATH
 PATH=/usr/local/Cellar/bison/3.5.2/bin:$PATH
 
 fortune -a | cowsay
-HISTSIZE= HISTFILESIZE=
 
 eval $(thefuck --alias)
 
