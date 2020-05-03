@@ -100,8 +100,11 @@ function ud() {
 	rustup update
 	pip_upgrade_outdated -u -p
 	doom upgrade
-	doom compile
+	doom build
+	doom sync
+	doom purge
 	doom env
+	doom compile
 	popd || (
 		echo "popd failed to pop top of directory stack"
 		exit
