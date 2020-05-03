@@ -140,17 +140,9 @@
   (flycheck-mode . flycheck-clang-tidy-setup)
   )
 
-(load! "/home/luciano/Downloads/gud-dism.el")
 (after! tramp
- (add-to-list `tramp-remote-path `tramp-own-remote-path)
+ (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
  )
-
-;; (use-package symon
-;;   :config (
-;;    symon-mode 1
-;;               )
-;;   )
-
 
 (setq org-src-fontify-natively t
       org-src-tab-acts-natively t
