@@ -80,8 +80,6 @@ function ud() {
 		sudo npm install -g npm
 	else
 		if cat /etc/*release | rg "arch"; then
-			yay -Syu --devel --timeupdate
-			yay -Yc
 			if cat /etc/*release | rg "manjaro"; then
 				sudo npm install -g npm
 				sudo npm update
@@ -89,6 +87,8 @@ function ud() {
 				npm install -g npm
 				npm update
 			fi
+			yay -Syu --devel --timeupdate
+			yay -Yc
 		else
 			sudo apt update
 			sudo apt upgrade
@@ -99,9 +99,9 @@ function ud() {
 	fi
 	rustup update
 	pip_upgrade_outdated -u -p
-	doom update
 	doom upgrade
 	doom compile
+	doom env
 	popd || (
 		echo "popd failed to pop top of directory stack"
 		exit
