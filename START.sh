@@ -32,6 +32,7 @@ CFLAGS="-O2" ./configure --with-modules --quiet
 NUMCORES="$(grep -c ^processor /proc/cpuinfo)"
 NUMCORES=$(($NUMCORES * 2))
 make -j${NUMCORES}
+sudo make install
 
 cd
 git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
