@@ -67,12 +67,15 @@ function udd() {
 	)
 }
 
+function ude() {
+	doom upgrade
+	doom sync
+	doom env
+	doom compile
+}
+
 function ud() {
 	system=$(uname -s)
-	pushd ~ || (
-		echo "pushd failed to push ~ onto directory stack"
-		exit
-	)
 	if [ "$system" = "Darwin" ]; then
 		brew update
 		brew upgrade
@@ -87,18 +90,14 @@ function ud() {
 			sudo apt autoremove
 		fi
 	fi
-  sudo npm install -g npm
-  sudo npm update
+	sudo npm install -g npm
+	sudo npm update
 	rustup update
 	pip_upgrade_outdated -u -p
 	doom upgrade
 	doom sync
 	doom env
 	doom compile
-	popd || (
-		echo "popd failed to pop top of directory stack"
-		exit
-	)
 }
 
 function popall() {
