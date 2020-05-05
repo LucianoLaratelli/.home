@@ -77,32 +77,22 @@ function ud() {
 		brew update
 		brew upgrade
 		brew cleanup
-		sudo npm install -g npm
 	else
 		if cat /etc/*release | rg "arch"; then
-			if cat /etc/*release | rg "manjaro"; then
-				sudo npm install -g npm
-				sudo npm update
-			else
-				npm install -g npm
-				npm update
-			fi
 			yay -Syu --devel --timeupdate
 			yay -Yc
 		else
 			sudo apt update
 			sudo apt upgrade
 			sudo apt autoremove
-			sudo npm install -g npm
-			sudo npm update
 		fi
 	fi
+  sudo npm install -g npm
+  sudo npm update
 	rustup update
 	pip_upgrade_outdated -u -p
 	doom upgrade
-	doom build
 	doom sync
-	doom purge
 	doom env
 	doom compile
 	popd || (
