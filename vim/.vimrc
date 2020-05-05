@@ -41,20 +41,10 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'vim-latex/vim-latex'
 Plugin 'pangloss/vim-javascript'
 
-"Git wrapper for Vim
-Plugin 'tpope/vim-fugitive'
-
 " Nerdtree
 Plugin 'scrooloose/nerdtree'
 noremap \\ :NERDTreeToggle<CR>
 noremap \f :NERDTreeFind<CR>
-Plugin 'sjl/tslime.vim'
-" tslime {{{
-let g:tslime_ensure_trailing_newlines = 1
-let g:tslime_normal_mapping = '<localleader>t'
-let g:tslime_visual_mapping = '<localleader>t'
-let g:tslime_vars_mapping = '<localleader>T'
-" " }}}
 Plugin 'amdt/vim-niji'
 let g:niji_dark_colours = [
     \ [ '81', '#5fd7ff'],
