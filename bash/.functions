@@ -68,10 +68,10 @@ function udd() {
 }
 
 function ude() {
-	doom upgrade
-	doom sync
-	doom env
-	doom compile
+	doom -y upgrade
+	doom -y sync
+	doom -y env
+	doom -y compile
 }
 
 function ud() {
