@@ -28,24 +28,23 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;;(setq doom-theme 'doom-one)
-(setq doom-theme 'doom-outrun-electric)
+;;(setq doom-theme 'doom-outrun-electric)
+(setq doom-theme `doom-monokai-pro)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Dropbox/org/")
-
+(setq org-roam-directory "~/Dropbox/org/roam")
+(setq org-journal-dir "~/Dropbox/org/roam/")
+(setq org-journal-date-prefix "* ")
+(setq org-journal-file-format "Journal %Y-%m.org")
+(setq org-journal-date-format "%A, %d %B %Y")
+(setq org-journal-enable-agenda-integration t)
+(setq org-journal-enable-cache t)
+(setq org-journal-file-type 'monthly)
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
-
-(defun desperately-compile ()
-  "traveling up the path, find a Makefile and 'compile'."
-  (interactive)
-  (when (locate-dominating-file default-directory "Makefile")
-    (with-temp-buffer
-      (cd (locate-dominating-file default-directory "Makefile"))
-      (compile "make -k"))))
-
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
@@ -78,6 +77,14 @@
       "C-k" #'evil-window-up
       "C-l" #'evil-window-right
       )
+
+(with-eval-after-load 'magit
+  (evil-define-key 'normal magit-mode-map (kbd "C-k") 'evil-window-up)
+  (evil-define-key 'visual magit-mode-map (kbd "C-k") 'evil-window-up)
+  (evil-define-key 'normal magit-mode-map (kbd "C-j") 'evil-window-down)
+  (evil-define-key 'visual magit-mode-map (kbd "C-j") 'evil-window-down)
+  )
+
 (map! :after vterm
       :map vterm-mode-map
       "C-h" #'evil-window-left
