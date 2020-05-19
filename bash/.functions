@@ -60,7 +60,7 @@ function udd() {
 		exit
 	)
 	git pull
-	stow bash doom git tmux vim
+	stow --target=${HOME} bash doom git tmux vim
 	popd || (
 		echo "popd failed to pop top of directory stack"
 		exit
