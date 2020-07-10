@@ -93,10 +93,22 @@ function ud() {
 		fi
 	fi
 
-	sudo npm install -g npm
-	sudo npm update
-	rustup update
-	pip_upgrade_outdated -u -p
+	if command -v flatpak; then
+		flatpak update
+	fi
+	if command -v snap; then
+		snap refresh
+	fi
+	if command -v npm; then
+		sudo npm install -g npm
+		sudo npm update
+	fi
+	if command -v rustup; then
+		rustup update
+	fi
+	if command -v pip_upgrade_outdated; then
+		pip_upgrade_outdated -u -p
+	fi
 
 	ude
 }

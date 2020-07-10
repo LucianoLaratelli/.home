@@ -44,8 +44,10 @@
 (setq org-journal-file-type 'monthly)
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
 
+(display-time-mode 1)
+(setq display-time-24hr-format t)
+(setq display-time-day-and-date t)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
