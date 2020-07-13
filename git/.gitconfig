@@ -186,7 +186,6 @@
 [user]
 	name = Luciano Laratelli
 	email = luciano@laratelli.com
-	signingkey = EDF23D9CB0F3AF74
 
 [diff]
   tool = meld

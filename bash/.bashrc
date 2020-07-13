@@ -3,7 +3,6 @@
 # for examples
 
 # If not running interactively, don't do anything
-# 
 . /home/luciano/repos/z/z.sh
 
 case $- in

@@ -18,7 +18,6 @@ read -p "Press Enter to continue"
 
 cd ~/.home
 stow bash doom git tmux vim
-source ~/.bashrc
 
 cd ~/repos
 
@@ -37,6 +36,7 @@ sudo make install
 cd
 git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
 yes | ~/.emacs.d/bin/doom install
+source ~/.bashrc
 doom compile
 
 cd ~/Dropbox/stow

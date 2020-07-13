@@ -12,8 +12,6 @@ PATH=/usr/local/Cellar/bison/3.5.2/bin:$PATH
 
 fortune -a | cowsay
 
-eval $(thefuck --alias)
-
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.

@@ -17,8 +17,8 @@
 ;(unpin! pinned-package)
 ;; Use it to unpin multiple packages
 ;(unpin! pinned-package another-pinned-package)
-(unpin! org-journal org-roam)
 (unpin! org-journal)
+(unpin! org-roam)
 
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
