@@ -97,7 +97,7 @@ function ud() {
 		flatpak update
 	fi
 	if command -v snap; then
-		snap refresh
+		sudo snap refresh
 	fi
 	if command -v npm; then
 		sudo npm install -g npm
