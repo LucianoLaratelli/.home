@@ -109,6 +109,15 @@ function ud() {
 	if command -v pip_upgrade_outdated; then
 		pip_upgrade_outdated -u -p
 	fi
+	if command -v rvm; then
+		rvm get stable
+	fi
+	if command -v update_rubygems; then
+		update_rubygems
+	fi
+	if command -v gem; then
+		gem update --system
+	fi
 
 	ude
 }

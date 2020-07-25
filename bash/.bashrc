@@ -122,3 +122,5 @@ if ! shopt -oq posix; then
 	fi
 fi
 [ -n "$PS1" ] && source ~/.bash_profile
+export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+eval "$(rbenv init -)"

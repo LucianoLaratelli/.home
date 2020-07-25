@@ -2,6 +2,7 @@
 mkdir ~/repos
 
 if cat /etc/*release | grep "arch"; then
+	sudo pacman -S git base-devel stow
 	cd ~/repos
 	git clone https://aur.archlinux.org/yay.git
 	cd yay
