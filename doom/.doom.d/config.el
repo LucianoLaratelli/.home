@@ -35,7 +35,7 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Dropbox/org/")
 (setq org-roam-directory "~/Dropbox/org/roam")
-(setq org-journal-dir "~/Dropbox/org/roam/")
+(setq org-journal-dir "~/Dropbox/org/journal")
 (setq org-journal-date-prefix "* ")
 (setq org-journal-file-format "Journal %Y-%m.org")
 (setq org-journal-date-format "%A, %d %B %Y")
