@@ -92,6 +92,6 @@ cp ~/.home/.userChrome.css userChrome.css
 cd
 
 cd ~/Dropbox/stow
-rm ~/.bash_histor && stow --target=${HOME} bash
+rm ~/.bash_history && stow --target=${HOME} bash
 
 sudo shutdown -r now
