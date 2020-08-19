@@ -2,7 +2,7 @@
 mkdir ~/repos
 
 if cat /etc/*release | grep "arch"; then
-	sudo pacman -S git base-devel stow cmake fortune-mod cowsay tmux terminator
+	sudo pacman -S git base-devel stow cmake fortune-mod cowsay tmux terminator gnome-tweaks
 	cd ~/repos
 	git clone https://aur.archlinux.org/yay.git
 	cd yay
@@ -42,3 +42,23 @@ yes | ~/.emacs.d/bin/doom install
 
 cd ~/Dropbox/stow
 rm ~/.bash_histor && stow --target=${HOME} bash
+
+cd
+mkdir .icons
+pushd .icons
+git clone https://github.com/rtlewis88/rtl88-Themes.git
+cd rtl88-Themes
+git checkout Arc-ICONS
+popd
+cp -r rtl88-Themes/Arc-ICONS .
+rm -rf rtl88-Themes
+
+cd
+mkdir .themes
+pushd .themes
+git clone https://github.com/rtlewis88/rtl88-Themes.git
+cd rtl88-Themes
+git checkout Arc-Darkest-COLORS-Complete-Desktop
+popd
+cp -r rtl88-Themes/AD-Plum .
+rm -rf rtl88-Themes
