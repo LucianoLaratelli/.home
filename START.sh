@@ -2,7 +2,7 @@
 mkdir ~/repos
 
 if cat /etc/*release | grep "arch"; then
-	sudo pacman -S git base-devel stow cmake fortune-mod cowsay tmux terminator gnome-tweaks ripgrep
+	sudo pacman -S - <pkglist.txt
 	cd ~/repos
 	git clone https://aur.archlinux.org/yay.git
 	cd yay
@@ -16,9 +16,13 @@ echo "*****************************start dropbox please*************************
 echo "********************************************************************************"
 read -p "Press Enter to continue"
 
+yay snapd
+sudo systemctl enable --now snapd.socket
+
 cd ~/.home
 rm -rf ~/.bash* ~/.git ~/.tmux* ~/.vim
 stow bash doom git tmux vim
+exec ${SHELL}
 
 cd ~/repos
 
@@ -40,9 +44,7 @@ git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
 yes | ~/.emacs.d/bin/doom install
 ~/.emacs.d/bin/doom compile
 
-cd ~/Dropbox/stow
-rm ~/.bash_histor && stow --target=${HOME} bash
-
+#install icons
 cd
 mkdir .icons
 pushd .icons
@@ -53,6 +55,7 @@ popd
 cp -r rtl88-Themes/Arc-ICONS .
 rm -rf rtl88-Themes
 
+#install themes
 cd
 mkdir .themes
 pushd .themes
@@ -62,3 +65,33 @@ git checkout Arc-Darkest-COLORS-Complete-Desktop
 popd
 cp -r rtl88-Themes/AD-Plum .
 rm -rf rtl88-Themes
+
+#rbenv install
+cd
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+
+rbenv install 2.7.1
+rbenv global 2.7.1
+ruby -v
+
+gem install bundler
+rbenv rehash
+
+pip install black pyflakes isort pipenv nose pytest
+
+#install rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rustup component add rls
+
+#firefox customization
+cd ~/.mozilla/firefox/*default-release
+mkdir chrome
+cp ~/.home/.userChrome.css userChrome.css
+cd
+
+cd ~/Dropbox/stow
+rm ~/.bash_histor && stow --target=${HOME} bash
+
+sudo shutdown -r now
