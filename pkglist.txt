@@ -1,3 +1,4 @@
+aspell
 autoconf
 automake
 baobab
