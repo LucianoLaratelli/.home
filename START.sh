@@ -2,7 +2,7 @@
 mkdir ~/repos
 
 if cat /etc/*release | grep "arch"; then
-	sudo pacman -S git base-devel stow cmake fortune-mod cowsay tmux terminator gnome-tweaks
+	sudo pacman -S git base-devel stow cmake fortune-mod cowsay tmux terminator gnome-tweaks ripgrep
 	cd ~/repos
 	git clone https://aur.archlinux.org/yay.git
 	cd yay
