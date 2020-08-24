@@ -1,4 +1,5 @@
 aspell
+aspell-en
 autoconf
 automake
 baobab
@@ -6,10 +7,13 @@ base
 bash-language-server
 binutils
 bison
+ccls
 cheese
 cmake
 cowsay
+cups
 discount
+dmidecode
 efibootmgr
 eog
 epiphany
@@ -71,6 +75,7 @@ gvfs-mtp
 gvfs-nfs
 gvfs-smb
 htop
+intel-ucode
 jdk11-openjdk
 jre11-openjdk-headless
 linux
@@ -91,12 +96,14 @@ sbcl
 shellcheck
 shfmt
 simple-scan
+speedtest-cli
 stow
 stylelint
 sudo
 sushi
 terminator
 texinfo
+tk
 tmux
 totem
 tracker
