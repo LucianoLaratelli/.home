@@ -80,6 +80,7 @@
       "C-l" #'evil-window-right
       )
 
+
 (with-eval-after-load 'magit
   (evil-define-key 'normal magit-mode-map (kbd "C-k") 'evil-window-up)
   (evil-define-key 'visual magit-mode-map (kbd "C-k") 'evil-window-up)
