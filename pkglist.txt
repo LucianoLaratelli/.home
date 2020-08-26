@@ -80,6 +80,7 @@ jdk11-openjdk
 jre11-openjdk-headless
 linux
 linux-firmware
+llvm
 m4
 make
 mutter
