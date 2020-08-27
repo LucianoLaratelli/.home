@@ -86,6 +86,12 @@ function ud() {
 		if cat /etc/*release | rg "arch"; then
 			yay -Syu --devel --timeupdate
 			yay -Yc
+			pacman -Qqen >~/.home/pkglist.txt
+			pushd ~/.home
+			git add pkglist.txt
+			git commit -m "automated pkglist update"
+			git push
+			popd
 		else
 			sudo apt update
 			sudo apt upgrade
@@ -96,25 +102,41 @@ function ud() {
 	if command -v flatpak; then
 		flatpak update
 	fi
+
 	if command -v snap; then
 		sudo snap refresh
 	fi
+
 	if command -v npm; then
 		sudo npm install -g npm
 		sudo npm update
 	fi
+
 	if command -v rustup; then
 		rustup update
 	fi
+
+	if command -v pip; then
+		pushd ~/.home
+		pip list | tail +3 | awk '{print $1}' >pippkg.txt
+		git add pippkg.txt
+		git commit -m "automated pip pkg update"
+		git push
+		popd
+	fi
+
 	if command -v pip_upgrade_outdated; then
 		pip_upgrade_outdated -u -p
 	fi
+
 	if command -v rvm; then
 		rvm get stable
 	fi
+
 	if command -v update_rubygems; then
 		update_rubygems
 	fi
+
 	if command -v gem; then
 		gem update --system
 	fi
