@@ -1,22 +1,20 @@
 #!/usr/bin/env bash
 mkdir ~/repos
 
-if cat /etc/*release | grep "arch"; then
-	sudo pacman -S - <pkglist.txt
-	cd ~/repos
-	git clone https://aur.archlinux.org/yay.git
-	cd yay
-	makepkg -si
-	cd
-	yay dropbox
-fi
+sudo pacman -S - <pkglist.txt
+pip install --user -r pippkg.txt
+cd ~/repos
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+cd
+yay dropbox bear snapd franz
 
 echo "********************************************************************************"
 echo "*****************************start dropbox please*******************************"
 echo "********************************************************************************"
 read -p "Press Enter to continue"
 
-yay snapd
 sudo systemctl enable --now snapd.socket
 
 cd ~/.home
@@ -86,12 +84,17 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 rustup component add rls
 
 #firefox customization
-cd ~/.mozilla/firefox/*default-release
+pushd ~/.mozilla/firefox/*default-release
 mkdir chrome
 cp ~/.home/.userChrome.css userChrome.css
-cd
+popd
 
-cd ~/Dropbox/stow
+pushd ~/Dropbox/stow
 rm ~/.bash_history && stow --target=${HOME} bash
+popd
 
+echo "************************************************************************"
+echo "*****************************restarting now*****************************"
+echo "************************************************************************"
+read -p "Press Enter to continue"
 sudo shutdown -r now
