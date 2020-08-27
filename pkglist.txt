@@ -1,3 +1,4 @@
+anki
 aspell
 aspell-en
 autoconf
@@ -78,6 +79,7 @@ htop
 intel-ucode
 jdk11-openjdk
 jre11-openjdk-headless
+libreoffice-still
 linux
 linux-firmware
 llvm
