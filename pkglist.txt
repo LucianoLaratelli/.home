@@ -92,6 +92,7 @@ networkmanager
 orca
 patch
 pkgconf
+pycharm-community-edition
 python-pip
 ripgrep
 rygel
