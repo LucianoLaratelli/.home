@@ -112,6 +112,7 @@ tmux
 totem
 tracker
 tracker-miners
+transmission-qt
 vim
 vino
 which
