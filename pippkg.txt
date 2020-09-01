@@ -3,6 +3,7 @@ ankirspy
 apparmor
 appdirs
 aqt
+astroid
 attrs
 beautifulsoup4
 black
@@ -30,12 +31,14 @@ itsdangerous
 jedi
 Jinja2
 jsonschema
+lazy-object-proxy
 lensfun
 LibAppArmor
 lit
 louis
 Markdown
 MarkupSafe
+mccabe
 more-itertools
 msgpack
 mypy-extensions
@@ -60,6 +63,7 @@ pycairo
 pyflakes
 pygame
 PyGObject
+pylint
 pyparsing
 PyQt5
 PyQt5-sip
@@ -92,4 +96,5 @@ waitress
 webencodings
 Werkzeug
 wheel
+wrapt
 zipp
