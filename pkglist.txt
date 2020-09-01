@@ -13,6 +13,7 @@ cheese
 cmake
 cowsay
 cups
+discount
 dmidecode
 efibootmgr
 eog
@@ -22,7 +23,6 @@ fakeroot
 fd
 file-roller
 firefox
-flatpak
 flex
 fortune-mod
 gcc
@@ -55,6 +55,7 @@ gnome-session
 gnome-settings-daemon
 gnome-shell
 gnome-shell-extensions
+gnome-software
 gnome-system-monitor
 gnome-terminal
 gnome-themes-extra
@@ -81,7 +82,6 @@ jre11-openjdk-headless
 libreoffice-still
 linux
 linux-firmware
-linux-headers
 llvm
 m4
 make
@@ -89,7 +89,6 @@ mutter
 nano
 nautilus
 networkmanager
-openssh
 orca
 patch
 pkgconf
@@ -108,6 +107,7 @@ stylelint
 sudo
 sushi
 terminator
+texinfo
 tk
 tmux
 totem
@@ -116,9 +116,9 @@ tracker-miners
 transmission-qt
 vim
 vino
+which
 xclip
 xdg-user-dirs-gtk
-xf86-video-intel
 xf86-video-vesa
 xorg-bdftopcf
 xorg-docs
