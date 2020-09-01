@@ -86,8 +86,10 @@ function ud() {
 		if cat /etc/*release | rg "arch"; then
 			yay -Syu --devel --timeupdate
 			yay -Yc
-			pacman -Qqen >~/.home/pkglist.txt
 			pushd ~/.home
+			pacman -Qqen >tmppkg.txt
+			paste tmppkg.txt pkglist.txt >pkglist.txt
+			rm tmppkg.txt
 			git add pkglist.txt
 			git commit -m "automated pkglist update"
 			git push
@@ -118,7 +120,8 @@ function ud() {
 
 	if command -v pip; then
 		pushd ~/.home
-		pip list | tail +3 | awk '{print $1}' >pippkg.txt
+		pip list | tail +3 | awk '{print $1}' >tmppip.txt
+		paste tmppip.txt pippkg.txt >pippkg.txt
 		git add pippkg.txt
 		git commit -m "automated pip pkg update"
 		git push
