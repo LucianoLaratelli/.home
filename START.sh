@@ -8,7 +8,16 @@ git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
 cd
-yay dropbox bear snapd franz
+
+#prevent keyserver import failure when using yay to get dropbox:
+#https://bbs.archlinux.org/viewtopic.php?pid=1917184#p1917184
+cp /etc/pacman.d/gnupg/gpg.conf ~/.gnupg/gpg.conf
+echo "keyserver pool.sks-keyservers.net" >>~/.gnupg/gpg.conf
+
+yay dropbox
+yay bear
+yay snapd
+yay franz
 
 echo "********************************************************************************"
 echo "*****************************start dropbox please*******************************"
@@ -20,7 +29,6 @@ sudo systemctl enable --now snapd.socket
 cd ~/.home
 rm -rf ~/.bash* ~/.git ~/.tmux* ~/.vim
 stow bash doom git tmux vim
-exec ${SHELL}
 
 cd ~/repos
 
@@ -70,8 +78,8 @@ git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 
-rbenv install 2.7.1
-rbenv global 2.7.1
+${HOME}/.rbenv/bin/rbenv install 2.7.1
+${HOME}/.rbenv/bin/rbenvv global 2.7.1
 ruby -v
 
 gem install bundler
