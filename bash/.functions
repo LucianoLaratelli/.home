@@ -88,7 +88,7 @@ function ud() {
 			yay -Yc
 			pushd ~/.home
 			pacman -Qqen >tmppkg.txt
-			paste tmppkg.txt pkglist.txt >pkglist.txt
+			sort tmppkg.txt pkglist.txt | uniq >pkglist.txt
 			rm tmppkg.txt
 			git add pkglist.txt
 			git commit -m "automated pkglist update"
@@ -121,7 +121,8 @@ function ud() {
 	if command -v pip; then
 		pushd ~/.home
 		pip list | tail +3 | awk '{print $1}' >tmppip.txt
-		paste tmppip.txt pippkg.txt >pippkg.txt
+		sort tmppip.txt pippkg.txt | uniq >pippkg.txt
+		rm tmppip.txt
 		git add pippkg.txt
 		git commit -m "automated pip pkg update"
 		git push
