@@ -94,6 +94,7 @@ patch
 pkgconf
 pycharm-community-edition
 python-pip
+python-pylint
 ripgrep
 rygel
 sbcl
