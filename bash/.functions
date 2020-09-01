@@ -87,7 +87,7 @@ function ud() {
 			yay -Syu --devel --timeupdate
 			yay -Yc
 			pushd ~/.home
-			pacman -S - <pkglist.txt #install any new packages from other computers
+			sudo pacman -S - <pkglist.txt #install any new packages from other computers
 			pacman -Qqen >tmppkg.txt
 			sort tmppkg.txt pkglist.txt | uniq >pkglist.txt
 			rm tmppkg.txt
