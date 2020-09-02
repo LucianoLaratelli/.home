@@ -11,6 +11,7 @@ bison
 bluez-utils
 ccls
 cheese
+chrome-gnome-shell
 cmake
 cowsay
 cups
@@ -24,6 +25,7 @@ fakeroot
 fd
 file-roller
 firefox
+flatpak
 flex
 fortune-mod
 gcc
@@ -75,6 +77,7 @@ mutter
 nano
 nautilus
 networkmanager
+openssh
 orca
 patch
 pkgconf
@@ -93,7 +96,6 @@ stylelint
 sudo
 sushi
 terminator
-texinfo
 tk
 tmux
 totem
@@ -102,7 +104,6 @@ tracker-miners
 transmission-qt
 vim
 vino
-which
 xclip
 xdg-user-dirs-gtk
 xf86-video-intel
