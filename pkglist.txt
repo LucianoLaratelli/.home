@@ -24,7 +24,6 @@ fakeroot
 fd
 file-roller
 firefox
-flatpak
 flex
 fortune-mod
 gcc
@@ -78,6 +77,7 @@ gvfs-mtp
 gvfs-nfs
 gvfs-smb
 htop
+hyperfine
 intel-ucode
 iw
 jdk11-openjdk
@@ -94,7 +94,6 @@ mutter
 nano
 nautilus
 networkmanager
-openssh
 orca
 patch
 pkgconf
@@ -113,6 +112,7 @@ stylelint
 sudo
 sushi
 terminator
+texinfo
 tk
 tmux
 totem
@@ -121,6 +121,7 @@ tracker-miners
 transmission-qt
 vim
 vino
+which
 xclip
 xdg-user-dirs-gtk
 xf86-video-intel
