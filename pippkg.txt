@@ -36,7 +36,6 @@ itsdangerous
 jedi
 Jinja2
 jsonschema
-lensfun
 LibAppArmor
 lit
 louis
@@ -61,7 +60,6 @@ protobuf
 pwquality
 py
 PyAudio
-pycairo
 pyflakes
 Pygments
 PyGObject
