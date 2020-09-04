@@ -23,6 +23,7 @@ fakeroot
 fd
 file-roller
 firefox
+flatpak
 flex
 fortune-mod
 gcc
