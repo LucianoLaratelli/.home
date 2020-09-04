@@ -62,6 +62,7 @@ gvfs-nfs
 gvfs-smb
 htop
 hugo
+hyperfine
 jdk8-openjdk
 jre8-openjdk
 lib32-glibc
