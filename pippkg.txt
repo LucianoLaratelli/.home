@@ -57,6 +57,7 @@ pip-upgrade-outdated
 pluggy
 progress
 protobuf
+psutil
 pwquality
 py
 PyAudio
