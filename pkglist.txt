@@ -80,6 +80,7 @@ noto-fonts
 npm
 nss-mdns
 nvidia
+okular
 openresolv
 orca
 patch
