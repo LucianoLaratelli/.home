@@ -34,6 +34,7 @@ gcc
 gdb
 gdm
 gedit
+gimp
 git
 git-filter-repo
 glslang
@@ -54,6 +55,7 @@ gnome-themes-extra
 gnome-tweaks
 gnome-video-effects
 go
+gpick
 gptfdisk
 graphviz
 grilo-plugins
