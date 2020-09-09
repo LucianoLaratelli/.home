@@ -39,6 +39,7 @@ jedi
 Jinja2
 jsonschema
 lazy-object-proxy
+lensfun
 LibAppArmor
 lit
 louis
