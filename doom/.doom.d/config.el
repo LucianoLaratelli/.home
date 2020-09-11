@@ -43,6 +43,8 @@
 (setq org-journal-enable-agenda-integration t)
 (setq org-journal-enable-cache t)
 (setq org-journal-file-type 'monthly)
+
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 
