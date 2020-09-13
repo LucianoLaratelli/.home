@@ -3,11 +3,15 @@ mkdir ~/repos
 
 sudo pacman -S - <pkglist.txt
 pip install --user -r pippkg.txt
-cd ~/repos
+pushd ~/repos
+
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
-cd
+popd
+
+#prevent dropbox automatic updates
+install -dm0 ~/.dropbox-dist
 
 #prevent keyserver import failure when using yay to get dropbox:
 #https://bbs.archlinux.org/viewtopic.php?pid=1917184#p1917184
@@ -23,6 +27,9 @@ echo "**************************************************************************
 echo "*****************************start dropbox please*******************************"
 echo "********************************************************************************"
 read -p "Press Enter to continue"
+
+sudo systemctl edit dropbox@{USER}
+sudo systemctl enable dropbox@{USER}
 
 sudo systemctl enable --now snapd.socket
 
