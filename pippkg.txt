@@ -89,6 +89,7 @@ resolvelib
 retrying
 Send2Trash
 setuptools
+sgmllib3k
 six
 soupsieve
 speedtest-cli
