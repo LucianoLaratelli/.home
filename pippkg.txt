@@ -43,6 +43,7 @@ lensfun
 LibAppArmor
 lit
 louis
+lxml
 Markdown
 MarkupSafe
 mccabe
@@ -106,6 +107,7 @@ wcwidth
 webencodings
 Werkzeug
 wheel
+win32-setctime
 wrapt
 xlrd
 xlwt
