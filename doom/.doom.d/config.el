@@ -246,3 +246,9 @@
 
 (setq backup-directory-alist `(("." . "~/.BACKUPS")))
 (setq backup-by-copying t)
+
+(defun my/copy-eval-buffer-to-clipboard (orig-fun &rest args)
+  (kill-new (apply orig-fun args)))
+
+(advice-add '+eval/buffer :around #'my/copy-eval-buffer-to-clipboard)
+(advice-add 'eval-buffer :around #'my/copy-eval-buffer-to-clipboard)
