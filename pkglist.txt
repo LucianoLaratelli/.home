@@ -106,6 +106,7 @@ python-pylint
 refind
 ripgrep
 rsync
+rust-analyzer
 rygel
 sbcl
 shellcheck
