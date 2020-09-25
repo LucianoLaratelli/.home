@@ -102,6 +102,7 @@ patch
 pkgconf
 psensor
 pycharm-community-edition
+python-antlr4
 python-pip
 python-pylint
 refind
