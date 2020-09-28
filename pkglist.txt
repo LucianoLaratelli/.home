@@ -110,6 +110,7 @@ ripgrep
 rsync
 rust-analyzer
 rygel
+sagemath
 sbcl
 shellcheck
 shfmt
@@ -117,6 +118,7 @@ simple-scan
 sl
 speedtest-cli
 stow
+s-tui
 stylelint
 sudo
 sushi
