@@ -71,6 +71,7 @@ gvfs-smb
 htop
 hugo
 hyperfine
+inetutils
 intel-ucode
 iw
 jdk11-openjdk
@@ -90,6 +91,7 @@ mutter
 nano
 nautilus
 networkmanager
+nmap
 nodejs
 noto-fonts
 npm
@@ -149,6 +151,7 @@ valgrind
 vim
 vino
 wireguard-tools
+x2goclient
 xclip
 xdg-user-dirs-gtk
 xf86-video-intel
