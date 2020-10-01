@@ -8,6 +8,7 @@ apy
 aqt
 argon2-cffi
 astroid
+async-generator
 attrs
 Babel
 backcall
@@ -64,10 +65,12 @@ jsonschema
 jupyter-client
 jupyter-console
 jupyter-core
+jupyterlab-pygments
 kiwisolver
 lazy-object-proxy
 lensfun
 LibAppArmor
+line-profiler
 lit
 louis
 lxml
@@ -80,8 +83,10 @@ mistune
 more-itertools
 mpmath
 msgpack
+nbclient
 nbconvert
 nbformat
+nest-asyncio
 networkx
 nose
 notebook
