@@ -150,6 +150,7 @@ tree
 valgrind
 vim
 vino
+wget
 wireguard-tools
 x2goclient
 xclip
