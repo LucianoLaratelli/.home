@@ -85,6 +85,7 @@ linux
 linux-firmware
 linux-headers
 llvm
+luit
 make
 meld
 mutter
@@ -164,7 +165,6 @@ xorg-fonts-75dpi
 xorg-fonts-encodings
 xorg-font-util
 xorg-iceauth
-xorg-luit
 xorg-mkfontscale
 xorg-server
 xorg-server-common
