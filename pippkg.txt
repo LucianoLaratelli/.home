@@ -6,6 +6,7 @@ apparmor
 appdirs
 apy
 aqt
+arandr
 argon2-cffi
 astroid
 async-generator
