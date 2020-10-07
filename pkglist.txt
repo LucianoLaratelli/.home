@@ -1,10 +1,12 @@
 alacritty
 amd-ucode
 anki
+arandr
 aspell
 aspell-en
 autoconf
 automake
+awesome
 baobab
 base
 bash-language-server
@@ -120,6 +122,7 @@ shellcheck
 shfmt
 simple-scan
 sl
+slock
 speedtest-cli
 stow
 s-tui
