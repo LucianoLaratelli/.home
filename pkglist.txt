@@ -80,6 +80,7 @@ jdk11-openjdk
 jdk8-openjdk
 jre11-openjdk-headless
 jre8-openjdk
+julia
 jupyter-notebook
 lib32-glibc
 libreoffice-fresh
