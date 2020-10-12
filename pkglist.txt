@@ -33,6 +33,7 @@ gpick
 gptfdisk
 graphviz
 grub
+gtk3
 htop
 hugo
 hyperfine
