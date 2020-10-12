@@ -155,6 +155,7 @@ sphinxcontrib-serializinghtml
 sqlparse
 s-tui
 sympy
+team
 terminado
 testpath
 toml
