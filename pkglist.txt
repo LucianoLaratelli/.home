@@ -20,8 +20,11 @@ dmenu
 dmidecode
 fakeroot
 fd
+firefox
+flatpak
 flex
 fortune-mod
+gammastep
 gcc
 gdb
 gimp
@@ -55,6 +58,7 @@ llvm
 luit
 make
 nano
+networkmanager
 nmap
 nodejs
 noto-fonts
@@ -65,7 +69,12 @@ openresolv
 otf-font-awesome
 p7zip
 patch
+pavucontrol
 pkgconf
+plasma-pa
+pulseaudio
+pulseaudio-alsa
+pulseaudio-bluetooth
 python-antlr4
 python-pip
 python-pylint
@@ -106,6 +115,7 @@ transmission-qt
 tree
 valgrind
 vim
+waybar
 wget
 wireguard-tools
 x2goclient
