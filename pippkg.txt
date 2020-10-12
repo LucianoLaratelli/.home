@@ -6,7 +6,6 @@ apparmor
 appdirs
 apy
 aqt
-arandr
 argon2-cffi
 astroid
 async-generator
@@ -17,16 +16,13 @@ beautifulsoup4
 black
 bleach
 brial
-Brlapi
 btrfsutil
 CacheControl
 certifi
 cffi
 chardet
-chrome-gnome-shell
 click
 colorama
-configobj
 contextlib2
 cvxopt
 cycler
@@ -79,7 +75,6 @@ Markdown
 MarkupSafe
 matplotlib
 mccabe
-meld
 mistune
 more-itertools
 mpmath
@@ -116,7 +111,6 @@ prompt-toolkit
 protobuf
 psutil
 ptyprocess
-pwquality
 py
 PyAudio
 pycairo
@@ -124,7 +118,6 @@ pycallgraph
 pycparser
 pyflakes
 Pygments
-PyGObject
 pylint
 pyparsing
 PyQt5
@@ -137,7 +130,6 @@ python-dateutil
 python-jsonrpc-server
 python-language-server
 pytz
-pyxdg
 pyzmq
 regex
 requests
@@ -163,9 +155,7 @@ sphinxcontrib-serializinghtml
 sqlparse
 s-tui
 sympy
-team
 terminado
-terminator
 testpath
 toml
 tornado
