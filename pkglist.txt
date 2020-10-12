@@ -15,6 +15,7 @@ clang
 cmake
 cowsay
 cups
+discord
 discount
 dmenu
 dmidecode
@@ -89,6 +90,8 @@ shfmt
 sl
 slock
 speedtest-cli
+steam
+steam-native-runtime
 stow
 s-tui
 stylelint
