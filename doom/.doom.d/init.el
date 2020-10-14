@@ -87,7 +87,7 @@
        ;;direnv
        ;;docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
-       ;;ein               ; tame Jupyter notebooks with emacs
+       ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)                     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
        (lookup                             ; helps you navigate your code and documentation
@@ -144,7 +144,7 @@
         +hugo                              ; use Emacs for hugo blogging
         +roam
         +journal
-        ;;+jupyter        ; ipython/jupyter support for babel
+        +jupyter        ; ipython/jupyter support for babel
         ;;+pandoc          ; export-with-pandoc support
         +pomodoro        ; be fruitful with the tomato technique
         +present)                          ; using org-mode for presentations
@@ -174,7 +174,7 @@
 
        :app
        ;;calendar
-       ;;irc               ; how neckbeards socialize
+       ;; irc               ; how neckbeards socialize
        ;;(rss +org)        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought
 

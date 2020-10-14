@@ -28,9 +28,9 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-;;(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-one)
 ;;(setq doom-theme 'doom-outrun-electric)
-(setq doom-theme `doom-monokai-pro)
+;; (setq doom-theme `doom-monokai-pro)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -44,7 +44,7 @@
 (setq org-journal-enable-cache t)
 (setq org-journal-file-type 'monthly)
 
-
+(setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 
@@ -73,6 +73,9 @@
       "w /" #'evil-window-vsplit
       "w -" #'evil-window-split)
 
+(map! :leader
+      "a c r" #'jupyter-org-clear-all-results)
+
 (require `evil-surround)
 
 (add-hook 'pdf-view-mode-hook (lambda () (auto-revert-mode 1)))
@@ -83,6 +86,14 @@
       "C-l" #'evil-window-right
       )
 
+; unmap key bindings I use in sway
+(map! "M-C-c" nil)
+(map! "M-C-d" nil)
+(map! "M-C-l" nil)
+(map! "M-C-r" nil)
+(map! "M-C-s" nil)
+(map! "M-C-q" nil)
+(map! "M-C-t" nil)
 
 (with-eval-after-load 'magit
   (evil-define-key 'normal magit-mode-map (kbd "C-k") 'evil-window-up)
@@ -247,8 +258,44 @@
 (setq backup-directory-alist `(("." . "~/.BACKUPS")))
 (setq backup-by-copying t)
 
-(defun my/copy-eval-buffer-to-clipboard (orig-fun &rest args)
-  (kill-new (apply orig-fun args)))
 
-(advice-add '+eval/buffer :around #'my/copy-eval-buffer-to-clipboard)
-(advice-add 'eval-buffer :around #'my/copy-eval-buffer-to-clipboard)
+(setq rainbow-delimiters-max-face-count nil)
+(setq org-pretty-entities t)
+
+
+;Allow bold, italics, etc in middle of word
+(after! org
+ (setcar org-emphasis-regexp-components " \t('\"{[:alpha:]")
+ (setcar (nthcdr 1 org-emphasis-regexp-components) "[:alpha:]- \t.,:!?;'\")}\\")
+ (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+ )
+
+;https://stackoverflow.com/a/30697761/5692730
+(defun my/sort-lines-by-length (reverse beg end)
+  "Sort lines by length."
+  (interactive "P\nr")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region beg end)
+      (goto-char (point-min))
+      (let ;; To make `end-of-line' and etc. to ignore fields.
+          ((inhibit-field-text-motion t))
+        (sort-subr reverse 'forward-line 'end-of-line nil nil
+                   (lambda (l1 l2)
+                     (apply #'< (mapcar (lambda (range) (- (cdr range) (car range)))
+                                        (list l1 l2)))))))))
+
+
+(defun my/clear-subtree ()
+  (interactive)
+  (org-mark-subtree) ;; mark the current subtree
+  (forward-line) ;; move point forward, so the headline isn't in the region
+  (delete-region (region-beginning) (region-end)) ;; delete the rest
+)
+
+
+(setq org-latex-listings 'minted
+      org-latex-packages-alist '(("" "minted"))
+      org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
