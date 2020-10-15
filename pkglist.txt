@@ -17,7 +17,6 @@ cowsay
 cups
 discord
 discount
-dmenu
 dmidecode
 fakeroot
 fd
@@ -42,6 +41,9 @@ hardinfo
 htop
 hugo
 hyperfine
+i3lock
+i3status
+i3-wm
 inetutils
 inkscape
 intel-ucode
@@ -68,6 +70,7 @@ nodejs
 noto-fonts
 npm
 nss-mdns
+nvidia
 okular
 openbox
 openresolv
@@ -124,6 +127,7 @@ ttf-dejavu
 ttf-liberation
 valgrind
 vim
+vulkan-mesa-layers
 waybar
 wget
 wireguard-tools
