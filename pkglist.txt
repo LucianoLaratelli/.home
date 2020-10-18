@@ -102,8 +102,6 @@ shfmt
 sl
 slock
 speedtest-cli
-steam
-steam-native-runtime
 stow
 s-tui
 stylelint
