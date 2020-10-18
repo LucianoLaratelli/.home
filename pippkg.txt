@@ -91,6 +91,7 @@ oauth2
 ordered-set
 orjson
 packaging
+pandas
 pandocfilters
 parso
 pathspec
@@ -118,6 +119,7 @@ pycallgraph
 pycparser
 pyflakes
 Pygments
+PyGObject
 pylint
 pyparsing
 PyQt5
