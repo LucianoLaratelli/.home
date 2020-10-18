@@ -20,6 +20,7 @@ discount
 dmidecode
 fakeroot
 fd
+feh
 firefox
 flatpak
 flex
@@ -64,6 +65,7 @@ luit
 make
 mesa-demos
 nano
+nautilus
 networkmanager
 nmap
 nodejs
@@ -83,9 +85,12 @@ plasma-pa
 pulseaudio
 pulseaudio-alsa
 pulseaudio-bluetooth
+pycharm-community-edition
 python-antlr4
+python-gobject
 python-pip
 python-pylint
+redshift
 refind
 ripgrep
 rsync
