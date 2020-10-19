@@ -73,6 +73,7 @@ noto-fonts
 npm
 nss-mdns
 nvidia
+nvidia-settings
 okular
 openbox
 openresolv
