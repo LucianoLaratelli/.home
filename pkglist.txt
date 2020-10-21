@@ -32,6 +32,7 @@ gimp
 git
 git-filter-repo
 glslang
+gnome-screenshot
 go
 gpick
 gptfdisk
@@ -98,6 +99,7 @@ rsync
 rust-analyzer
 sagemath
 sbcl
+scrot
 shellcheck
 shfmt
 sl
