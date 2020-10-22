@@ -67,6 +67,7 @@ make
 mesa-demos
 nano
 nautilus
+neofetch
 networkmanager
 nmap
 nodejs
