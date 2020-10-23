@@ -15,7 +15,6 @@ clang
 cmake
 cowsay
 cups
-discord
 discount
 dmidecode
 fakeroot
@@ -113,6 +112,7 @@ sudo
 sway
 swayidle
 swaylock
+telegram-desktop
 texinfo
 texlive-bibtexextra
 texlive-core
