@@ -74,6 +74,7 @@ nodejs
 noto-fonts
 npm
 nss-mdns
+nvidia-dkms
 nvidia-settings
 okular
 openbox
