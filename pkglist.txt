@@ -14,6 +14,7 @@ ccls
 clang
 cmake
 cowsay
+crda
 cups
 discount
 dmidecode
@@ -73,7 +74,6 @@ nodejs
 noto-fonts
 npm
 nss-mdns
-nvidia
 nvidia-settings
 okular
 openbox
