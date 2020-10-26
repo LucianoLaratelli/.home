@@ -41,7 +41,6 @@ filelock
 Flask
 Flask-Cors
 fpylll
-future
 git-filter-repo
 gmpy2
 graphviz
