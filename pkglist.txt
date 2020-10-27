@@ -12,6 +12,7 @@ bison
 bluez-utils
 ccls
 clang
+cloc
 cmake
 cowsay
 crda
@@ -129,6 +130,7 @@ texlive-publishers
 texlive-science
 tk
 tmux
+tokei
 transmission-qt
 tree
 ttf-dejavu
