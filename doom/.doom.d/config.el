@@ -260,6 +260,7 @@
 
 
 (setq rainbow-delimiters-max-face-count nil)
+
 (setq org-pretty-entities t)
 
 
