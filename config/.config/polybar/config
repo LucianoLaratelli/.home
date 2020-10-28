@@ -1,0 +1,82 @@
+;==========================================================
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;==========================================================
+[bar/mybar]
+monitor=DP-2
+background = #177245
+font-0 = Pragmata Pro
+height = 25
+separator =  " | "
+modules-left = filesystem updates-pacman-aurhelper
+modules-center = date
+modules-right = wired-network wireless-network publicip temperature cpu gpu ram
+tray-position = left
+tray-padding = 5
+
+[module/filesystem]
+type = internal/fs
+mount-0 = /
+interval = 10
+fixed-values = false
+label-mounted =%mountpoint%: %used%/%total% used
+
+[module/updates-pacman-aurhelper]
+type = custom/script
+exec = /home/luciano/repos/polybar-scripts/polybar-scripts/updates-pacman-aurhelper/updates-pacman-aurhelper.sh
+interval = 600
+
+[module/date]
+type = internal/date
+date = %Y-%m-%d (%A) %T
+
+[module/wired-network]
+type = internal/network
+interface = enp34s0
+
+[module/wireless-network]
+type = internal/network
+interface = wlo1
+label-connected = %essid%: %downspeed:10% down %upspeed:10% up
+label-connected-foreground = #eefafafa
+label-disconnected = no internet!
+label-disconnected-foreground = #721744
+
+[module/publicip]
+type=custom/script
+exec=curl -4 -sf ifconfig.me
+interval=60
+color=#88FFFF
+
+[module/temperature]
+type = internal/temperature
+interval = 1
+thermal-zone = 0
+hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input
+base-temperature = 20
+warn-temperature = 60
+label = CPU %temperature%
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+label = CPU %percentage-sum:04%%
+
+[module/gpu]
+type = custom/script
+exec = /home/luciano/.config/polybar/gpustatus.sh --poly
+interval = 0.5
+
+[module/ram]
+type = internal/memory
+; there is a special space character " " at the end of this line, to avoid an
+; issue where it looks like the GB is off of the bigger of my two monitors,
+; which is quite wide. This character is also placed in module/filesystem, at
+; the beginning of the line.
+label = RAM %gb_used%/%gb_total% 
+interval = 1
+
