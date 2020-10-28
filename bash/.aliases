@@ -18,6 +18,7 @@ alias dt="cd ~/Desktop"
 alias p="cd ~/projects"
 alias g="git"
 alias drdc="doom refresh; yes | doom compile"
+alias shutdown="shutdown now"
 
 # Detect which `ls` flavor is in use
 if ls --color >/dev/null 2>&1; then # GNU `ls`
