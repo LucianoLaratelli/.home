@@ -35,7 +35,7 @@ sudo systemctl enable --now snapd.socket
 
 cd ~/.home
 rm -rf ~/.bash* ~/.git ~/.tmux* ~/.vim
-stow bash doom git tmux vim
+stow bash doom git tmux vim config
 
 cd ~/repos
 
@@ -56,28 +56,6 @@ cd
 git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
 yes | ~/.emacs.d/bin/doom install
 ~/.emacs.d/bin/doom compile
-
-#install icons
-cd
-mkdir .icons
-pushd .icons
-git clone https://github.com/rtlewis88/rtl88-Themes.git
-cd rtl88-Themes
-git checkout Arc-ICONS
-popd
-cp -r rtl88-Themes/Arc-ICONS .
-rm -rf rtl88-Themes
-
-#install themes
-cd
-mkdir .themes
-pushd .themes
-git clone https://github.com/rtlewis88/rtl88-Themes.git
-cd rtl88-Themes
-git checkout Arc-Darkest-COLORS-Complete-Desktop
-popd
-cp -r rtl88-Themes/AD-Plum .
-rm -rf rtl88-Themes
 
 #rbenv install
 cd
