@@ -65,6 +65,7 @@ linux-headers
 llvm
 luit
 make
+meld
 mesa-demos
 nano
 nautilus
