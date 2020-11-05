@@ -59,6 +59,8 @@ julia
 jupyter-notebook
 lib32-glibc
 libreoffice-fresh
+lightdm
+lightdm-gtk-greeter
 linux
 linux-firmware
 linux-headers
@@ -97,6 +99,7 @@ python-pip
 python-pylint
 redshift
 refind
+reflector
 ripgrep
 rsync
 rust-analyzer
