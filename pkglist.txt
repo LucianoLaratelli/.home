@@ -122,6 +122,7 @@ sway
 swayidle
 swaylock
 telegram-desktop
+terminus-font
 texinfo
 texlive-bibtexextra
 texlive-core
@@ -141,7 +142,12 @@ tokei
 transmission-qt
 tree
 ttf-dejavu
+ttf-droid
+ttf-font-awesome
+ttf-inconsolata
 ttf-liberation
+ttf-roboto
+ttf-ubuntu-font-family
 valgrind
 vim
 vulkan-mesa-layers
