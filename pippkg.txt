@@ -15,7 +15,6 @@ backcall
 beautifulsoup4
 black
 bleach
-brial
 btrfsutil
 CacheControl
 certifi
@@ -86,6 +85,7 @@ nbclient
 nbconvert
 nbformat
 nest-asyncio
+netsnmp-python
 networkx
 nose
 notebook
