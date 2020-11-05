@@ -58,6 +58,7 @@ jre8-openjdk
 julia
 jupyter-notebook
 lib32-glibc
+lib32-nvidia-utils
 libreoffice-fresh
 lightdm
 lightdm-gtk-greeter
@@ -78,6 +79,7 @@ nodejs
 noto-fonts
 npm
 nss-mdns
+nvidia
 nvidia-dkms
 nvidia-settings
 okular
@@ -111,6 +113,7 @@ shfmt
 sl
 slock
 speedtest-cli
+steam
 stow
 s-tui
 stylelint
