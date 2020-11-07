@@ -83,7 +83,6 @@ nvidia
 nvidia-dkms
 nvidia-settings
 okular
-openbox
 openresolv
 otf-font-awesome
 p7zip
@@ -121,6 +120,7 @@ sudo
 sway
 swayidle
 swaylock
+swi-prolog
 telegram-desktop
 terminus-font
 texinfo
