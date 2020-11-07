@@ -89,12 +89,10 @@ p7zip
 patch
 pavucontrol
 pkgconf
-plasma-pa
 pulseaudio
 pulseaudio-alsa
 pulseaudio-bluetooth
 pycharm-community-edition
-python-antlr4
 python-gobject
 python-pip
 python-pylint
@@ -117,9 +115,6 @@ stow
 s-tui
 stylelint
 sudo
-sway
-swayidle
-swaylock
 swi-prolog
 telegram-desktop
 terminus-font
@@ -151,7 +146,6 @@ ttf-ubuntu-font-family
 valgrind
 vim
 vulkan-mesa-layers
-waybar
 wget
 wireguard-tools
 x2goclient
