@@ -59,6 +59,7 @@ itsdangerous
 jedi
 Jinja2
 jsonschema
+jswipl
 jupyter-client
 jupyter-console
 jupyter-core
@@ -131,6 +132,7 @@ PyQt5-sip
 PyQtWebEngine
 pyrsistent
 PySocks
+pyswip
 pytest
 python-dateutil
 python-jsonrpc-server
