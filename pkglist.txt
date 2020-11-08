@@ -89,6 +89,7 @@ p7zip
 patch
 pavucontrol
 pkgconf
+plasma-pa
 pulseaudio
 pulseaudio-alsa
 pulseaudio-bluetooth
