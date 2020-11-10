@@ -1,6 +1,7 @@
 alacritty
 amd-ucode
 anki
+arandr
 aspell
 aspell-en
 autoconf
@@ -101,6 +102,7 @@ redshift
 refind
 reflector
 ripgrep
+rofi
 rsync
 rust-analyzer
 sagemath
