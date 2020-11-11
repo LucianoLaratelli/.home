@@ -58,6 +58,7 @@ jre11-openjdk-headless
 jre8-openjdk
 julia
 jupyter-notebook
+kcolorchooser
 lib32-glibc
 lib32-nvidia-utils
 libreoffice-fresh
