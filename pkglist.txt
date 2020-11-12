@@ -14,6 +14,7 @@ bluez-utils
 ccls
 clang
 cloc
+clojure
 cmake
 cowsay
 crda
