@@ -28,7 +28,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+;; (setq doom-theme 'doom-one)
+(setq doom-theme 'doom-dracula)
 ;;(setq doom-theme 'doom-outrun-electric)
 ;; (setq doom-theme `doom-monokai-pro)
 
@@ -86,7 +87,7 @@
       "C-l" #'evil-window-right
       )
 
-; unmap key bindings I use in sway
+; unmap key bindings I use in i3
 (map! "M-C-c" nil)
 (map! "M-C-d" nil)
 (map! "M-C-l" nil)
@@ -95,11 +96,29 @@
 (map! "M-C-q" nil)
 (map! "M-C-t" nil)
 
+; I could use bind-keys* here, but that overwrites the keymap *everywhere*,
+; including in e.g. an ivy completion buffer. This does the thing but not at
+; that top-most level.
 (with-eval-after-load 'magit
-  (evil-define-key 'normal magit-mode-map (kbd "C-k") 'evil-window-up)
-  (evil-define-key 'visual magit-mode-map (kbd "C-k") 'evil-window-up)
+  (evil-define-key 'normal magit-mode-map (kbd "C-h") 'evil-window-left)
   (evil-define-key 'normal magit-mode-map (kbd "C-j") 'evil-window-down)
+  (evil-define-key 'normal magit-mode-map (kbd "C-k") 'evil-window-up)
+  (evil-define-key 'normal magit-mode-map (kbd "C-l") 'evil-window-right)
+  (evil-define-key 'visual magit-mode-map (kbd "C-h") 'evil-window-left)
   (evil-define-key 'visual magit-mode-map (kbd "C-j") 'evil-window-down)
+  (evil-define-key 'visual magit-mode-map (kbd "C-k") 'evil-window-up)
+  (evil-define-key 'visual magit-mode-map (kbd "C-l") 'evil-window-right)
+  )
+
+(with-eval-after-load 'org
+  (evil-define-key 'normal org-mode-map (kbd "C-h") 'evil-window-left)
+  (evil-define-key 'normal org-mode-map (kbd "C-j") 'evil-window-down)
+  (evil-define-key 'normal org-mode-map (kbd "C-k") 'evil-window-up)
+  (evil-define-key 'normal org-mode-map (kbd "C-l") 'evil-window-right)
+  (evil-define-key 'visual org-mode-map (kbd "C-h") 'evil-window-left)
+  (evil-define-key 'visual org-mode-map (kbd "C-j") 'evil-window-down)
+  (evil-define-key 'visual org-mode-map (kbd "C-k") 'evil-window-up)
+  (evil-define-key 'visual org-mode-map (kbd "C-l") 'evil-window-right)
   )
 
 (map! :after vterm
