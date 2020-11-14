@@ -87,6 +87,7 @@ nvidia-dkms
 nvidia-settings
 okular
 openresolv
+openttd
 otf-font-awesome
 p7zip
 patch
