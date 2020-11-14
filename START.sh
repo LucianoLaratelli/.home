@@ -46,7 +46,7 @@ cd emacs
 git checkout -t origin/emacs-27
 
 ./autogen.sh
-CFLAGS="-O2 -march=native" ./configure --with-modules --quiet
+CFLAGS="-O2 -march=native" ./configure --with-modules --with-cairo --with-imagemagick --quiet
 NUMCORES="$(grep -c ^processor /proc/cpuinfo)"
 NUMCORES=$(($NUMCORES * 2))
 make -j${NUMCORES}
