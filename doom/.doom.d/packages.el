@@ -22,12 +22,14 @@
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 (package! bison-mode)
+(package! bnf-mode)
 (package! ccls)
-(package! impatient-mode)
-(package! open-junk-file)
-(package! make-mode)
 (package! flycheck-clang-tidy)
+(package! impatient-mode)
 (package! magit-delta)
+(package! make-mode)
+(package! ob-prolog)
+(package! open-junk-file)
 
 ;; To install a package directly from a particular repo, you'll need to specify
 ;; a `:recipe'. You'll find documentation on what `:recipe' accepts here:
