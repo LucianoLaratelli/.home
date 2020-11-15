@@ -7,6 +7,7 @@ apy
 aqt
 arandr
 argon2-cffi
+asn1crypto
 astroid
 async-generator
 attrs
@@ -24,6 +25,7 @@ click
 colorama
 contextlib2
 coverage
+cryptography
 cvxopt
 cycler
 cypari2
@@ -126,6 +128,7 @@ pyflakes
 Pygments
 PyGObject
 pylint
+pyOpenSSL
 pyparsing
 PyQt5
 PyQt5-sip
