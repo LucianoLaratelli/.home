@@ -156,6 +156,7 @@ wget
 wireguard-tools
 x2goclient
 xclip
+xdotool
 xf86-video-intel
 xf86-video-vesa
 xorg-bdftopcf
