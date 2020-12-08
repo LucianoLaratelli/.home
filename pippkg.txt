@@ -12,6 +12,7 @@ attrs
 Babel
 backcall
 beautifulsoup4
+black
 bleach
 btrfsutil
 CacheControl
@@ -69,6 +70,7 @@ meld
 mistune
 mpmath
 msgpack
+mypy-extensions
 nbconvert
 nbformat
 netsnmp-python
@@ -80,6 +82,7 @@ orjson
 packaging
 pandocfilters
 parso
+pathspec
 pep517
 pexpect
 pickleshare
@@ -110,6 +113,7 @@ python-dateutil
 pytz
 pyzmq
 Reflector
+regex
 requests
 resolvelib
 retrying
@@ -137,6 +141,8 @@ testpath
 toml
 tornado
 traitlets
+typed-ast
+typing-extensions
 tzlocal
 urllib3
 urwid
