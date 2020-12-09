@@ -101,6 +101,7 @@ pycharm-community-edition
 python-gobject
 python-pip
 python-pylint
+python-sqlparse
 redshift
 refind
 reflector
