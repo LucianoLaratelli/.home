@@ -133,6 +133,7 @@ sphinxcontrib-htmlhelp
 sphinxcontrib-jsmath
 sphinxcontrib-qthelp
 sphinxcontrib-serializinghtml
+sqlparse
 s-tui
 sympy
 team
