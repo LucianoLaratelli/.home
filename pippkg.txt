@@ -96,6 +96,7 @@ prompt-toolkit
 protobuf
 psutil
 ptyprocess
+pwquality
 PyAudio
 pycairo
 pycparser
@@ -109,6 +110,7 @@ PyQt5-sip
 PyQtWebEngine
 pyrsistent
 PySocks
+pyswip
 python-dateutil
 pytz
 pyzmq
