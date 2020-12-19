@@ -1,3 +1,4 @@
+accountsservice
 alacritty
 amd-ucode
 anki
@@ -32,6 +33,7 @@ fortune-mod
 gammastep
 gcc
 gdb
+gdm
 gimp
 git
 git-filter-repo
@@ -82,6 +84,7 @@ nodejs
 noto-fonts
 npm
 nss-mdns
+nvidia
 okular
 openresolv
 openttd
