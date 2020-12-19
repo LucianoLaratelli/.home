@@ -11,6 +11,7 @@ base
 bash-language-server
 bison
 bluez-utils
+bpytop
 ccls
 clang
 cloc
@@ -61,7 +62,6 @@ julia
 jupyter-notebook
 kcolorchooser
 lib32-glibc
-lib32-nvidia-utils
 libreoffice-fresh
 lightdm
 lightdm-gtk-greeter
@@ -82,9 +82,6 @@ nodejs
 noto-fonts
 npm
 nss-mdns
-nvidia
-nvidia-dkms
-nvidia-settings
 okular
 openresolv
 openttd
@@ -117,7 +114,6 @@ shfmt
 sl
 slock
 speedtest-cli
-steam
 stow
 s-tui
 stylelint
@@ -174,7 +170,6 @@ xorg-server-devel
 xorg-server-xephyr
 xorg-server-xnest
 xorg-server-xvfb
-xorg-server-xwayland
 xorg-sessreg
 xorg-setxkbmap
 xorg-smproxy
@@ -205,6 +200,7 @@ xorg-xrefresh
 xorg-xset
 xorg-xsetroot
 xorg-xvinfo
+xorg-xwayland
 xorg-xwd
 xorg-xwininfo
 xorg-xwud
