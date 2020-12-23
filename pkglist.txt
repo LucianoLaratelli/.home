@@ -23,6 +23,8 @@ crda
 cups
 discount
 dmidecode
+dotnet-runtime
+dotnet-sdk
 fakeroot
 fd
 feh
@@ -156,6 +158,10 @@ vim
 vulkan-mesa-layers
 vulkan-swrast
 wget
+wine
+wine-gecko
+wine-mono
+winetricks
 wireguard-tools
 x2goclient
 xclip
