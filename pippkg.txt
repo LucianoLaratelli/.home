@@ -20,6 +20,7 @@ cffi
 chardet
 click
 colorama
+congruity
 contextlib2
 cryptography
 cvxopt
@@ -60,6 +61,7 @@ kiwisolver
 lazy-object-proxy
 lensfun
 LibAppArmor
+libconcord
 lit
 louis
 Markdown
@@ -137,6 +139,7 @@ sphinxcontrib-qthelp
 sphinxcontrib-serializinghtml
 sqlparse
 s-tui
+suds-py3
 sympy
 team
 terminado
@@ -156,4 +159,5 @@ Werkzeug
 wheel
 widgetsnbextension
 wrapt
+wxPython
 zipp
