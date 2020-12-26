@@ -11,6 +11,7 @@ astroid
 attrs
 Babel
 backcall
+Beaker
 beautifulsoup4
 black
 bleach
@@ -40,11 +41,13 @@ Flask-Cors
 fpylll
 git-filter-repo
 gmpy2
+hidapi
 html2text
 html5lib
 idna
 imagesize
 importlib-metadata
+injector
 ipykernel
 ipython
 ipython-genutils
@@ -62,8 +65,10 @@ lazy-object-proxy
 lensfun
 LibAppArmor
 libconcord
+liquidctl
 lit
 louis
+Mako
 Markdown
 MarkupSafe
 matplotlib
@@ -85,6 +90,7 @@ packaging
 pandocfilters
 parso
 pathspec
+peewee
 pep517
 pexpect
 pickleshare
@@ -115,6 +121,8 @@ PySocks
 pyswip
 python-dateutil
 pytz
+pyusb
+pyxdg
 pyzmq
 Reflector
 regex
@@ -122,6 +130,7 @@ requests
 resolvelib
 retrying
 rpy2
+Rx
 sage
 scipy
 Send2Trash
