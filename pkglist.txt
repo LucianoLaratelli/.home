@@ -67,6 +67,7 @@ jupyter-notebook
 kcolorchooser
 lib32-glibc
 lib32-nvidia-utils
+libconfig
 libreoffice-fresh
 lightdm
 lightdm-gtk-greeter
@@ -115,6 +116,7 @@ rust-analyzer
 sagemath
 sbcl
 scrot
+shairport-sync
 shellcheck
 shfmt
 sl
