@@ -8,6 +8,7 @@ arandr
 argon2-cffi
 asn1crypto
 astroid
+async-generator
 attrs
 Babel
 backcall
@@ -60,6 +61,7 @@ jsonschema
 jupyter-client
 jupyter-console
 jupyter-core
+jupyterlab-pygments
 kiwisolver
 lazy-object-proxy
 lensfun
@@ -78,8 +80,10 @@ mistune
 mpmath
 msgpack
 mypy-extensions
+nbclient
 nbconvert
 nbformat
+nest-asyncio
 netsnmp-python
 networkx
 notebook
