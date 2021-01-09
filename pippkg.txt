@@ -30,6 +30,7 @@ cycler
 cypari2
 cysignals
 decorator
+deepdiff
 defusedxml
 distlib
 distro
@@ -57,6 +58,7 @@ isort
 itsdangerous
 jedi
 Jinja2
+jsonpickle
 jsonschema
 jupyter-client
 jupyter-console
@@ -70,12 +72,14 @@ libconcord
 liquidctl
 lit
 louis
+lxml
 Mako
 Markdown
 MarkupSafe
 matplotlib
 mccabe
 meld
+mergedeep
 mistune
 mpmath
 msgpack
@@ -150,6 +154,7 @@ sphinxcontrib-htmlhelp
 sphinxcontrib-jsmath
 sphinxcontrib-qthelp
 sphinxcontrib-serializinghtml
+SQLAlchemy
 sqlparse
 s-tui
 suds-py3
@@ -163,6 +168,7 @@ traitlets
 typed-ast
 typing-extensions
 tzlocal
+ujson
 urllib3
 urwid
 waitress
@@ -171,6 +177,7 @@ webencodings
 Werkzeug
 wheel
 widgetsnbextension
+win32-setctime
 wrapt
 wxPython
 zipp
