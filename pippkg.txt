@@ -16,6 +16,7 @@ Beaker
 beautifulsoup4
 black
 bleach
+bs4
 btrfsutil
 CacheControl
 cffi
@@ -25,6 +26,7 @@ colorama
 congruity
 contextlib2
 cryptography
+cssselect
 cvxopt
 cycler
 cypari2
@@ -37,6 +39,7 @@ distro
 docopt
 docutils
 entrypoints
+fake-useragent
 feedparser
 Flask
 Flask-Cors
@@ -96,6 +99,7 @@ ordered-set
 orjson
 packaging
 pandocfilters
+parse
 parso
 pathspec
 peewee
@@ -116,14 +120,17 @@ pwquality
 PyAudio
 pycairo
 pycparser
+pyee
 Pygments
 PyGObject
 pylint
 pyOpenSSL
 pyparsing
+pyppeteer
 PyQt5
 PyQt5-sip
 PyQtWebEngine
+pyquery
 pyrsistent
 PySocks
 pyswip
@@ -135,12 +142,14 @@ pyzmq
 Reflector
 regex
 requests
+requests-html
 resolvelib
 retrying
 rpy2
 Rx
 sage
 scipy
+selenium
 Send2Trash
 setuptools
 six
@@ -164,6 +173,7 @@ terminado
 testpath
 toml
 tornado
+tqdm
 traitlets
 typed-ast
 typing-extensions
@@ -171,9 +181,11 @@ tzlocal
 ujson
 urllib3
 urwid
+w3lib
 waitress
 wcwidth
 webencodings
+websockets
 Werkzeug
 wheel
 widgetsnbextension
