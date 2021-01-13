@@ -36,6 +36,7 @@ gammastep
 gcc
 gdb
 gdm
+geckodriver
 gimp
 git
 git-filter-repo
@@ -89,6 +90,7 @@ noto-fonts
 npm
 nss-mdns
 nvidia
+nvidia-settings
 okular
 openresolv
 openttd
