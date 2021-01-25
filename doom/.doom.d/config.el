@@ -23,7 +23,7 @@
 ;; font string. You generally only need these two:
 ;;(setq doom-font (font-spec :family "monospace" :size 12))
 (setq doom-font (font-spec :family "monospace" ))
-(setq doom-font (font-spec :family "PragmataPro"))
+(setq doom-font (font-spec :family "PragmataPro" :size 16))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -96,6 +96,9 @@
 (map! "M-C-q" nil)
 (map! "M-C-t" nil)
 
+(map! "M-r" 'raise-sexp)
+(map! "M-f" 'sp-splice-sexp-killing-forward)
+(map! "M-b" 'sp-splice-sexp-killing-backward)
 ; I could use bind-keys* here, but that overwrites the keymap *everywhere*,
 ; including in e.g. an ivy completion buffer. This does the thing but not at
 ; that top-most level.
@@ -317,7 +320,15 @@
 (setq org-latex-listings 'minted
       org-latex-packages-alist '(("" "minted"))
       org-latex-pdf-process
-      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+      '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
 (setq org-babel-clojure-backend 'cider)
+
+(setq org-latex-caption-above nil)
+
+(setq nrepl-use-ssh-fallback-for-remote-hosts t)
+
+(smartparens-global-strict-mode 1)
+
+(add-hook! clojure-mode #'evil-cleverparens-mode)
