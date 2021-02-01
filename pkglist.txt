@@ -96,6 +96,7 @@ openresolv
 openttd
 otf-font-awesome
 p7zip
+pandoc
 patch
 pavucontrol
 pkgconf
