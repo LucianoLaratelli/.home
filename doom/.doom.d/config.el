@@ -327,8 +327,6 @@
 
 (setq org-latex-caption-above nil)
 
-(setq nrepl-use-ssh-fallback-for-remote-hosts t)
-
 (smartparens-global-strict-mode 1)
 
 (add-hook! clojure-mode #'evil-cleverparens-mode)
