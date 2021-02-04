@@ -160,6 +160,7 @@ ttf-roboto
 ttf-ubuntu-font-family
 valgrind
 vim
+virtualbox
 vulkan-mesa-layers
 vulkan-swrast
 wget
