@@ -2,18 +2,6 @@
 
 # Create a new directory and enter it
 system=$(uname -s)
-#mac specific commands
-if [ "$system" = "Darwin" ]; then
-	# `o` with no arguments opens the current directory, otherwise opens the given
-	# location
-	function o() {
-		if [ $# -eq 0 ]; then
-			open .
-		else
-			open "$@"
-		fi
-	}
-fi
 if [ "$system" = "Linux" ]; then
 	function o() {
 		if [ $# -eq 0 ]; then
@@ -35,16 +23,6 @@ if [ $? -eq 0 ]; then
 		git diff --no-index --color-words "$@"
 	}
 fi
-
-# `v` with no arguments opens the current directory in Vim, otherwise opens the
-# given location
-function v() {
-	if [ $# -eq 0 ]; then
-		vim .
-	else
-		vim "$@"
-	fi
-}
 
 # `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
 # the `.git` directory, listing directories first. The output gets piped into
@@ -77,29 +55,22 @@ function ude() {
 function ud() {
 	udd
 
-	system=$(uname -s)
-	if [ "$system" = "Darwin" ]; then
-		brew update
-		brew upgrade
-		brew cleanup
+	if cat /etc/*release | rg "arch"; then
+		yay -Syu --devel --timeupdate
+		yay -Yc
+		pushd ~/.home
+		sudo pacman -S --needed - <pkglist.txt #install any new packages from other computers
+		pacman -Qqen >tmppkg.txt
+		sort tmppkg.txt pkglist.txt | uniq >pkglist.txt
+		rm tmppkg.txt
+		git add pkglist.txt
+		git commit -m "automated pkglist update"
+		git push
+		popd
 	else
-		if cat /etc/*release | rg "arch"; then
-			yay -Syu --devel --timeupdate
-			yay -Yc
-			pushd ~/.home
-			sudo pacman -S --needed - <pkglist.txt #install any new packages from other computers
-			pacman -Qqen >tmppkg.txt
-			sort tmppkg.txt pkglist.txt | uniq >pkglist.txt
-			rm tmppkg.txt
-			git add pkglist.txt
-			git commit -m "automated pkglist update"
-			git push
-			popd
-		else
-			sudo apt update
-			sudo apt upgrade
-			sudo apt autoremove
-		fi
+		sudo apt update
+		sudo apt upgrade
+		sudo apt autoremove
 	fi
 
 	if command -v flatpak; then
@@ -145,6 +116,11 @@ function ud() {
 	if command -v gem; then
 		gem update --system
 	fi
+	pushd ~/repos/emacs/
+	git pull
+	make -j24 NATIVE_FULL_AOT=1
+	sudo make install
+	popd
 
 	ude
 }

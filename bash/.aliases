@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 # Easier navigation: .., ..., ...., ....., ~ and -
-alias osmake="make clean;bear make;make clean; make TEST=1"
+NUMCORES="$(grep -c ^processor /proc/cpuinfo)"
+NUMCORES=$(($NUMCORES * 2))
+alias make="make -j${NUMCORES}"
 alias mcmk="make clean; make"
 alias mcbk="make clean; bear make"
 alias ..="cd .."
