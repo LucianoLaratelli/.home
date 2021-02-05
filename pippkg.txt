@@ -14,6 +14,7 @@ Babel
 backcall
 Beaker
 beautifulsoup4
+behave
 black
 bleach
 bs4
@@ -31,6 +32,7 @@ cvxopt
 cycler
 cypari2
 cysignals
+dbus-python
 decorator
 deepdiff
 defusedxml
@@ -59,6 +61,7 @@ ipython-genutils
 ipywidgets
 isort
 itsdangerous
+JACK-Client
 jedi
 Jinja2
 jsonpickle
@@ -86,6 +89,8 @@ mergedeep
 mistune
 mpmath
 msgpack
+musicbrainzngs
+mutagen
 mypy-extensions
 nbclient
 nbconvert
@@ -100,6 +105,7 @@ orjson
 packaging
 pandocfilters
 parse
+parse-type
 parso
 pathspec
 peewee
@@ -117,6 +123,7 @@ protobuf
 psutil
 ptyprocess
 pwquality
+pyalsaaudio
 PyAudio
 pycairo
 pycparser
@@ -133,6 +140,7 @@ PyQtWebEngine
 pyquery
 pyrsistent
 PySocks
+PySoundFile
 pyswip
 python-dateutil
 pytz
