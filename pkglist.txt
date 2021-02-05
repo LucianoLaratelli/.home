@@ -59,6 +59,7 @@ inetutils
 inkscape
 intel-ucode
 iw
+jack2
 jdk11-openjdk
 jdk8-openjdk
 jre11-openjdk-headless
@@ -68,6 +69,7 @@ jupyter-notebook
 kcolorchooser
 lib32-glibc
 lib32-nvidia-utils
+libc++
 libconfig
 libreoffice-fresh
 lightdm
@@ -86,6 +88,7 @@ neofetch
 networkmanager
 nmap
 nodejs
+notify-osd
 noto-fonts
 npm
 nss-mdns
@@ -104,11 +107,14 @@ plasma-pa
 pulseaudio
 pulseaudio-alsa
 pulseaudio-bluetooth
+pulseaudio-jack
 pycharm-community-edition
 python-gobject
 python-pip
 python-pylint
 python-sqlparse
+qjackctl
+realtime-privileges
 redshift
 refind
 reflector
