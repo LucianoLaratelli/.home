@@ -41,6 +41,7 @@ gimp
 git
 git-filter-repo
 glslang
+gnome-control-center
 gnome-screenshot
 go
 gpick
@@ -71,6 +72,7 @@ lib32-glibc
 lib32-nvidia-utils
 libc++
 libconfig
+libffado
 libreoffice-fresh
 lightdm
 lightdm-gtk-greeter
@@ -86,6 +88,8 @@ nano
 nautilus
 neofetch
 networkmanager
+networkmanager-openvpn
+nftables
 nmap
 nodejs
 notify-osd
@@ -97,6 +101,7 @@ nvidia-settings
 okular
 openresolv
 openttd
+openvpn
 otf-font-awesome
 p7zip
 pandoc
@@ -155,6 +160,7 @@ texlive-science
 tk
 tmux
 tokei
+transmission-gtk
 transmission-qt
 tree
 ttf-dejavu
