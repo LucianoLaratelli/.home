@@ -98,6 +98,7 @@ nbformat
 nest-asyncio
 netsnmp-python
 networkx
+nftables
 notebook
 numpy
 ordered-set
