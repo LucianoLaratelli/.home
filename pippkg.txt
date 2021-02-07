@@ -54,6 +54,7 @@ html5lib
 idna
 imagesize
 importlib-metadata
+informant
 injector
 ipykernel
 ipython
@@ -77,6 +78,7 @@ LibAppArmor
 libconcord
 liquidctl
 lit
+lockfile
 louis
 lxml
 Mako
