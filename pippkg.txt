@@ -45,6 +45,7 @@ fake-useragent
 feedparser
 Flask
 Flask-Cors
+Flask-SQLAlchemy
 fpylll
 git-filter-repo
 gmpy2
