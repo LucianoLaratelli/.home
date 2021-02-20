@@ -32,6 +32,7 @@ cvxopt
 cycler
 cypari2
 cysignals
+Cython
 dbus-python
 decorator
 deepdiff
@@ -45,6 +46,7 @@ fake-useragent
 feedparser
 Flask
 Flask-Cors
+Flask-Login
 Flask-SQLAlchemy
 fpylll
 git-filter-repo
@@ -118,6 +120,7 @@ pexpect
 pickleshare
 Pillow
 pip
+pip-upgrade-outdated
 ply
 pplpy
 progress
@@ -165,6 +168,7 @@ selenium
 Send2Trash
 setuptools
 six
+smbus
 snowballstemmer
 soupsieve
 speedtest-cli
