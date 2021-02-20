@@ -113,7 +113,6 @@ pulseaudio
 pulseaudio-alsa
 pulseaudio-bluetooth
 pulseaudio-jack
-pycharm-community-edition
 python-gobject
 python-pip
 python-pylint
@@ -136,6 +135,7 @@ shfmt
 sl
 slock
 speedtest-cli
+sqlitebrowser
 steam
 stow
 s-tui
