@@ -84,6 +84,8 @@ luit
 make
 meld
 mesa-demos
+monero
+monero-gui
 nano
 nautilus
 neofetch
