@@ -41,13 +41,19 @@ distlib
 distro
 docopt
 docutils
+dominate
 entrypoints
 fake-useragent
 feedparser
 Flask
+Flask-Babel
+Flask-Bootstrap4
 Flask-Cors
+Flask-FontAwesome
 Flask-Login
 Flask-SQLAlchemy
+Flask-Table
+Flask-WTF
 fpylll
 git-filter-repo
 gmpy2
@@ -74,6 +80,7 @@ jupyter-client
 jupyter-console
 jupyter-core
 jupyterlab-pygments
+jupyterlab-widgets
 kiwisolver
 lazy-object-proxy
 lensfun
@@ -83,6 +90,7 @@ liquidctl
 lit
 lockfile
 louis
+lrcalc
 lxml
 Mako
 Markdown
@@ -167,6 +175,7 @@ scipy
 selenium
 Send2Trash
 setuptools
+sgmllib3k
 six
 smbus
 snowballstemmer
@@ -197,6 +206,7 @@ tzlocal
 ujson
 urllib3
 urwid
+visitor
 w3lib
 waitress
 wcwidth
@@ -207,5 +217,6 @@ wheel
 widgetsnbextension
 win32-setctime
 wrapt
+WTForms
 wxPython
 zipp
