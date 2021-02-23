@@ -18,9 +18,14 @@ install -dm0 ~/.dropbox-dist
 cp /etc/pacman.d/gnupg/gpg.conf ~/.gnupg/gpg.conf
 echo "keyserver pool.sks-keyservers.net" >>~/.gnupg/gpg.conf
 
+pushd ~/.home/
+while read p; do
+	yay -S "$p"
+done <AUR.txt
+
+yay polybar
 yay dropbox
 yay bear
-yay snapd
 yay franz
 
 echo "********************************************************************************"
@@ -30,8 +35,6 @@ read -p "Press Enter to continue"
 
 sudo systemctl edit dropbox@{USER}
 sudo systemctl enable dropbox@{USER}
-
-sudo systemctl enable --now snapd.socket
 
 cd ~/.home
 rm -rf ~/.bash* ~/.git ~/.tmux* ~/.vim
