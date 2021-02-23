@@ -1,3 +1,5 @@
+aiohttp
+aiohttp-cors
 alabaster
 anki
 ankirspy
@@ -9,6 +11,7 @@ argon2-cffi
 asn1crypto
 astroid
 async-generator
+async-timeout
 attrs
 Babel
 backcall
@@ -52,7 +55,6 @@ Flask-Cors
 Flask-FontAwesome
 Flask-Login
 Flask-SQLAlchemy
-Flask-Table
 Flask-WTF
 fpylll
 git-filter-repo
@@ -102,6 +104,7 @@ mergedeep
 mistune
 mpmath
 msgpack
+multidict
 musicbrainzngs
 mutagen
 mypy-extensions
@@ -219,4 +222,5 @@ win32-setctime
 wrapt
 WTForms
 wxPython
+yarl
 zipp
