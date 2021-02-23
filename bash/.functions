@@ -59,12 +59,23 @@ function ud() {
 		yay -Syu --devel --timeupdate
 		yay -Yc
 		pushd ~/.home
+
 		sudo pacman -S --needed - <pkglist.txt #install any new packages from other computers
+
 		pacman -Qqen >tmppkg.txt
-		sort tmppkg.txt pkglist.txt | uniq >pkglist.txt
+		sort tmppkg.txt pkglist.txt | uniq >tmppkg2.txt
+		mv tmppkg2.txt pkglist.txt
+
+		pacman -Qqm >tmpaur.txt
+		sort tmpaur.txt AUR.txt | uniq >tmpaur2.txt
+		mv tmpaur2.txt AUR.txt
+
 		rm tmppkg.txt
+		rm tmpaur.txt
 		git add pkglist.txt
 		git commit -m "automated pkglist update"
+		git add AUR.txt
+		git commit -m "automated AURlist update"
 		git push
 		popd
 	else
