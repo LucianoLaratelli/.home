@@ -8,7 +8,6 @@ appdirs
 aqt
 arandr
 argon2-cffi
-asn1crypto
 astroid
 async-generator
 async-timeout
