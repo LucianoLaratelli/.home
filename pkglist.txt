@@ -48,6 +48,7 @@ gpick
 gptfdisk
 graphviz
 grub
+gsmartcontrol
 gtk3
 hardinfo
 htop
