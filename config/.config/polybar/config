@@ -6,17 +6,84 @@
 ;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
 ;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
 ;==========================================================
+
+[colors]
+background = #282a36 
+; current Line = #44475a
+selection = #44475a 
+foreground = #f8f8f2
+comment = #6272a4
+cyan = #8be9fd
+green = #50fa7b
+orange = #ffb86c
+pink = #ff79c6
+purple = #bd93f9
+red = #ff5555
+yellow = #f1fa8c
+
 [bar/mybar]
-monitor=DP-2
-background = #177245
+background = ${colors.background}
+foreground = ${colors.foreground}
 font-0 = Pragmata Pro
 height = 25
+dpi=0
 separator =  " | "
-modules-left = filesystem updates-pacman-aurhelper
+modules-left = i3 filesystem
 modules-center = date
-modules-right = wired-network wireless-network publicip temperature cpu gpu ram
+modules-right = pulseaudio wired-network publicip temperature cpu ram
+;modules-right = pulseaudio wired-network wireless-network publicip temperature cpu ram
 tray-position = left
 tray-padding = 5
+
+[module/i3]
+type = internal/i3
+
+; Only show workspaces defined on the same output as the bar
+;
+; Useful if you want to show monitor specific workspaces
+; on different bars
+;
+; Default: false
+
+; This will split the workspace name on ':'
+; Default: false
+strip-wsnumbers = true
+
+; Sort the workspaces by index instead of the default
+; sorting that groups the workspaces by output
+; Default: false
+index-sort = true
+
+; Create click handler used to focus workspace
+; Default: true
+enable-click = false
+
+; Create scroll handlers used to cycle workspaces
+; Default: true
+enable-scroll = false
+
+; Wrap around when reaching the first/last workspace
+; Default: true
+wrapping-scroll = false
+
+; Set the scroll cycle direction 
+; Default: true
+reverse-scroll = false
+
+; Use fuzzy (partial) matching on labels when assigning 
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces 
+; containing 'code' in the label
+; Default: false
+fuzzy-match = true
+label-focused-foreground = #ffffff
+label-focused-background = ${colors.purple}
+label-focused= %name% 
+label-unfocused= %name% 
+label-visible= %name% 
+label-urgent= %name% 
+; label-focused-background = #3f3f3f
+; label-focused-underline = #fba922
 
 [module/filesystem]
 type = internal/fs
@@ -25,18 +92,27 @@ interval = 10
 fixed-values = false
 label-mounted =%mountpoint%: %used%/%total% used
 
-[module/updates-pacman-aurhelper]
-type = custom/script
-exec = /home/luciano/repos/polybar-scripts/polybar-scripts/updates-pacman-aurhelper/updates-pacman-aurhelper.sh
-interval = 600
-
 [module/date]
 type = internal/date
 date = %Y-%m-%d (%A) %T
 
+[module/pulseaudio]
+type = internal/pulseaudio
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+label-muted = NO SOUND
+label-muted-foreground = ${colors.red}
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
+click-right = pavucontrol &
+
 [module/wired-network]
 type = internal/network
 interface = enp34s0
+label-connected = %downspeed:10% down %upspeed:10% up
 
 [module/wireless-network]
 type = internal/network
@@ -44,13 +120,12 @@ interface = wlo1
 label-connected = %essid%: %downspeed:10% down %upspeed:10% up
 label-connected-foreground = #eefafafa
 label-disconnected = no internet!
-label-disconnected-foreground = #721744
+label-disconnected-foreground = ${colors.red}
 
 [module/publicip]
 type=custom/script
 exec=curl -4 -sf ifconfig.me
 interval=60
-color=#88FFFF
 
 [module/temperature]
 type = internal/temperature
@@ -59,12 +134,12 @@ thermal-zone = 0
 hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp1_input
 base-temperature = 20
 warn-temperature = 60
-label = CPU %temperature%
+label = CPU %temperature-c%
 
 [module/cpu]
 type = internal/cpu
 interval = 1
-label = CPU %percentage-sum:04%%
+label = %percentage-sum:04%%
 
 [module/gpu]
 type = custom/script
