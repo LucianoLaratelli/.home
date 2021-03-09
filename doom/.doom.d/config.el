@@ -1,74 +1,74 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
-
-
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets.
 (setq user-full-name "Luciano Laratelli"
       user-mail-address "luciano@laratelli.com"
       default-input-method "TeX"
       )
 
-;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
-;; are the three important ones:
-;;
-;; + `doom-font'
-;; + `doom-variable-pitch-font'
-;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;;
-;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string. You generally only need these two:
-;;(setq doom-font (font-spec :family "monospace" :size 12))
 (setq doom-font (font-spec :family "monospace" ))
 (setq doom-font (font-spec :family "PragmataPro" :size 16))
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-;; (setq doom-theme 'doom-one)
 (setq doom-theme 'doom-dracula)
+;; (setq doom-theme 'doom-one)
 ;;(setq doom-theme 'doom-outrun-electric)
 ;; (setq doom-theme `doom-monokai-pro)
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Dropbox/org/")
 (setq org-roam-directory "~/Dropbox/org/roam")
-(setq org-journal-dir "~/Dropbox/org/journal")
 (setq org-journal-date-prefix "* ")
 (setq org-journal-file-format "Journal %Y-%m.org")
 (setq org-journal-date-format "%A, %d %B %Y")
-(setq org-journal-enable-agenda-integration t)
-(setq org-journal-enable-cache t)
 (setq org-journal-file-type 'monthly)
 
+(setq journals (make-hash-table :test 'equal))
+
+(setq journals '(("work" "~/Dropbox/org/work" "n j w")
+                 ("personal" "~/Dropbox/org/journal" "n j j")))
+
+
+(cdr (assoc "work" journals))
+(cdr (assoc "personal" journals))
+
+(add-to-list 'safe-local-variable-values
+             '(org-journal-dir . "~/Dropbox/org/work")
+             )
+
+(defun work-journal-new-entry ()
+  (interactive)
+  (setq org-journal-dir "~/Dropbox/org/work")
+  (call-interactively #'org-journal-new-entry)
+  )
+
+(map! :leader
+      "n j w" #'work-journal-new-entry
+      )
+
+(add-to-list 'safe-local-variable-values
+             '(org-journal-dir . "~/Dropbox/org/journal")
+             )
+
+(defun my-journal-new-entry ()
+  (interactive)
+  (setq org-journal-dir "~/Dropbox/org/journal")
+  (call-interactively #'org-journal-new-entry)
+  )
+
+
+(map! :leader
+      "n j j" #'my-journal-new-entry
+      )
+
+(map! :leader
+      :localleader
+      "s p p" #'org-priority
+      "s p u" #'org-priority-up
+      "s p d" #'org-priority-down
+      )
+
 (setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
 
-(display-time-mode 1)
-(setq display-time-24hr-format t)
-(setq display-time-day-and-date t)
-
-;; Here are some additional functions/macros that could help you configure Doom:
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c g k').
-;; This will open documentation for it, including demos of how they are used.
-;;
-;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
-;; they are implemented.
+;; (display-time-mode 1)
+;; (setq display-time-24hr-format t)
+;; (setq display-time-day-and-date t)
 
 (map! :leader
       "w /" #'evil-window-vsplit
@@ -87,7 +87,7 @@
       "C-l" #'evil-window-right
       )
 
-; unmap key bindings I use in i3
+;; unmap key bindings I use in i3
 (map! "M-C-c" nil)
 (map! "M-C-d" nil)
 (map! "M-C-l" nil)
@@ -99,9 +99,11 @@
 (map! "M-r" 'raise-sexp)
 (map! "M-f" 'sp-splice-sexp-killing-forward)
 (map! "M-b" 'sp-splice-sexp-killing-backward)
-; I could use bind-keys* here, but that overwrites the keymap *everywhere*,
-; including in e.g. an ivy completion buffer. This does the thing but not at
-; that top-most level.
+
+;; I could use bind-keys* here, but that overwrites the keymap *everywhere*,
+;; including in e.g. an ivy completion buffer. This does the thing but not at
+;; that top-most level.
+
 (with-eval-after-load 'magit
   (evil-define-key 'normal magit-mode-map (kbd "C-h") 'evil-window-left)
   (evil-define-key 'normal magit-mode-map (kbd "C-j") 'evil-window-down)
@@ -187,8 +189,8 @@
   )
 
 (after! tramp
- (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
- )
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+  )
 
 (setq org-src-fontify-natively t
       org-src-tab-acts-natively t
@@ -286,14 +288,14 @@
 (setq org-pretty-entities t)
 
 
-;Allow bold, italics, etc in middle of word
+;;Allow bold, italics, etc in middle of word
 (after! org
- (setcar org-emphasis-regexp-components " \t('\"{[:alpha:]")
- (setcar (nthcdr 1 org-emphasis-regexp-components) "[:alpha:]- \t.,:!?;'\")}\\")
- (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
- )
+  (setcar org-emphasis-regexp-components " \t('\"{[:alpha:]")
+  (setcar (nthcdr 1 org-emphasis-regexp-components) "[:alpha:]- \t.,:!?;'\")}\\")
+  (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+  )
 
-;https://stackoverflow.com/a/30697761/5692730
+;;https://stackoverflow.com/a/30697761/5692730
 (defun my/sort-lines-by-length (reverse beg end)
   "Sort lines by length."
   (interactive "P\nr")
@@ -314,7 +316,7 @@
   (org-mark-subtree) ;; mark the current subtree
   (forward-line) ;; move point forward, so the headline isn't in the region
   (delete-region (region-beginning) (region-end)) ;; delete the rest
-)
+  )
 
 
 (setq org-latex-listings 'minted
