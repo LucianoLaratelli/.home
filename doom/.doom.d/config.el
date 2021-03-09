@@ -38,10 +38,6 @@
   (call-interactively #'org-journal-new-entry)
   )
 
-(map! :leader
-      "n j w" #'work-journal-new-entry
-      )
-
 (add-to-list 'safe-local-variable-values
              '(org-journal-dir . "~/Dropbox/org/journal")
              )
@@ -55,9 +51,13 @@
 
 (map! :leader
       "n j j" #'my-journal-new-entry
+      "n j w" #'work-journal-new-entry
       )
 
-(map! :leader
+(map! :after org
+      :map org-mode-map
+      :leader
+      "a c r" #'jupyter-org-clear-all-results
       :localleader
       "s p p" #'org-priority
       "s p u" #'org-priority-up
@@ -73,9 +73,6 @@
 (map! :leader
       "w /" #'evil-window-vsplit
       "w -" #'evil-window-split)
-
-(map! :leader
-      "a c r" #'jupyter-org-clear-all-results)
 
 (require `evil-surround)
 
