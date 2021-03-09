@@ -14,8 +14,6 @@ bindsym Control+Mod1+t exec alacritty
 # kill focused window
 bindsym Control+Mod1+q kill
 
-# bindsym Control+Mod1+d exec --no-startup-id rofi -combi-modi window#drun -show combi -modi combi -show-icons -font "Pragmata Pro 12" -theme dracula2
-# bindsym Control+Mod1+d exec --no-startup-id rofi -combi-modi drun -show combi -modi combi -show-icons -font "Pragmata Pro 12" -theme dracula2
 bindsym Control+Mod1+d exec --no-startup-id rofi  -show combi -theme dracula2
 
 # change focus
@@ -23,12 +21,6 @@ bindsym Control+Mod1+h focus left
 bindsym Control+Mod1+j focus down
 bindsym Control+Mod1+k focus up
 bindsym Control+Mod1+l focus right
-
-# move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
 
 # reload the configuration file
 bindsym Control+Mod1+c reload
@@ -48,8 +40,6 @@ for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
 for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
 for_window [title="^Steam Keyboard$"] floating enable
 
-
-#workspace stuff
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -57,10 +47,6 @@ set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
-
 
 # move focused container to workspace
 bindsym Mod1+Control+Shift+1 move container to workspace number $ws1
@@ -70,9 +56,6 @@ bindsym Mod1+Control+Shift+4 move container to workspace number $ws4
 bindsym Mod1+Control+Shift+5 move container to workspace number $ws5
 bindsym Mod1+Control+Shift+6 move container to workspace number $ws6
 bindsym Mod1+Control+Shift+7 move container to workspace number $ws7
-bindsym Mod1+Control+Shift+8 move container to workspace number $ws8
-bindsym Mod1+Control+Shift+9 move container to workspace number $ws9
-bindsym Mod1+Control+Shift+0 move container to workspace number $ws10
 
 # switch to workspace, using Shift as a modifier to access extra workspaces
 # behind the current montior. this allows me to access all ten workspaces with
@@ -81,34 +64,27 @@ bindsym Mod1+1 workspace number $ws1
 bindsym Mod1+2 workspace number $ws2
 bindsym Mod1+3 workspace number $ws3
 
-bindsym Mod1+Shift+1 workspace number $ws8
-bindsym Mod1+Shift+2 workspace number $ws9
-bindsym Mod1+Shift+3 workspace number $ws10
-
 bindsym Mod1+4 workspace number $ws4
 bindsym Mod1+Shift+4 workspace number $ws6
+
 bindsym Mod1+5 workspace number $ws5
 bindsym Mod1+Shift+5 workspace number $ws7
 
 #the intention here is that I can easily access a workspace on each monitor with
 #only my thumbs and the fingers on my left hands (for the numbers.)
-workspace $ws1 output DP-4 #middle monitor
-workspace $ws2 output DP-4 #middle monitor
-workspace $ws3 output DP-4 #middle monitor
-workspace $ws4 output DP-2 #left monitor
-workspace $ws5 output HDMI-0 #right monitor
+# workspaces on my primary (center) monitor:
+workspace $ws1 output DP-4 
+workspace $ws2 output DP-4
+workspace $ws3 output DP-4
 
-#these are secondary workspaces (for example, I often have firefox full-screened
-#on workspace 4 [my left monitor] and a second emacs window open with my todo
-#lists on workspace 6, also on the left monitor.)
+# workspaces on my left (vertical) monitor:
+workspace $ws4 output DP-2
 workspace $ws6 output DP-2
+
+# workspaces on my right (smaller, horizontal) monitor:
+workspace $ws5 output HDMI-0 #right monitor
 workspace $ws7 output HDMI-0
-workspace $ws8 output DP-4
-workspace $ws9 output DP-4
-workspace $ws10 output DP-4
 
-
-#end workspace stuff
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -151,4 +127,3 @@ exec --no-startup-id killall polybar; polybar -r mybar
 
 # toggles mic mute
 bindsym Control+Mod1+m exec "/usr/bin/pulseaudio-ctl mute-input"
-
