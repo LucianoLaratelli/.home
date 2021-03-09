@@ -136,9 +136,9 @@
        ;;(haskell +dante)                  ; a language that's lazier than I am
        ;;hy                                ; readability of scheme w/ speed of python
        ;;idris                             ; a language you can depend on
-       ;;json                              ; At least it ain't XML
+       json                              ; At least it ain't XML
        ;;(java +meghanada)                 ; the poster child for carpal tunnel syndrome
-       ;;javascript                        ; all(hope(abandon(ye(who(enter(here))))))
+       (javascript +lsp)                        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia                             ; a better, faster MATLAB
        ;;kotlin                            ; a better, slicker Java(Script)
        latex                               ; writing papers in Emacs has never been so fun
@@ -193,10 +193,3 @@
        :config
        ;;literate
        (default +bindings +smartparens))
-
-(define-advice define-obsolete-function-alias (:filter-args (ll) fix-obsolete)
-  (let ((obsolete-name (pop ll))
-        (current-name (pop ll))
-        (when (if ll (pop ll) "1"))
-        (docstring (if ll (pop ll) nil)))
-    (list obsolete-name current-name when docstring)))
