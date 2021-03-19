@@ -9,51 +9,19 @@
 
 (setq doom-theme 'doom-dracula)
 
-(setq org-directory "~/Dropbox/org/")
-(setq org-roam-directory "~/Dropbox/org/roam")
+(setq org-directory "~/Documents/org/")
+(setq org-roam-directory "~/Documents/org/roam")
 (setq org-journal-date-prefix "* ")
 (setq org-journal-file-format "Journal %Y-%m.org")
 (setq org-journal-date-format "%A, %d %B %Y")
 (setq org-journal-file-type 'monthly)
+(setq org-journal-dir "~/Documents/org/journal")
 
-(setq journals (make-hash-table :test 'equal))
-
-(setq journals '(("work" "~/Dropbox/org/work" "n j w")
-                 ("personal" "~/Dropbox/org/journal" "n j j")))
-
-
-(cdr (assoc "work" journals))
-(cdr (assoc "personal" journals))
-
-(add-to-list 'safe-local-variable-values
-             '(org-journal-dir . "~/Dropbox/org/work")
-             )
 
 (map! :after ivy
      :map ivy-minibuffer-map
        "DEL" #'ivy-backward-delete-char)
 
-(defun work-journal-new-entry ()
-  (interactive)
-  (setq org-journal-dir "~/Dropbox/org/work")
-  (call-interactively #'org-journal-new-entry)
-  )
-
-(add-to-list 'safe-local-variable-values
-             '(org-journal-dir . "~/Dropbox/org/journal")
-             )
-
-(defun my-journal-new-entry ()
-  (interactive)
-  (setq org-journal-dir "~/Dropbox/org/journal")
-  (call-interactively #'org-journal-new-entry)
-  )
-
-
-(map! :leader
-      "n j j" #'my-journal-new-entry
-      "n j w" #'work-journal-new-entry
-      )
 
 (setq doom-localleader-key ",")
 
@@ -73,9 +41,6 @@
 
 (setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
 
-;; (display-time-mode 1)
-;; (setq display-time-24hr-format t)
-;; (setq display-time-day-and-date t)
 
 (map! :leader
       "w /" #'evil-window-vsplit
