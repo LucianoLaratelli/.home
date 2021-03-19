@@ -4,13 +4,10 @@
       default-input-method "TeX"
       )
 
-(setq doom-font (font-spec :family "monospace" ))
-(setq doom-font (font-spec :family "PragmataPro" :size 16))
+(setq doom-font (font-spec :family "Fira Code Retina" :size 14)
+      doom-unicode-font (font-spec :family "JuliaMono Medium" :size 14))
 
 (setq doom-theme 'doom-dracula)
-;; (setq doom-theme 'doom-one)
-;;(setq doom-theme 'doom-outrun-electric)
-;; (setq doom-theme `doom-monokai-pro)
 
 (setq org-directory "~/Dropbox/org/")
 (setq org-roam-directory "~/Dropbox/org/roam")
@@ -31,6 +28,10 @@
 (add-to-list 'safe-local-variable-values
              '(org-journal-dir . "~/Dropbox/org/work")
              )
+
+(map! :after ivy
+     :map ivy-minibuffer-map
+       "DEL" #'ivy-backward-delete-char)
 
 (defun work-journal-new-entry ()
   (interactive)
@@ -54,6 +55,9 @@
       "n j w" #'work-journal-new-entry
       )
 
+(setq doom-localleader-key ",")
+
+
 (map! :after org
       :map org-mode-map
       :leader
@@ -62,6 +66,9 @@
       "s p p" #'org-priority
       "s p u" #'org-priority-up
       "s p d" #'org-priority-down
+      "j k"   #'org-previous-visible-heading
+      "j j"   #'org-next-visible-heading
+      "j i"   #'org-insert-heading
       )
 
 (setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
@@ -275,6 +282,35 @@
              (t
               (insert "#+BEGIN_" choice "\n")
               (save-excursion (insert "#+END_" choice))))))))))
+
+(defun random-alnum ()
+  (let* ((alnum "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+         (i (% (abs (random)) (length alnum))))
+    (substring alnum i (1+ i))))
+
+(defun random-string (n)
+  "Generate a slug of n random alphanumeric characters.
+Inefficient implementation; don't use for large n."
+                                        ; thanks to https://stackoverflow.com/a/60790863/5692730
+  (if (= 0 n)
+      ""
+    (concat (random-alnum) (random-string (1- n)))))
+
+
+(defun my/org-clj-template ()
+  "Make a template at point."
+(let ((section-name (random-string 5)))
+  (save-excursion
+      (insert "#+name: " section-name "\n")
+      (insert "#+begin_src clojure :exports code\n\n")
+      (insert "#+end_src\n")
+      (insert "\\Rightarrow call_" section-name"[:exports results]()\n\n")
+      )
+  (forward-line 2)
+  (evil-insert)
+  )
+)
+
 
 (setq backup-directory-alist `(("." . "~/.BACKUPS")))
 (setq backup-by-copying t)
