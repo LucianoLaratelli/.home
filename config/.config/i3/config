@@ -58,7 +58,7 @@ bindsym Mod1+Control+Shift+6 move container to workspace number $ws6
 bindsym Mod1+Control+Shift+7 move container to workspace number $ws7
 
 # switch to workspace, using Shift as a modifier to access extra workspaces
-# behind the current montior. this allows me to access all ten workspaces with
+# behind the current montior. this allows me to access all my workspaces with
 # one hand on my ergonomic keyboard.
 bindsym Mod1+1 workspace number $ws1
 bindsym Mod1+2 workspace number $ws2
@@ -72,7 +72,8 @@ bindsym Mod1+Shift+5 workspace number $ws7
 
 #the intention here is that I can easily access a workspace on each monitor with
 #only my thumbs and the fingers on my left hands (for the numbers.)
-# workspaces on my primary (center) monitor:
+
+#workspaces on my primary (center) monitor:
 workspace $ws1 output DP-4 
 workspace $ws2 output DP-4
 workspace $ws3 output DP-4
@@ -108,7 +109,7 @@ mode "resize" {
 
 default_border pixel 3
 
-bindsym $mod+r mode "resize"
+bindsym Control+Mod1+Shift+r mode "resize"
 
 bindsym Control+Mod1+s exec bash ~/.config/i3/lock.sh
 
