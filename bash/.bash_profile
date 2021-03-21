@@ -1,14 +1,6 @@
 # Add `~/bin` to the `$PATH`
-export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/go/bin:$PATH"
 PATH=/usr/local/bin/:$PATH
-PATH=/home/luciano/.local/lib/python2.7/site-packages:$PATH
-PATH=$HOME/.local/bin:$PATH   #fixes pip issues on debian
-PATH=$HOME/.emacs.d/bin:$PATH #fixes pip issues on debian
-PATH=/usr/local/opt/findutils/libexec/gnubin:$PATH
-PATH=/usr/local/Cellar/bison/3.5.2/bin:$PATH
 
 fortune -a | cowsay
 
@@ -22,9 +14,6 @@ unset file
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
-
-# Append to the Bash history file, rather than overwriting it
-shopt -s histappend
 
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell
@@ -43,24 +32,10 @@ elif [ -f /etc/bash_completion ]; then
 	source /etc/bash_completion
 fi
 
-# Enable tab completion for `g` by marking it as an alias for `git`
-if type _git &>/dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
-	complete -o default -o nospace -F _git g
-fi
-
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh
 
-# Add tab completion for `defaults read|write NSGlobalDomain`
-# You could just use `-g` instead, but I like being explicit
-complete -W "NSGlobalDomain" defaults
-
-system=$(uname -s)
-if [ "$system" = "Darwin" ]; then
-	# Add `killall` tab completion for common apps
-	complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall
-fi
-
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall
 
 export GPG_TTY=$(tty)
+source "$HOME/.cargo/env"
