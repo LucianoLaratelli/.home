@@ -1,6 +1,6 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 (setq user-full-name "Luciano Laratelli"
-      user-mail-address "luciano@laratelli.com"
+      user-mail-address "luciano@laratel.li"
       default-input-method "TeX"
       )
 
@@ -28,6 +28,8 @@
 (add-to-list 'safe-local-variable-values
              '(org-journal-dir . "~/Dropbox/org/work")
              )
+
+(unbind-key "C-h")
 
 (map! :after ivy
      :map ivy-minibuffer-map
@@ -157,9 +159,9 @@
       (eval-buffer)
       (message "Buffer evaluated!")))))
 
-(add-hook 'emacs-lisp-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-x E") 'eval-region-or-buffer)))
+(map! :leader
+      "e" #'eval-region-or-buffer)
+
 
 (defun my/put-file-name-on-clipboard ()
   "Put the current file name on the clipboard"
@@ -299,17 +301,17 @@ Inefficient implementation; don't use for large n."
 
 (defun my/org-clj-template ()
   "Make a template at point."
-(let ((section-name (random-string 5)))
-  (save-excursion
+  (let ((section-name (random-string 5)))
+    (save-excursion
       (insert "#+name: " section-name "\n")
       (insert "#+begin_src clojure :exports code\n\n")
       (insert "#+end_src\n")
       (insert "\\Rightarrow call_" section-name"[:exports results]()\n\n")
       )
-  (forward-line 2)
-  (evil-insert)
+    (forward-line 2)
+    (evil-insert)
+    )
   )
-)
 
 
 (setq backup-directory-alist `(("." . "~/.BACKUPS")))
@@ -319,6 +321,15 @@ Inefficient implementation; don't use for large n."
 (setq rainbow-delimiters-max-face-count nil)
 
 (setq org-pretty-entities t)
+
+(add-to-list 'auto-mode-alist '("\\.ebnf\\'" . bnf-mode))
+
+(after! bnf-mode (add-hook 'bnf-mode-hook
+          (lambda () (progn
+                       (setq comment-start "(* ")
+                       (setq comment-end " *)")
+                       (setq comment-add 0)))))
+
 
 
 ;;Allow bold, italics, etc in middle of word
