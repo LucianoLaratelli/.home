@@ -9,14 +9,16 @@
 
 (setq doom-theme 'doom-dracula)
 
-(setq org-directory "~/Documents/org/")
-(setq org-roam-directory "~/Documents/org/roam")
+(setq org-directory "~/Dropbox/org/work")
 (setq org-journal-date-prefix "* ")
-(setq org-journal-file-format "Journal %Y-%m.org")
+(setq org-journal-file-format "%Y/%m.org")
 (setq org-journal-date-format "%A, %d %B %Y")
 (setq org-journal-file-type 'monthly)
-(setq org-journal-dir "~/Documents/org/journal")
+(setq org-journal-dir "~/Dropbox/org/work/journal")
+(setq org-journal-encrypt-journal t)
 
+(setq org-roam-directory "~/Dropbox/org/roam")
+(setq org-roam-encrypt-files t)
 
 (map! :after ivy
      :map ivy-minibuffer-map
@@ -330,3 +332,57 @@ Inefficient implementation; don't use for large n."
 (smartparens-global-strict-mode 1)
 
 (add-hook! clojure-mode #'evil-cleverparens-mode)
+(after! org-roam
+  (org-roam-db-build-cache ())
+
+  (setq org-roam-capture-templates
+        '(("d" "default" plain (function org-roam--capture-get-point)
+           ;; "%?"
+           :file-name "%<%Y%m%d>-${slug}"
+           ;; added a double space at the end for the double-space insert link issue.
+           :head "#+TITLE: ${title}\n#+Created: %u\n\n- tags ::  %?\n\n* "
+           :unnarrowed t)
+
+          ("a" "New Area" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "%<%Y%m%d>-${slug}"
+           ;; added a double space at the end for the double-space insert link issue.
+           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-index.org.gpg][Indexes]]\n\n* "
+           :unnarrowed t)
+
+          ("e" "emacs")
+          ("eo" "org mode")
+          ("eoo" "general org" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "emacs/org/%<%Y%m%d>-${slug}"
+           ;; added a double space at the end for the double-space insert link issue.
+           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-emacs.org.gpg][Emacs]]\n\n* "
+           :unnarrowed t)
+          ("eor" "org roam" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "emacs/org/roam/%<%Y%m%d>-${slug}"
+           ;; added a double space at the end for the double-space insert link issue.
+           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-org_roam.org.gpg][org-roam]]\n\n* "
+           :unnarrowed t)
+
+          ("w" "work")
+          ("wc" "cardhop" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "flexibits/cardhop/%<%Y%m%d>-${slug}"
+           ;; added a double space at the end for the double-space insert link issue.
+           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-cardhop.org.gpg][cardhop]]\n\n* "
+           :unnarrowed t)
+          ("wf" "fantastical" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "flexibits/fantastical/%<%Y%m%d>-${slug}"
+           ;; added a double space at the end for the double-space insert link issue.
+           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-fantastical.org.gpg][fantastical]]\n\n* "
+           :unnarrowed t)
+          )
+        )
+
+  (setq org-roam-capture-ref-templates
+        '(("r" "ref" plain #'org-roam-capture--get-point "%?"
+           :file-name "website/%(url-host (url-generic-parse-url \"${ref}\"))-${slug}"
+           :head "#+TITLE: ${title}\n#+Created: %u\n#+last_modified: %U\n#+roam_key: ${ref}\n- tags ::  "
+           :unnarrowed t))))
