@@ -2,7 +2,7 @@
 export PATH="$HOME/bin:$PATH"
 PATH=/usr/local/bin/:$PATH
 
-fortune -a | cowsay
+fortune | cowsay
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
