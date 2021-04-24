@@ -100,7 +100,6 @@ I clock out, this updates my report.
                                    (org-clock-report)
                                    )))
 #+end_src
-
 ** Org Journal
 *** Definitions
 #+begin_src emacs-lisp
@@ -496,7 +495,9 @@ Sort a group of lines by length, taken from [[https://stackoverflow.com/a/306977
                                         (list l1 l2)))))))))
 #+end_src
 * Archive
-I've retired the code in this section from service, or just want to hold onto it because it was difficult to find.
+I've retired the code in this section from service, or just want to hold onto it
+because it was difficult to find. These do not get tangled into the final
+=config.el=.
 
 This was used to fix a bug in ivy on my laptop, which I don't think is active anymore.
 #+begin_src emacs-lisp :tangle no
