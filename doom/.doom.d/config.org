@@ -1,0 +1,515 @@
+#+TITLE: (macOS) Doom Emacs Config
+#+AUTHOR: Luciano Laratelli
+#+EMAIL: luciano@laratel.li
+
+This is my configuration for the [[https://github.com/hlissner/doom-emacs][DOOM emacs]] framework, specifically for my macOS
+device(s).
+#+begin_src emacs-lisp :comments no
+;;; config.el -*- lexical-binding: t; -*-
+#+end_src
+
+
+* Personal Information
+
+#+begin_src emacs-lisp
+(setq user-full-name "Luciano Laratelli"
+      user-mail-address "luciano@laratel.li")
+#+end_src
+
+* Acknowledgements
+I mention these folks throughout these folks throughout my config; they've
+helped me develop it either by teaching me what they knew, helping me write
+elisp, or by sharing their configs for anyone to steal. Thanks guys!
+- [[https://github.com/djeis97][Elijah]]
+- [[https://github.com/kiranshila][Kiran]]
+- [[https://github.com/djshorty][Dominik]]
+
+* Theme and Appearance
+** Font
+Setting the size explicitly here is important, because it prevents a bug in
+=doom-big-font-mode= that caused the size of text to only ever increase, instead
+of the intended behavior of switching between normal and regular font size. This
+combination produces nice ligatures in a great monospace font, and I have my
+friends Kiran and Elijah to thank for it.
+#+begin_src emacs-lisp
+(setq doom-font (font-spec :family "Fira Code Retina" :size 14)
+      doom-unicode-font (font-spec :family "JuliaMono Medium" :size 14))
+#+end_src
+
+** Theme
+I have used quite a few others in the past; this is my current daily driver.
+#+begin_src emacs-lisp
+(setq doom-theme 'doom-dracula)
+#+end_src
+* Org
+** General
+*** Definitions
+Some general org stuff. My laptop is my work computer, so I use a different org
+directory on this machine.
+#+begin_src emacs-lisp
+(setq org-directory "~/Dropbox/org/work"
+      org-src-fontify-natively t
+      org-src-tab-acts-natively t
+      org-confirm-babel-evaluate nil
+      org-edit-src-content-indentation 0
+      org-pretty-entities t
+      org-babel-clojure-backend 'cider)
+#+end_src
+This next bit handles latex exporting and bibtex stuff; parts of it have been
+ripped from Kiran.
+#+begin_src emacs-lisp
+(setq org-latex-listings 'minted
+      org-latex-packages-alist '(("" "minted"))
+      org-latex-pdf-process
+      '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f")
+      org-latex-caption-above nil)
+
+(setq-default
+ reftex-default-bibliography '("~/Dropbox/bibtex/main.bib")
+ org-ref-default-bibliography '("~/Dropbox/bibtex/main.bib")
+ bibtex-completion-bibliography "~/Dropbox/bibtex/main.bib"
+ bibtex-completion-library-path "~/Dropbox/bibtex/")
+#+end_src
+*** Keybinds
+#+begin_src emacs-lisp
+(map! :after org
+      :map org-mode-map
+      "s-RET" #'+org/insert-item-below
+      "M-RET" #'+org/insert-item-below
+      :leader
+      "a c r" #'jupyter-org-clear-all-results
+      "RET" #'+org/insert-item-below
+      "k" #'org-previous-visible-heading
+      "j" #'org-next-visible-heading
+      :localleader
+      "s p p" #'org-priority
+      "s p u" #'org-priority-up
+      "s p d" #'org-priority-down
+      "j k"   #'outline-up-heading
+      )
+#+end_src
+*** Hooks
+Each of my journal files starts with an org clock report. This isn't automated;
+I just make sure to make the report the first line of the file. Thus, every time
+I clock out, this updates my report.
+#+begin_src emacs-lisp
+(add-hook 'org-clock-out-hook  (lambda ()
+                                 (save-excursion
+                                   (evil-goto-first-line)
+                                   (org-clock-report)
+                                   )))
+#+end_src
+
+** Org Journal
+*** Definitions
+#+begin_src emacs-lisp
+(setq org-journal-date-format "%A, %d %B %Y")
+(setq org-journal-date-prefix "* ")
+(setq org-journal-dir "~/Dropbox/org/work/journal")
+(setq org-journal-encrypt-journal t)
+(setq org-journal-file-format "%Y/%m.org")
+(setq org-journal-file-type 'monthly)
+#+end_src
+*** Keybinds
+I clock in and out enough (specifically in my journal) that these are worth it
+for me.
+#+begin_src emacs-lisp
+(map! :after org-journal
+ :map org-journal-mode-map
+ :localleader
+ "c" 'nil
+ )
+
+(map! :after org-journal
+      :map org-journal-mode-map
+      :localleader
+      (:prefix ("c" . "clock")
+       "c" #'org-clock-cancel
+       "l" #'+org/toggle-last-clock
+       "i" #'org-clock-in
+       "I" #'org-clock-in-last
+       "o" #'org-clock-out
+       "r" #'org-resolve-clocks
+       "R" #'org-clock-report
+       "t" #'org-evaluate-time-range
+       )
+)
+#+end_src
+** Org Roam
+*** Definitions
+Roam stuff. I learned about capture templates from my friend Dom, and stole his
+for my own use. :) I have a sketch at a directory structure here, which is
+something org roam is sold as a cure for. These directories just help me keep a
+/little/ organized.
+#+begin_src emacs-lisp
+(setq org-roam-directory "~/Dropbox/org/roam")
+(setq org-roam-encrypt-files t)
+
+(after! org-roam
+  (org-roam-db-build-cache ())
+
+  (setq org-roam-capture-templates
+        '(("d" "default" plain (function org-roam--capture-get-point)
+           :file-name "general/%<%Y%m%d>-${slug}"
+           ;; added a double space at the end for the double-space insert link issue.
+           :head "#+TITLE: ${title}\n#+Created: %u\n\n- tags ::  %?\n\n* "
+           :unnarrowed t)
+
+          ("a" "New Area" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "%<%Y%m%d>-${slug}"
+           ;; added a double space at the end for the double-space insert link issue.
+           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-index.org.gpg][Indexes]]\n\n* "
+           :unnarrowed t)
+
+          ("e" "emacs")
+          ("eo" "org mode")
+          ("eoo" "general org" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "emacs/org/%<%Y%m%d>-${slug}"
+           ;; added a double space at the end for the double-space insert link issue.
+           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-emacs.org.gpg][Emacs]]\n\n* "
+           :unnarrowed t)
+          ("eor" "org roam" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "emacs/org/roam/%<%Y%m%d>-${slug}"
+           ;; added a double space at the end for the double-space insert link issue.
+           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-org_roam.org.gpg][org-roam]]\n\n* "
+           :unnarrowed t)
+
+          ("w" "work")
+          ("wc" "cardhop" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "flexibits/cardhop/%<%Y%m%d>-${slug}"
+           ;; added a double space at the end for the double-space insert link issue.
+           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-cardhop.org.gpg][cardhop]]\n\n* "
+           :unnarrowed t)
+          ("wf" "fantastical" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "flexibits/fantastical/%<%Y%m%d>-${slug}"
+           ;; added a double space at the end for the double-space insert link issue.
+           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-fantastical.org.gpg][fantastical]]\n\n* "
+           :unnarrowed t)
+          )
+        )
+
+  (setq org-roam-capture-ref-templates
+        '(("r" "ref" plain #'org-roam-capture--get-point "%?"
+           :file-name "website/%(url-host (url-generic-parse-url \"${ref}\"))-${slug}"
+           :head "#+TITLE: ${title}\n#+Created: %u\n#+last_modified: %U\n#+roam_key: ${ref}\n- tags ::  "
+           :unnarrowed t))))
+#+end_src
+* Non-Org Programming Languages
+** Clojure
+Need as many =*parens-mode=s as possible
+#+begin_src emacs-lisp
+(add-hook! clojure-mode #'evil-cleverparens-mode)
+#+end_src
+* Miscellaneous
+** macOS specific commands
+
+Unbind these two, for use in org mode:
+#+begin_src emacs-lisp
+(map! "s-RET" nil
+      "M-RET" nil)
+#+end_src
+Why use =global-unset-key= instead of =map!=ing to =nil=? Beats me!
+#+begin_src emacs-lisp
+(global-unset-key (kbd "s-h"))
+(global-unset-key (kbd "s-j"))
+(global-unset-key (kbd "s-k"))
+(global-unset-key (kbd "s-l"))
+#+end_src
+=ls= is dumb on macOS:
+#+begin_src emacs-lisp
+(when (string= system-type "darwin")
+  (setq dired-use-ls-dired nil))
+#+end_src
+** emacs internal stuff
+#+begin_src emacs-lisp
+(setq backup-directory-alist `(("." . "~/.BACKUPS")))
+(setq backup-by-copying t)
+
+(setq auth-sources '("~/.authinfo.gpg"))
+#+end_src
+** keybinds
+This is Kiran's insane hack for having comma count as =SPC m= without remapping
+=:localleader:= away from =SPC m=. Thanks Kiran!
+#+begin_src emacs-lisp
+(map! :n "," (cmd! (push (cons t ?m) unread-command-events)
+                   (push (cons t 32) unread-command-events)))
+#+end_src
+** definitions
+#+begin_src emacs-lisp
+(require `evil-surround)
+
+(add-hook 'pdf-view-mode-hook (lambda () (auto-revert-mode 1)))
+
+(setq company-idle-delay 0.01
+      company-minimum-prefix-length 2)
+
+
+(setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
+
+
+(use-package! open-junk-file
+  :custom
+  (open-junk-file-format "~/Dropbox/junk/%Y/%m/%d-%H%M%S."))
+
+(after! tramp
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+  )
+#+end_src
+My laptop is a little slow, so company can really be a drag when writing "prose"
+(read: org files and commit messages.) We disable company-mode wherever it
+annoys me:
+#+begin_src emacs-lisp
+(setq company-global-modes '((not org-mode) (not magit-mode)))
+#+end_src
+Smartparens! They're smart!
+#+begin_src emacs-lisp
+(smartparens-global-strict-mode 1)
+
+(defun disable-smartparens ()
+  (smartparens-mode 0))
+
+(add-hook 'org-mode-hook 'disable-smartparens)
+#+end_src
+* Navigation
+Easily split windows:
+#+begin_src emacs-lisp
+(map! :leader
+      "w /" #'evil-window-vsplit
+      "w -" #'evil-window-split)
+#+end_src
+This next group of keybindings gives me easy, =hjkl= window navigation everywhere
+that matter to me. I used to do this using =bind-keys*=, but the issue was that
+that rebound =M-{hjkl}= /everywhere/, even in ivy completion buffers, etc. Doing
+it this way makes it happen in the modes I care about. TODO: this needs to be
+cleaned up and checked for functionality.
+#+begin_src emacs-lisp
+(map! "s-h" #'evil-window-left
+      "s-j" #'evil-window-down
+      "s-k" #'evil-window-up
+      "s-l" #'evil-window-right
+      )
+(with-eval-after-load 'magit
+  (evil-define-key 'normal magit-mode-map (kbd "M-h") 'evil-window-left)
+  (evil-define-key 'normal magit-mode-map (kbd "M-j") 'evil-window-down)
+  (evil-define-key 'normal magit-mode-map (kbd "M-k") 'evil-window-up)
+  (evil-define-key 'normal magit-mode-map (kbd "M-l") 'evil-window-right)
+  (evil-define-key 'visual magit-mode-map (kbd "M-h") 'evil-window-left)
+  (evil-define-key 'visual magit-mode-map (kbd "M-j") 'evil-window-down)
+  (evil-define-key 'visual magit-mode-map (kbd "M-k") 'evil-window-up)
+  (evil-define-key 'visual magit-mode-map (kbd "M-l") 'evil-window-right)
+  )
+
+(with-eval-after-load 'org
+  (evil-define-key 'normal org-mode-map (kbd "M-h") 'evil-window-left)
+  (evil-define-key 'normal org-mode-map (kbd "M-j") 'evil-window-down)
+  (evil-define-key 'normal org-mode-map (kbd "M-k") 'evil-window-up)
+  (evil-define-key 'normal org-mode-map (kbd "M-l") 'evil-window-right)
+  (evil-define-key 'visual org-mode-map (kbd "M-h") 'evil-window-left)
+  (evil-define-key 'visual org-mode-map (kbd "M-j") 'evil-window-down)
+  (evil-define-key 'visual org-mode-map (kbd "M-k") 'evil-window-up)
+  (evil-define-key 'visual org-mode-map (kbd "M-l") 'evil-window-right)
+  )
+
+(map! :after vterm
+      :map vterm-mode-map
+      "s-h" #'evil-window-left
+      "s-j" #'evil-window-down
+      "s-k" #'evil-window-up
+      "s-l" #'evil-window-right
+      )
+#+end_src
+
+Easy workspace navigation:
+#+begin_src emacs-lisp
+(map! :leader
+      :nv "[" #'+workspace/switch-left
+      :nv "]" #'+workspace/switch-right)
+#+end_src
+
+* Top-level keybindings
+#+begin_src emacs-lisp
+(map! "M-r" 'raise-sexp
+      "M-f" 'sp-splice-sexp-killing-forward
+      "M-b" 'sp-splice-sexp-killing-backward)
+
+(map! :leader
+      "r" #'rtags-find-symbol-at-point
+      "f j" `open-junk-file)
+#+end_src
+* Stolen functions (the Luciano namespace)
+This function puts the full path of a file on the clipboard. I forgot where I
+stole it from, but it isn't mine.
+#+begin_src emacs-lisp
+(defun luciano/put-file-name-on-clipboard ()
+  "Put the current file name on the clipboard"
+  (interactive)
+  (let ((filename (if (equal major-mode 'dired-mode)
+                      default-directory
+                    (buffer-file-name))))
+    (when filename
+      (with-temp-buffer
+        (insert filename)
+        (clipboard-kill-region (point-min) (point-max)))
+      (message filename))))
+#+end_src
+This function formats and auto-tabs all of the files in a directory with a
+specific extension. Stolen from [[https://stackoverflow.com/a/55302689][here]] and [[https://emacs.stackexchange.com/a/34222][here]].
+#+begin_src emacs-lisp
+(defun luciano/fix-file-formatting-and-tabs (directory extension)
+  (interactive (list (read-directory-name "Directory: ")
+                     (read-string "File extension: ")))
+  (dolist (file (directory-files-recursively directory (concat "^[a-z0-9A-Z]?+\\" extension "$")))
+    (find-file file)
+    (format-all-buffer (point-min)(point-max))
+    (untabify(point-min)(point-max))
+    (save-buffer)
+    (kill-buffer nil)))
+#+end_src
+If you have exactly two windows open in a frame, this function will toggle them between vertical and horizontal splits. Not my own work; sadly I didn't keep the attribution.
+#+begin_src emacs-lisp
+(defun luciano/toggle-window-split ()
+  (interactive)
+  (if (= (count-windows) 2)
+      (let* ((this-win-buffer (window-buffer))
+             (next-win-buffer (window-buffer (next-window)))
+             (this-win-edges (window-edges (selected-window)))
+             (next-win-edges (window-edges (next-window)))
+             (this-win-2nd (not (and (<= (car this-win-edges)
+                                         (car next-win-edges))
+                                     (<= (cadr this-win-edges)
+                                         (cadr next-win-edges)))))
+             (splitter
+              (if (= (car this-win-edges)
+                     (car (window-edges (next-window))))
+                  'split-window-horizontally
+                'split-window-vertically)))
+        (delete-other-windows)
+        (let ((first-win (selected-window)))
+          (funcall splitter)
+          (if this-win-2nd (other-window 1))
+          (set-window-buffer (selected-window) this-win-buffer)
+          (set-window-buffer (next-window) next-win-buffer)
+          (select-window first-win)
+          (if this-win-2nd (other-window 1))))))
+#+end_src
+=Function to wrap blocks of text in org templates.= Taken from [[http://pragmaticemacs.com/emacs/wrap-text-in-an-org-mode-block/        ;;][here]].
+#+begin_src emacs-lisp
+(defun luciano/org-begin-template ()
+  "Make a template at point."
+  (interactive)
+  (if (org-at-table-p)
+      (call-interactively 'org-table-rotate-recalc-marks)
+    (let* ((choices '(("s" . "SRC")
+                      ("e" . "EXAMPLE")
+                      ("q" . "QUOTE")
+                      ("v" . "VERSE")
+                      ("c" . "CENTER")
+                      ("l" . "LaTeX")
+                      ("h" . "HTML")
+                      ("a" . "ASCII")))
+           (key
+            (key-description
+             (vector
+              (read-key
+               (concat (propertize "Template type: " 'face 'minibuffer-prompt)
+                       (mapconcat (lambda (choice)
+                                    (concat (propertize (car choice) 'face 'font-lock-type-face)
+                                            ": "
+                                            (cdr choice)))
+                                  choices
+                                  ", ")))))))
+      (let ((result (assoc key choices)))
+        (when result
+          (let ((choice (cdr result)))
+            (cond
+             ((region-active-p)
+              (let ((start (region-beginning))
+                    (end (region-end)))
+                (goto-char end)
+                (insert "#+END_" choice "\n")
+                (goto-char start)
+                (insert "#+BEGIN_" choice "\n")))
+             (t
+              (insert "#+BEGIN_" choice "\n")
+              (save-excursion (insert "#+END_" choice))))))))))
+#+end_src
+#+begin_src emacs-lisp
+(defun my/org-auto-capitalize-headings-and-lists ()
+  "Create a buffer-local binding of sentence-end to auto-capitalize
+section headings."
+  ;; courtesy of https://emacs.stackexchange.com/questions/3949/fixing-auto-capitalize-to-work-with-org-mode-headings-and-lists
+  (make-local-variable 'sentence-end)
+  (setq sentence-end (concat (rx (or
+                                  (seq line-start (1+ "*") (1+ space))))
+                             "\\|" (sentence-end))))
+#+end_src
+This next group of functions work together to make Clojure source blocks that
+get exported to PDF, with the result of evaluating the source code block right
+under the block in the document, prefixed by a little =>. The arrow bit comes
+from [[https://stackoverflow.com/a/64893411/5692730][this]] answer on
+stackoverflow. =random-alnum= and =random-string= come from two separate answers
+to [[https://stackoverflow.com/q/37038441/5692730][this]] question on stackoverflow.
+#+begin_src emacs-lisp
+(defun random-alnum ()
+  (let* ((alnum "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+         (i (% (abs (random)) (length alnum))))
+    (substring alnum i (1+ i))))
+
+(defun random-string (n)
+  "Generate a slug of n random alphanumeric characters.
+Inefficient implementation; don't use for large n."
+  (if (= 0 n)
+      ""
+    (concat (random-alnum) (random-string (1- n)))))
+
+(defun my/org-clj-template ()
+  "Make a template at point."
+  (let ((section-name (random-string 5)))
+    (save-excursion
+      (insert "#+name: " section-name "\n")
+      (insert "#+begin_src clojure :exports code\n\n")
+      (insert "#+end_src\n")
+      (insert "\\Rightarrow call_" section-name"[:exports results]()\n\n"))
+    (forward-line 2)
+    (evil-insert)))
+#+end_src
+Sort a group of lines by length, taken from [[https://stackoverflow.com/a/30697761/5692730][here]].
+#+begin_src emacs-lisp
+(defun my/sort-lines-by-length (reverse beg end)
+  "Sort lines by length."
+  (interactive "P\nr")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region beg end)
+      (goto-char (point-min))
+      (let ;; To make `end-of-line' and etc. to ignore fields.
+          ((inhibit-field-text-motion t))
+        (sort-subr reverse 'forward-line 'end-of-line nil nil
+                   (lambda (l1 l2)
+                     (apply #'< (mapcar (lambda (range) (- (cdr range) (car range)))
+                                        (list l1 l2)))))))))
+#+end_src
+* Archive
+I've retired the code in this section from service, or just want to hold onto it because it was difficult to find.
+
+This was used to fix a bug in ivy on my laptop, which I don't think is active anymore.
+#+begin_src emacs-lisp :tangle no
+(map! :after ivy
+      :map ivy-minibuffer-map
+      "DEL" #'ivy-backward-delete-char)
+#+end_src
+This function deletes an entire subtree in an org document.
+#+begin_src emacs-lisp :tangle no
+(defun my/clear-subtree ()
+  (interactive)
+  (org-mark-subtree) ;; mark the current subtree
+  (forward-line) ;; move point forward, so the headline isn't in the region
+  (delete-region (region-beginning) (region-end)) ;; delete the rest
+  )
+#+end_src
