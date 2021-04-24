@@ -8,7 +8,7 @@ case $- in
 *) return ;;
 esac
 
-
+export KEYID=export KEYID=9CA6B136BA5CC652
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
