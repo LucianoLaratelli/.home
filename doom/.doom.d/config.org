@@ -64,9 +64,9 @@ ripped from Kiran.
       org-latex-caption-above nil)
 
 (setq-default
- reftex-default-bibliography '("~/Dropbox/bibtex/main.bib")
- org-ref-default-bibliography '("~/Dropbox/bibtex/main.bib")
- bibtex-completion-bibliography "~/Dropbox/bibtex/main.bib"
+ reftex-default-bibliography '("~/Dropbox/bibtex/library.bib")
+ org-ref-default-bibliography '("~/Dropbox/bibtex/library.bib")
+ bibtex-completion-bibliography "~/Dropbox/bibtex/library.bib"
  bibtex-completion-library-path "~/Dropbox/bibtex/")
 #+end_src
 #+begin_src emacs-lisp
