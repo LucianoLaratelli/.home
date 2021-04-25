@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
 function mkd() {
-	mkdir -p "$@" && cd "$_"
+    mkdir -p "$@" && cd "$_"
 }
 
 # Use Git’s colored diff when available
 hash git &>/dev/null
 if [ $? -eq 0 ]; then
-	function diff() {
-		git diff --no-index --color-words "$@"
-	}
+    function diff() {
+        git diff --no-index --color-words "$@"
+    }
 fi
 
 # `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
@@ -17,16 +17,33 @@ fi
 # `less` with options to preserve color and line numbers, unless the output is
 # small enough for one screen.
 function tre() {
-	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX
+    tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX
 }
 
 
 secret () {
-        output=~/"${1}".$(date +%s).enc
-        gpg --encrypt --armor --output ${output} -r 0x0000 -r 0x0001 -r 0x0002 "${1}" && echo "${1} -> ${output}"
+    output=~/"${1}".$(date +%s).enc
+    gpg --encrypt --armor --output ${output} -r 0x0000 -r 0x0001 -r 0x0002 "${1}" && echo "${1} -> ${output}"
 }
 
 reveal () {
-        output=$(echo "${1}" | rev | cut -c16- | rev)
-        gpg --decrypt --output ${output} "${1}" && echo "${1} -> ${output}"
+    output=$(echo "${1}" | rev | cut -c16- | rev)
+    gpg --decrypt --output ${output} "${1}" && echo "${1} -> ${output}"
+}
+
+prepareWorkRepo () {
+    pushd $1
+    git submodule update --init --recursive --jobs "$(sysctl -n hw.ncpu)"
+    bash Contributed/spacecommander/setup-repo.sh
+    cp Scripts/commit-msg .git/hooks
+    cp Scripts/prepare-commit-msg .git/hooks
+    popd
+}
+
+prepareFantastical () {
+    prepareWorkRepo "$HOME/repos/fantastical"
+}
+
+prepareCardhop () {
+    prepareWorkRepo "$HOME/repos/cardhop"
 }
