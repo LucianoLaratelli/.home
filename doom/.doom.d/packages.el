@@ -24,6 +24,7 @@
 (package! bnf-mode)
 (package! open-junk-file)
 (package! evil-cleverparens)
+(package! org-ref)
 
 
 ;; To install a package directly from a particular repo, you'll need to specify

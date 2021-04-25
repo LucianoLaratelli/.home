@@ -69,6 +69,12 @@ ripped from Kiran.
  bibtex-completion-bibliography "~/Dropbox/bibtex/main.bib"
  bibtex-completion-library-path "~/Dropbox/bibtex/")
 #+end_src
+#+begin_src emacs-lisp
+(use-package! org-ref
+  :after org
+  :config
+  (setq org-ref-completion-library 'org-ref-ivy-cite))
+#+end_src
 *** Keybinds
 #+begin_src emacs-lisp
 (map! :after org
