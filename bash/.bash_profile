@@ -1,7 +1,3 @@
-# Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:$PATH"
-PATH=/usr/local/bin/:$PATH
-PATH="${HOME}/.emacs.d/bin/":$PATH
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 fortune | cowsay
@@ -38,10 +34,7 @@ fi
 
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall
 
-export PATH="/usr/local/sbin:$PATH"
-
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK="/Users/luciano/.gnupg/S.gpg-agent.ssh"
 gpgconf --launch gpg-agent
 export BASH_SILENCE_DEPRECATION_WARNING=1
-

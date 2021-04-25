@@ -1,0 +1,5 @@
+PATH="$HOME/bin:$PATH"
+PATH="${HOME}/.emacs.d/bin/":$PATH
+PATH="/Users/luciano/Library/Python/3.9/bin/":$PATH
+PATH="/usr/local/sbin:$PATH"
+PATH=/usr/local/bin/:$PATH
