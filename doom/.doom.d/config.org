@@ -60,9 +60,7 @@ ripped from Kiran.
 #+begin_src emacs-lisp
 (setq org-latex-listings 'minted
       org-latex-packages-alist '(("" "minted"))
-      org-latex-pdf-process
-      '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f")
+      org-latex-pdf-process (list "latexmk -pdflatex='pdflatex -shell-escape -interaction nonstopmode' -pdf -bibtex -f %f")
       org-latex-caption-above nil)
 
 (setq-default
