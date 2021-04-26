@@ -23,6 +23,9 @@ elisp, or by sharing their configs for anyone to steal. Thanks guys!
 - [[https://github.com/kiranshila][Kiran]]
 - [[https://github.com/djshorty][Dominik]]
 
+I learned this [[https://emacs.stackexchange.com/a/14034][trick]] from Archenoth on emacs stackexchange; I use it a bunch in
+here. This makes it easier for this document to apply to both my macOS laptop
+and my Arch Linux (btw) desktop.
 * Theme and Appearance
 ** Font
 Setting the size explicitly here is important, because it prevents a bug in
@@ -43,16 +46,21 @@ I have used quite a few others in the past; this is my current daily driver.
 * Org
 ** General
 *** Definitions
-Some general org stuff.
+Some general org stuff. My macOS machine is my work machine, so I use a different org dir there.
 #+begin_src emacs-lisp
-(setq org-directory "~/Dropbox/org/"
-      org-src-fontify-natively t
+(if (string= system-type "darwin")
+    (setq org-directory "~/Dropbox/org/work")
+    (setq org-directory "~/Dropbox/org"))
+
+(setq org-src-fontify-natively t
       org-src-tab-acts-natively t
       org-confirm-babel-evaluate nil
       org-edit-src-content-indentation 0
       org-pretty-entities t
-      org-babel-clojure-backend 'cider)
+      org-babel-clojure-backend 'cider
+)
 #+end_src
+
 This next bit handles latex exporting and bibtex stuff; parts of it have been
 ripped from Kiran.
 #+begin_src emacs-lisp
@@ -103,12 +111,15 @@ I clock out, this updates my report.
 ** Org Journal
 *** Definitions
 #+begin_src emacs-lisp
-(setq org-journal-date-format "%A, %d %B %Y")
-(setq org-journal-date-prefix "* ")
-(setq org-journal-dir "~/Dropbox/org/work/journal")
-(setq org-journal-encrypt-journal t)
-(setq org-journal-file-format "%Y/%m.org")
-(setq org-journal-file-type 'monthly)
+(if (string= system-type "darwin")
+    (setq org-journal-dir "~/Dropbox/org/work/journal")
+  (setq org-journal-dir "~/Dropbox/org/journal"))
+
+(setq org-journal-date-format "%A, %d %B %Y"
+      org-journal-date-prefix "* "
+      org-journal-encrypt-journal t
+      org-journal-file-format "%Y/%m.org"
+      org-journal-file-type 'monthly)
 #+end_src
 *** Keybinds
 I clock in and out enough (specifically in my journal) that these are worth it
@@ -206,25 +217,6 @@ Need as many =*parens-mode=s as possible
 (add-hook! clojure-mode #'evil-cleverparens-mode)
 #+end_src
 * Miscellaneous
-** macOS specific commands
-
-Unbind these two, for use in org mode:
-#+begin_src emacs-lisp
-(map! "s-RET" nil
-      "M-RET" nil)
-#+end_src
-Why use =global-unset-key= instead of =map!=ing to =nil=? Beats me!
-#+begin_src emacs-lisp
-(global-unset-key (kbd "s-h"))
-(global-unset-key (kbd "s-j"))
-(global-unset-key (kbd "s-k"))
-(global-unset-key (kbd "s-l"))
-#+end_src
-=ls= is dumb on macOS:
-#+begin_src emacs-lisp
-(when (string= system-type "darwin")
-  (setq dired-use-ls-dired nil))
-#+end_src
 ** emacs internal stuff
 #+begin_src emacs-lisp
 (setq backup-directory-alist `(("." . "~/.BACKUPS")))
@@ -275,8 +267,25 @@ Smartparens! They're smart!
 
 (add-hook 'org-mode-hook 'disable-smartparens)
 #+end_src
-* Navigation
+** macOS specific stuff
+Unbind these two, for use in org mode:
+#+begin_src emacs-lisp :tangle (when (eq system-type 'darwin) "yes")
+(map! "s-RET" nil
+      "M-RET" nil)
+#+end_src
+Why use =global-unset-key= instead of =map!=ing to =nil=? Beats me!
+#+begin_src emacs-lisp :tangle (when (eq system-type 'darwin) "yes")
+(global-unset-key (kbd "s-h"))
+(global-unset-key (kbd "s-j"))
+(global-unset-key (kbd "s-k"))
+(global-unset-key (kbd "s-l"))
+#+end_src
+=ls= is dumb on macOS:
+#+begin_src emacs-lisp :tangle (when (eq system-type 'darwin) "yes")
+(setq dired-use-ls-dired nil)
+#+end_src
 
+* Navigation
 Easily split windows:
 #+begin_src emacs-lisp
 (map! :leader
@@ -286,44 +295,34 @@ Easily split windows:
 This next group of keybindings gives me easy, =hjkl= window navigation everywhere
 that matter to me. I used to do this using =bind-keys*=, but the issue was that
 that rebound =M-{hjkl}= /everywhere/, even in ivy completion buffers, etc. Doing
-it this way makes it happen in the modes I care about. TODO: this needs to be
-cleaned up and checked for functionality.
-#+begin_src emacs-lisp
+it this way makes it happen in the modes I care about.
+This one gets tangled on macOS:
+#+begin_src emacs-lisp :tangle (when (eq system-type 'darwin) "yes")
+(map! "s-h" #'evil-window-left
+      "s-j" #'evil-window-down
+      "s-k" #'evil-window-up
+      "s-l" #'evil-window-right
+      )
+
+(map! :map (org-mode-map magit-mode-map vterm-mode-map)
+      :nv "s-h" #'evil-window-left
+      :nv "s-j" #'evil-window-down
+      :nv "s-k" #'evil-window-up
+      :nv "s-l" #'evil-window-right)
+#+end_src
+And this one on GNU/LINUX:
+#+begin_src emacs-lisp :tangle (when (eq system-type 'gnu/linux) "yes")
 (map! "C-h" #'evil-window-left
       "C-j" #'evil-window-down
       "C-k" #'evil-window-up
-      "C-l" #'evil-window-right
-      )
+      "C-l" #'evil-window-right)
 
-(with-eval-after-load 'magit
-  (evil-define-key 'normal magit-mode-map (kbd "C-h") 'evil-window-left)
-  (evil-define-key 'normal magit-mode-map (kbd "C-j") 'evil-window-down)
-  (evil-define-key 'normal magit-mode-map (kbd "C-k") 'evil-window-up)
-  (evil-define-key 'normal magit-mode-map (kbd "C-l") 'evil-window-right)
-  (evil-define-key 'visual magit-mode-map (kbd "C-h") 'evil-window-left)
-  (evil-define-key 'visual magit-mode-map (kbd "C-j") 'evil-window-down)
-  (evil-define-key 'visual magit-mode-map (kbd "C-k") 'evil-window-up)
-  (evil-define-key 'visual magit-mode-map (kbd "C-l") 'evil-window-right)
-  )
+(map! :map (org-mode-map magit-mode-map vterm-mode-map)
+      :nv "C-h" #'evil-window-left
+      :nv "C-j" #'evil-window-down
+      :nv "C-k" #'evil-window-up
+      :nv "C-l" #'evil-window-right)
 
-(with-eval-after-load 'org
-  (evil-define-key 'normal org-mode-map (kbd "C-h") 'evil-window-left)
-  (evil-define-key 'normal org-mode-map (kbd "C-j") 'evil-window-down)
-  (evil-define-key 'normal org-mode-map (kbd "C-k") 'evil-window-up)
-  (evil-define-key 'normal org-mode-map (kbd "C-l") 'evil-window-right)
-  (evil-define-key 'visual org-mode-map (kbd "C-h") 'evil-window-left)
-  (evil-define-key 'visual org-mode-map (kbd "C-j") 'evil-window-down)
-  (evil-define-key 'visual org-mode-map (kbd "C-k") 'evil-window-up)
-  (evil-define-key 'visual org-mode-map (kbd "C-l") 'evil-window-right)
-  )
-
-(map! :after vterm
-      :map vterm-mode-map
-      "C-h" #'evil-window-left
-      "C-j" #'evil-window-down
-      "C-k" #'evil-window-up
-      "C-l" #'evil-window-right
-      )
 #+end_src
 
 Easy workspace navigation:
@@ -342,9 +341,17 @@ Easy workspace navigation:
 (map! :leader
       "r" #'rtags-find-symbol-at-point
       "f j" `open-junk-file)
+
+#+end_src
+Fix for a rather annoying bug that pops up on my desktop where I can't backspace
+in =counsel-find-file=:
+#+begin_src emacs-lisp
+(map! :after ivy
+      :map ivy-minibuffer-map
+      "DEL" #'ivy-backward-delete-char)
 #+end_src
 It seems like a good idea to unmap the keybindings I use in i3:
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle (when (eq system-type 'gnu/linux) "yes")
 (map! "M-C-c" nil
       "M-C-d" nil
       "M-C-l" nil
@@ -528,12 +535,6 @@ I've retired the code in this section from service, or just want to hold onto it
 because it was difficult to find. These do not get tangled into the final
 =config.el=.
 
-This was used to fix a bug in ivy on my laptop, which I don't think is active anymore.
-#+begin_src emacs-lisp :tangle no
-(map! :after ivy
-      :map ivy-minibuffer-map
-      "DEL" #'ivy-backward-delete-char)
-#+end_src
 This function deletes an entire subtree in an org document.
 #+begin_src emacs-lisp :tangle no
 (defun my/clear-subtree ()

@@ -88,6 +88,7 @@
        :tools
        ;;ansible
        debugger                            ; FIXME stepping through code, to help you add bugs
+       biblio
        ;;direnv
        ;;docker
        ;;editorconfig                      ; let someone else argue about tabs vs spaces
@@ -157,6 +158,7 @@
         +journal
         +jupyter                           ; ipython/jupyter support for babel
         ;;+pandoc                          ; export-with-pandoc support
+        +pretty
         +pomodoro                          ; be fruitful with the tomato technique
         +present)                          ; using org-mode for presentations
        ;;perl                              ; write code no one else can comprehend
@@ -191,5 +193,5 @@
        ;; twitter                           ; twitter client https://twitter.com/vnought
 
        :config
-       ;;literate
+       literate
        (default +bindings +smartparens))

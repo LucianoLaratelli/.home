@@ -15,6 +15,12 @@ export PATH=$OCLINT_HOME/bin:$PATH
 PATH=/usr/local/pgsql/bin:$PATH
 export PATH
 
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
+
+export KEYID=0x9CA6B136BA5CC652
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
