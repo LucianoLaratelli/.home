@@ -169,7 +169,8 @@
 
 [user]
 	name = Luciano Laratelli
-	email = luciano@laratelli.com
+	email = luciano@laratel.li
+	signingkey = 0x9CA6B136BA5CC652
 
 [diff]
   tool = meld
@@ -194,3 +195,5 @@
 	diffFilter = delta --color-only
 [init]
 	defaultBranch = main
+[commit]
+	gpgsign = true
