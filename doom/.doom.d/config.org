@@ -3,7 +3,12 @@
 #+EMAIL: luciano@laratel.li
 
 This is my configuration for the [[https://github.com/hlissner/doom-emacs][DOOM emacs]] framework, specifically for my macOS
-device(s).
+device(s). I should note that I've optimized my keybindings for my keyboard, the
+[[https://kinesis-ergo.com/shop/advantage2/][advantage2]] from Kinesis. I rest my thumb on SPC and backSPC and have easy access
+to modifier keys from that position as well. I also have Caps Lock remapped to
+ESC everywhere; this is a holdover from when I used vim full-time, but it serves
+me well with EVIL. Since I have CTRL so easily accessible, I'm not at risk for
+Emacs pinky!
 #+begin_src emacs-lisp :comments no
 ;;; config.el -*- lexical-binding: t; -*-
 #+end_src
@@ -101,6 +106,7 @@ I clock out, this updates my report.
 (add-hook 'org-clock-out-hook  (lambda ()
                                  (save-excursion
                                    (evil-goto-first-line)
+                                   (evil-next-line)
                                    (org-clock-report)
                                    )))
 #+end_src
@@ -235,6 +241,8 @@ Why use =global-unset-key= instead of =map!=ing to =nil=? Beats me!
 (setq backup-by-copying t)
 
 (setq auth-sources '("~/.authinfo.gpg"))
+(setq epa-pinentry-mode 'ask)
+(setenv "SSH_AUTH_SOCK" (string-trim (shell-command-to-string "gpgconf --list-dirs agent-ssh-socket")))
 #+end_src
 ** keybinds
 This is Kiran's insane hack for having comma count as =SPC m= without remapping
@@ -278,6 +286,9 @@ Smartparens! They're smart!
   (smartparens-mode 0))
 
 (add-hook 'org-mode-hook 'disable-smartparens)
+#+end_src
+#+begin_src emacs-lisp
+(setq epa-file-cache-passphrase-for-symmetric-encryption nil)
 #+end_src
 * Navigation
 Easily split windows:
