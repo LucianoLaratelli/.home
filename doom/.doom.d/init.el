@@ -19,10 +19,11 @@
        ;;japanese
 
        :completion
-       (company +childframe)               ; the ultimate code completion backend
+       company                             ; the ultimate code completion backend
        ;;helm                              ; the *other* search engine for love and life
        ;;ido                               ; the other *other* search engine...
-       (ivy +prescient +icons +childframe) ; a search engine for love and life
+       ;; (ivy +prescient +icons +childframe) ; a search engine for love and life
+       (vertico +icons)
 
        :ui
        ;;deft                              ; notational velocity for Emacs
@@ -34,7 +35,7 @@
        hl-todo                             ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
        ;;indent-guides                     ; highlighted indent columns
-       ;;ligatures                         ; ligatures and symbols to make your code pretty again
+       ligatures                         ; ligatures and symbols to make your code pretty again
        ;;minimap                           ; show a map of the code on the side
        modeline                            ; snazzy, Atom-inspired modeline, plus API
        ;;nav-flash                         ; blink cursor line after big motions
@@ -57,7 +58,7 @@
        (evil +everywhere)                  ; come to the dark side, we have cookies
        file-templates                      ; auto-snippets for empty files
        fold                                ; (nigh) universal code folding
-       ;; (format +onsave)                    ; automated prettiness
+       format                              ; automated prettiness
        ;;god                               ; run Emacs commands without modifier keys
        ;;lispy                             ; vim for lisp, for people who don't like vim
        multiple-cursors                    ; editing in many places at once
@@ -82,7 +83,7 @@
 
        :checkers
        syntax                              ; tasing you for every semicolon you forget
-       spell                               ; tasing you for misspelling mispelling
+       (spell +everywhere)                 ; tasing you for misspelling mispelling
        grammar                             ; tasing grammar mistake every you make
 
        :tools
@@ -90,16 +91,15 @@
        biblio
        debugger                            ; FIXME stepping through code, to help you add bugs
        ;;direnv
-       ;;docker
+       docker
        ;;editorconfig                      ; let someone else argue about tabs vs spaces
-       ein                                 ; tame Jupyter notebooks with emacs
+       ;;ein                                 ; tame Jupyter notebooks with emacs
        (eval +overlay)                     ; run code, run (also, repls)
        ;;gist                              ; interacting with github gists
        (lookup                             ; helps you navigate your code and documentation
         +docsets)                          ; ...or in Dash docsets locally
        lsp
-       ;;macos                             ; MacOS-specific commands
-       (magit +forge)                               ; a git porcelain for Emacs
+       magit                               ; a git porcelain for Emacs
        make                                ; run make tasks from Emacs
        ;;pass                              ; password manager for nerds
        pdf                                 ; pdf enhancements
@@ -119,7 +119,7 @@
        ;;assembly                          ; assembly for fun or debugging
        (cc +lsp)                           ; C/C++/Obj-C madness
        clojure                             ; java with a lisp
-       common-lisp                         ; if you've seen one lisp, you've seen them all
+       ;; common-lisp                         ; if you've seen one lisp, you've seen them all
        ;;coq                               ; proofs-as-programs
        ;;crystal                           ; ruby at the speed of c
        ;;csharp                            ; unity, .NET, and mono shenanigans
@@ -139,7 +139,7 @@
        ;;idris                             ; a language you can depend on
        json                              ; At least it ain't XML
        ;;(java +meghanada)                 ; the poster child for carpal tunnel syndrome
-       (javascript +lsp)                        ; all(hope(abandon(ye(who(enter(here))))))
+       ;; (javascript +lsp)                        ; all(hope(abandon(ye(who(enter(here))))))
        ;;julia                             ; a better, faster MATLAB
        ;;kotlin                            ; a better, slicker Java(Script)
        latex                               ; writing papers in Emacs has never been so fun
@@ -153,12 +153,10 @@
        ;;ocaml                             ; an objective camel
        (org                                ; organize your plain life in plain text
         +dragndrop                         ; drag & drop files/images into org buffers
-        +hugo                              ; use Emacs for hugo blogging
         +roam
         +journal
         +pretty
         +jupyter                           ; ipython/jupyter support for babel
-        ;;+pandoc                          ; export-with-pandoc support
         +pomodoro                          ; be fruitful with the tomato technique
         +present)                          ; using org-mode for presentations
        ;;perl                              ; write code no one else can comprehend
@@ -170,15 +168,15 @@
        ;;racket                            ; a DSL for DSLs
        rest                              ; Emacs as a REST client
        ;;rst                               ; ReST in peace
-       (ruby +lsp +rbenv +rails)           ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       (rust +lsp)                         ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       ;; (ruby +lsp +rbenv +rails)           ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
+       ;; (rust +lsp)                         ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala                             ; java, but good
        ;;scheme                            ; a fully conniving family of lisps
        (sh +lsp)                           ; she sells {ba,z,fi}sh shells on the C xor
        ;;solidity                          ; do you need a blockchain? No.
-       (swift +lsp)                             ; who asked for emoji variables?
+       ;; (swift +lsp)                             ; who asked for emoji variables?
        ;;terra                             ; Earth and Moon in alignment for performance.
-       (web +lsp)                                 ; the tubes
+       ;; (web +lsp)                                 ; the tubes
        yaml                                ; JSON, but readable
 
        :email

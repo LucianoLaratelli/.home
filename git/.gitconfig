@@ -105,7 +105,6 @@
 	# Speed up commands involving untracked files such as `git status`.
 	# https://git-scm.com/docs/git-update-index#_untracked_cache
 	untrackedCache = true
-  editor = vim
 
 [color]
 
@@ -170,6 +169,10 @@
 [user]
 	name = Luciano Laratelli
 	email = luciano@laratel.li
-	signingkey = 0x9CA6B136BA5CC652
+	#signingkey = 0x9CA6B136BA5CC652
 [commit]
-	gpgsign = true
+	#gpgsign = true
+[gpg]
+	#program = /opt/homebrew/bin/gpg
+[init]
+	defaultBranch = main

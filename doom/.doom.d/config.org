@@ -87,7 +87,7 @@ ripped from Kiran.
       "s-RET" #'+org/insert-item-below
       "M-RET" #'+org/insert-item-below
       :leader
-      "a c r" #'jupyter-org-clear-all-results
+      ; "a c r" #'jupyter-org-clear-all-results
       "RET" #'+org/insert-item-below
       "k" #'org-previous-visible-heading
       "j" #'org-next-visible-heading
@@ -213,7 +213,7 @@ something org roam is sold as a cure for. These directories just help me keep a
 ** Clojure
 Need as many =*parens-mode=s as possible
 #+begin_src emacs-lisp
-(add-hook! clojure-mode #'evil-cleverparens-mode)
+;; (add-hook! clojure-mode #'evil-cleverparens-mode)
 #+end_src
 * Miscellaneous
 ** macOS specific commands

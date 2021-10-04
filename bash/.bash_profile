@@ -38,3 +38,6 @@ export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK="/Users/luciano/.gnupg/S.gpg-agent.ssh"
 gpgconf --launch gpg-agent
 export BASH_SILENCE_DEPRECATION_WARNING=1
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+. "$HOME/.cargo/env"
