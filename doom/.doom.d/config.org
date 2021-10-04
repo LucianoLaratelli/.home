@@ -272,12 +272,6 @@ This is Kiran's insane hack for having comma count as =SPC m= without remapping
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
   )
 #+end_src
-My laptop is a little slow, so company can really be a drag when writing "prose"
-(read: org files and commit messages.) We disable company-mode wherever it
-annoys me:
-#+begin_src emacs-lisp
-(setq company-global-modes '((not org-mode) (not magit-mode)))
-#+end_src
 Smartparens! They're smart!
 #+begin_src emacs-lisp
 (smartparens-global-strict-mode 1)
