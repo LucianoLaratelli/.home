@@ -21,11 +21,18 @@
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
+
+
+
+
 (package! open-junk-file)
 (package! evil-cleverparens)
-(package! org-ref)
 (package! map :pin "bb50dba")
 (package! parseclj :recipe (:build (:not compile)))
+
+
+
+
 
 ;; To install a package directly from a particular repo, you'll need to specify
 ;; a `:recipe'. You'll find documentation on what `:recipe' accepts here:

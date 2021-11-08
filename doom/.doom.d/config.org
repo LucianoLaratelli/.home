@@ -37,14 +37,14 @@ of the intended behavior of switching between normal and regular font size. This
 combination produces nice ligatures in a great monospace font, and I have my
 friends Kiran and Elijah to thank for it.
 #+begin_src emacs-lisp
-(setq doom-font (font-spec :family "Fira Code Retina" :size 14)
+(setq doom-font (font-spec :family "PragmataPro for Powerline" :size 14)
       doom-unicode-font (font-spec :family "JuliaMono Medium" :size 14))
 #+end_src
 
 ** Theme
 I have used quite a few others in the past; this is my current daily driver.
 #+begin_src emacs-lisp
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-one)
 #+end_src
 * Org
 ** General
@@ -59,6 +59,8 @@ directory on this machine.
       org-edit-src-content-indentation 0
       org-pretty-entities t
       org-babel-clojure-backend 'cider)
+
+(setq org-duration-format 'h:mm)
 #+end_src
 This next bit handles latex exporting and bibtex stuff; parts of it have been
 ripped from Kiran.
@@ -70,15 +72,21 @@ ripped from Kiran.
 
 (setq-default
  reftex-default-bibliography '("~/Dropbox/bibtex/library.bib")
- org-ref-default-bibliography '("~/Dropbox/bibtex/library.bib")
+ ;; org-ref-default-bibliography '("~/Dropbox/bibtex/library.bib")
  bibtex-completion-bibliography "~/Dropbox/bibtex/library.bib"
  bibtex-completion-library-path "~/Dropbox/bibtex/")
 #+end_src
 #+begin_src emacs-lisp
-(use-package! org-ref
-  :after org
-  :config
-  (setq org-ref-completion-library 'org-ref-ivy-cite))
+;; (use-package! org-ref
+;;   :after org
+;;   :config
+;;   (setq org-ref-completion-library 'org-ref-ivy-cite))
+#+end_src
+A handy function to
+#+begin_src emacs-lisp
+(defun my/stamp-now ()
+    (let ((current-prefix-arg '(2)))
+      (call-interactively 'org-time-stamp)))
 #+end_src
 *** Keybinds
 #+begin_src emacs-lisp
@@ -96,12 +104,12 @@ ripped from Kiran.
       "s p u" #'org-priority-up
       "s p d" #'org-priority-down
       "j k"   #'outline-up-heading
+      "d n" #'my/stamp-now
       )
 #+end_src
 *** Hooks
-Each of my journal files starts with an org clock report. This isn't automated;
-I just make sure to make the report the first line of the file. Thus, every time
-I clock out, this updates my report.
+Each of my journal files starts with an org clock report. Every time I clock
+out, this updates my report.
 #+begin_src emacs-lisp
 (add-hook 'org-clock-out-hook  (lambda ()
                                  (save-excursion
@@ -116,9 +124,16 @@ I clock out, this updates my report.
 (setq org-journal-date-format "%A, %d %B %Y")
 (setq org-journal-date-prefix "* ")
 (setq org-journal-dir "~/Dropbox/org/work/journal")
-(setq org-journal-encrypt-journal t)
-(setq org-journal-file-format "%Y/%m.org")
-(setq org-journal-file-type 'monthly)
+(setq org-journal-file-format "%Y/%U_%m-%d.org")
+(setq org-journal-file-type 'weekly)
+
+(defun org-journal-file-header-func (time)
+  "Custom function to create journal header."
+  (concat
+   "#+BEGIN: clocktable :scope file :maxlevel 2\n#+END:\n"))
+
+(setq org-journal-file-header 'org-journal-file-header-func)
+
 #+end_src
 *** Keybinds
 I clock in and out enough (specifically in my journal) that these are worth it
@@ -144,6 +159,10 @@ for me.
        "t" #'org-evaluate-time-range
        )
 )
+
+(after! org-mode
+ (setq org-export-with-smart-qutoes t)
+ )
 #+end_src
 ** Org Roam
 *** Definitions
@@ -153,7 +172,8 @@ something org roam is sold as a cure for. These directories just help me keep a
 /little/ organized.
 #+begin_src emacs-lisp
 (setq org-roam-directory "~/Dropbox/org/roam")
-(setq org-roam-encrypt-files t)
+
+(setq +org-roam-open-buffer-on-find-file nil)
 
 (after! org-roam
   (org-roam-db-build-cache ())
@@ -261,6 +281,8 @@ This is Kiran's insane hack for having comma count as =SPC m= without remapping
       company-minimum-prefix-length 2)
 
 
+(setq company-global-modes '(not org-mode))
+
 (setq tramp-shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
 
 
@@ -283,6 +305,37 @@ Smartparens! They're smart!
 #+end_src
 #+begin_src emacs-lisp
 (setq epa-file-cache-passphrase-for-symmetric-encryption nil)
+#+end_src
+
+from https://github.com/suryaaditya/emacs.d/blob/0151600afd1c6a71bdd0b33583bda92d9ce73ca9/elisp/init-magit.el
+#+begin_src emacs-lisp
+;; (defun magit-set-repo-dirs-from-projectile ()
+;;   "Set `magit-repository-directories' with known Projectile projects."
+;;   (setq magit-repository-directories
+;;         (mapcar
+;;          (lambda (dir)
+;;            (substring dir 0 -1))
+;;          (cl-remove-if-not
+;;           (lambda (project)
+;;             (unless (file-remote-p project)
+;;               (file-directory-p (concat project "/.git/"))))
+;;           (projectile-relevant-known-projects)))))
+
+;; (after! projectile
+;;   (magit-set-repo-dirs-from-projectile))
+
+
+;; (add-hook 'projectile-switch-project-hook
+;;           #'magit-set-repo-dirs-from-projectile)
+
+;; (after! magit
+;; (add-to-list 'magit-repository-directories '("~/repos" . 1))
+;; (add-to-list 'magit-repository-directories '("~/.home" . 1))
+;;   )
+#+end_src
+** formatters
+#+begin_src emacs-lisp
+(remove-hook 'objc-mode #'format-all-mode)
 #+end_src
 * Navigation
 Easily split windows:
