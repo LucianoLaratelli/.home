@@ -29,23 +29,17 @@ elisp, or by sharing their configs for anyone to steal. Thanks guys!
 - [[https://github.com/kiranshila][Kiran]]
 - [[https://github.com/djshorty][Dominik]]
 
-* Theme and Appearance
-** Font
+* Font
 Setting the size explicitly here is important, because it prevents a bug in
 =doom-big-font-mode= that caused the size of text to only ever increase, instead
 of the intended behavior of switching between normal and regular font size. This
 combination produces nice ligatures in a great monospace font, and I have my
 friends Kiran and Elijah to thank for it.
 #+begin_src emacs-lisp
-(setq doom-font (font-spec :family "PragmataPro for Powerline" :size 14)
+(setq doom-font (font-spec :family "PragmataPro for Powerline" :size 12)
       doom-unicode-font (font-spec :family "JuliaMono Medium" :size 14))
 #+end_src
 
-** Theme
-I have used quite a few others in the past; this is my current daily driver.
-#+begin_src emacs-lisp
-(setq doom-theme 'doom-one)
-#+end_src
 * Org
 ** General
 *** Definitions
@@ -189,7 +183,7 @@ something org roam is sold as a cure for. These directories just help me keep a
            "%?"
            :file-name "%<%Y%m%d>-${slug}"
            ;; added a double space at the end for the double-space insert link issue.
-           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-index.org.gpg][Indexes]]\n\n* "
+           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-index.org][Indexes]]\n\n* "
            :unnarrowed t)
 
           ("e" "emacs")
@@ -198,13 +192,13 @@ something org roam is sold as a cure for. These directories just help me keep a
            "%?"
            :file-name "emacs/org/%<%Y%m%d>-${slug}"
            ;; added a double space at the end for the double-space insert link issue.
-           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-emacs.org.gpg][Emacs]]\n\n* "
+           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-emacs.org][Emacs]]\n\n* "
            :unnarrowed t)
           ("eor" "org roam" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "emacs/org/roam/%<%Y%m%d>-${slug}"
            ;; added a double space at the end for the double-space insert link issue.
-           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-org_roam.org.gpg][org-roam]]\n\n* "
+           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-org_roam.org][org-roam]]\n\n* "
            :unnarrowed t)
 
           ("w" "work")
@@ -212,13 +206,13 @@ something org roam is sold as a cure for. These directories just help me keep a
            "%?"
            :file-name "flexibits/cardhop/%<%Y%m%d>-${slug}"
            ;; added a double space at the end for the double-space insert link issue.
-           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-cardhop.org.gpg][cardhop]]\n\n* "
+           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-cardhop.org][cardhop]]\n\n* "
            :unnarrowed t)
           ("wf" "fantastical" plain (function org-roam--capture-get-point)
            "%?"
            :file-name "flexibits/fantastical/%<%Y%m%d>-${slug}"
            ;; added a double space at the end for the double-space insert link issue.
-           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-fantastical.org.gpg][fantastical]]\n\n* "
+           :head "#+TITLE: ${title}\n#+Created: %u\n- tags :: [[file:~/Dropbox/org/roam/20210421-fantastical.org][fantastical]]\n\n* "
            :unnarrowed t)
           )
         )
@@ -236,7 +230,8 @@ Need as many =*parens-mode=s as possible
 ;; (add-hook! clojure-mode #'evil-cleverparens-mode)
 #+end_src
 * Miscellaneous
-** macOS specific commands
+** macOS
+*** specific commands
 
 Unbind these two, for use in org mode:
 #+begin_src emacs-lisp
@@ -249,11 +244,28 @@ Why use =global-unset-key= instead of =map!=ing to =nil=? Beats me!
 (global-unset-key (kbd "s-j"))
 (global-unset-key (kbd "s-k"))
 (global-unset-key (kbd "s-l"))
+(map! "s-h" nil
+      "s-j" nil
+      "s-k" nil
+      "s-l" nil
+      )
 #+end_src
 =ls= is dumb on macOS:
 #+begin_src emacs-lisp
 (when (string= system-type "darwin")
   (setq dired-use-ls-dired nil))
+#+end_src
+*** functions, hooks
+#+begin_src emacs-lisp
+(defun my/apply-theme (appearance)
+  "Load theme, taking current system APPEARANCE into consideration."
+  (mapc #'disable-theme custom-enabled-themes)
+  (pcase appearance
+    ('light (setq doom-theme 'doom-solarized-light))
+    ('dark (setq doom-theme 'doom-one)))
+  (load-theme doom-theme))
+
+(add-hook 'ns-system-appearance-change-functions #'my/apply-theme)
 #+end_src
 ** emacs internal stuff
 #+begin_src emacs-lisp

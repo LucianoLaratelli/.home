@@ -8,4 +8,6 @@ xargs brew install < homebrewPackageList.txt
 
 pip3 install black pyflakes isort pipenv nose pytest
 
-brew install
+read -p "Install XCode then press <RET> to continue set the defaults you like"
+
+defaults write com.apple.dt.Xcode ShowBuildOperationDuration YES

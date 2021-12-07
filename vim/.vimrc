@@ -12,24 +12,24 @@ Plugin 'timonv/vim-cargo'
 
 " youCompleteMe for code completion. run installation process after Plugin is
 " pulled in
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'rdnetto/YCM-Generator'
+" Plugin 'Valloric/YouCompleteMe'
+" Plugin 'rdnetto/YCM-Generator'
 Plugin 'dbeniamine/cheat.sh-vim'
 
 " YCM configurations and kwymaps
 filetype plugin indent on
-map <C-]> :YcmCompleter GoToImprecise<CR>
-nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
-nnoremap <leader>jd :YcmCompleter GoTo<CR>
-let g:ycm_always_populate_location_list = 1
-let g:ycm_python_binary_path = 'python'
+"map <C-]> :YcmCompleter GoToImprecise<CR>
+"nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+"nnoremap <leader>jd :YcmCompleter GoTo<CR>
+"let g:ycm_always_populate_location_list = 1
+"let g:ycm_python_binary_path = 'python'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 "
 " air-line
 set laststatus=2
 let g:airline_theme='atomic'
-set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline
+set guifont=PragmataPro\ for\ Powerline
 let g:airline_powerline_fonts = 1
 let g:airline_section_b = '%{strftime("%T")}'
 let g:airline_section_y = ''
